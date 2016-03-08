@@ -58,8 +58,9 @@ void pre_emphasis(fract16 data[], int arr_length, struct Coef shelving_coef)
 
 		fract32 temp_b = add_fr1x32(add_fr1x32(temp_b0, temp_b1), temp_b2);
 		fract32 temp_a = add_fr1x32(temp_a1, temp_a2);
+		fract32 temp = sub_fr1x32(temp_b, temp_a);
 
-		yBuffer[current] = sub_fr1x32(temp_b, temp_a) << 2;
+		yBuffer[current] = shl_fr1x32(temp, 2);
 
 		xBuffer[current] = fr16_to_fr32(data[index]);		//input
 		data[index] = fr32_to_fr16(yBuffer[current]);		//output
