@@ -43,12 +43,16 @@ struct Coef get_shelving_coef(smp_type dbGain, smp_type fc, smp_type fs, smp_typ
 
 void pre_emphasis(smp_type data[], int arr_length, struct Coef shelving_coef)
 {
-	static smp_type xBuffer[BUFFER_SIZE] = {0.0};
+	smp_type xBuffer[BUFFER_SIZE];
 	// input buffer
-	static smp_type yBuffer[BUFFER_SIZE] = {0.0};
+	smp_type yBuffer[BUFFER_SIZE];
 	// output buffer
 
-	static int current = 0;
+	int current;
+	for (current = 0; current < BUFFER_SIZE; ++current) {
+		xBuffer[current] = yBuffer[current] = 0.0;
+	}
+	current = 0;
 
 	int index;
 	for (index = 0; index < arr_length; index++) {
@@ -60,10 +64,6 @@ void pre_emphasis(smp_type data[], int arr_length, struct Coef shelving_coef)
 
 		current++;
 		current %= BUFFER_SIZE;
-	}
-
-	for (current = 0; current < BUFFER_SIZE; ++current) {
-		xBuffer[current] = yBuffer[current] = 0.0;
 	}
 }
 
