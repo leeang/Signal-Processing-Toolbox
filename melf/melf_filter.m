@@ -23,7 +23,9 @@ for bank_num = 1:20
 	for index = 0:x_length_dec
 		filter_gain(bank_num, index+x_length_inc+1) = 1 - index / x_length_dec;
 	end
+end
 
+for bank_num = 1:20
 	for index = 1:x_length+1
 		energy_melband(bank_num) = energy_melband(bank_num) + power(border(bank_num)+index) * filter_gain(bank_num, index);
 	end
