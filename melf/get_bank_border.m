@@ -1,4 +1,4 @@
-function border = melf_border()
+function bank_border = get_bank_border()
 	WINDOW_SIZE = 512;
 
 	min_f = 0;
@@ -11,5 +11,5 @@ function border = melf_border()
 
 	f_point = melf_to_f(mf_point);
 
-	border = round(WINDOW_SIZE * f_point / 16E3);
+	bank_border = round(WINDOW_SIZE * f_point / 16E3);
 end
