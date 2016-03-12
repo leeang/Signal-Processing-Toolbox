@@ -30,9 +30,6 @@ for bank_num = 1:20
 end
 
 for bank_num = 1:20
-	x_length_inc = border(bank_num+1) - border(bank_num);
-	x_length_dec = border(bank_num+2) - border(bank_num+1);
-
 	offset = floor(border(bank_num)/125);
 	L = floor(border(bank_num+2)/125) - floor(border(bank_num)/125);
 
