@@ -8,7 +8,7 @@ power = magnitude .^ 2;
 
 border = get_bank_border();
 
-filter_gain = zeros(20, 256);
+filter_gain = zeros(20, 59);
 energy_melband = zeros(1, 20);
 
 for bank_num = 1:20
@@ -34,7 +34,7 @@ for bank_num = 1:20
 	x_length_dec = border(bank_num+2) - border(bank_num+1);
 
 	offset = floor(border(bank_num)/125);
-	L = floor(border(bank_num+2)/125) - floor(border(bank_num)/125) + 1;
+	L = floor(border(bank_num+2)/125) - floor(border(bank_num)/125);
 
 	for index = 1:L
 		energy_melband(bank_num) = energy_melband(bank_num) + power(index+offset+1) * filter_gain(bank_num, index);
