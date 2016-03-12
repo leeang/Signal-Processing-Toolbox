@@ -1,7 +1,5 @@
 function bank_border = get_bank_border()
-	WINDOW_SIZE = 512;
-
-	min_f = 0;
+	min_f = 1;
 	max_f = 8000;
 
 	min_mf = f_to_melf(min_f);
@@ -9,7 +7,6 @@ function bank_border = get_bank_border()
 
 	mf_point = linspace(min_mf, max_mf, 22);
 
-	f_point = melf_to_f(mf_point);
-
-	bank_border = round(WINDOW_SIZE * f_point / 16E3);
+	bank_border = melf_to_f(mf_point) * 4;
+    bank_border = round(bank_border);
 end
