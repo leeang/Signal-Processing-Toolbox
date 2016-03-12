@@ -16,18 +16,18 @@ for bank_num = 1:20
 	x_length_dec = border(bank_num+2) - border(bank_num+1);
 
 	% index = 1;
-	% while (index-1)*16000/512 < border(bank_num)
+	% while (index-1)*125 < border(bank_num)
 	% 	index = index+1;
 	% end
-	index = ceil(border(bank_num)/16000*512) + 1;
+	index = floor(border(bank_num)/125) + 2;
 
-	while (index-1)*16000/512 <= border(bank_num+1)
-		filter_gain(bank_num, index) = ( (index-1)*16000/512-border(bank_num) ) / x_length_inc;
+	while (index-1)*125 <= border(bank_num+1)
+		filter_gain(bank_num, index) = ( (index-1)*125-border(bank_num) ) / x_length_inc;
 		index = index+1;
 	end
 
-	while (index-1)*16000/512 <= border(bank_num+2)
-		filter_gain(bank_num, index) = 1 - ( (index-1)*16000/512 - border(bank_num+1) ) / x_length_dec;
+	while (index-1)*125 <= border(bank_num+2)
+		filter_gain(bank_num, index) = 1 - ( (index-1)*125 - border(bank_num+1) ) / x_length_dec;
 		index = index+1;
 	end
 end
