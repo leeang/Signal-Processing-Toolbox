@@ -37,3 +37,5 @@ for bank_num = 1:20
 		energy_melband(bank_num) = energy_melband(bank_num) + power(index+offset+1) * filter_gain(bank_num, index);
 	end
 end
+
+energy_melband = log10(energy_melband);
