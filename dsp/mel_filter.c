@@ -152,10 +152,11 @@ void mel_filter(fract16 power_fr[], float energy_melband[])
 
 		int index;
 		for (index = 0; index < L; index++) {
-			fract16 temp = mult_fr1x16(power_fr[index+offset+1], bank_gain[bank_num][index]);
-			energy_melband[bank_num] = energy_melband[bank_num] + fr16_to_float(temp);
+			fract32 temp = mult_fr1x32(power_fr[index+offset+1], bank_gain[bank_num][index]);
+			energy_melband[bank_num] = energy_melband[bank_num] + fr32_to_float(temp);
 		}
 
+		energy_melband[bank_num] = energy_melband[bank_num] * (1<<8);
 		energy_melband[bank_num] = log10f(energy_melband[bank_num]);
 	}
 }
@@ -166,7 +167,7 @@ int main() {
 	fract16 power_fr[512];
 	int i;
 	for (i = 0; i < 512; ++i) {
-		power_fr[i] = float_to_fr16(power[i]);
+		power_fr[i] = float_to_fr16(power[i] / (1<<8));
 	}
 
 	float energy_melband[20] = {0.0};
