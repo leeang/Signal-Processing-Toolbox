@@ -297,6 +297,13 @@ int main() {
 		power_fr[i] = float_to_fr16(power[i] / (1<<8));
 	}
 
+	fract16 power_spectrum[WINDOW_LENGTH];
+	for (i = 0; i < WINDOW_LENGTH; ++i) {
+		fract16 absolute = cabs_fr16(fft_spectrum[i]);
+		fract32 power_fr32 = mult_fr1x32(absolute, absolute);
+		power_spectrum[i] = fr32_to_float(power_fr32) * (1 << block_exponent*2);
+	}
+
 	float energy_melband[20] = {0.0};
 	mel_filter(power_fr, energy_melband);
 
