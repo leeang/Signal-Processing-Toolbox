@@ -142,6 +142,24 @@ void calc_bank_gain(void)
 	}
 }
 
+void mel_filter(fract16 power_fr[], float energy_melband[])
+{
+	int bank_num;
+	for (bank_num = 0; bank_num < 20; bank_num++) {
+		int offset = bank_border[bank_num]/125;
+
+		int L = bank_border[bank_num+2]/125 - bank_border[bank_num]/125;
+
+		int index;
+		for (index = 0; index < L; index++) {
+			fract16 temp = mult_fr1x16(power_fr[index+offset+1], bank_gain[bank_num][index]);
+			energy_melband[bank_num] = energy_melband[bank_num] + fr16_to_float(temp);
+		}
+
+		energy_melband[bank_num] = log10f(energy_melband[bank_num]);
+	}
+}
+
 int main() {
 	calc_bank_gain();
 
