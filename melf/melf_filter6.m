@@ -40,8 +40,8 @@ for bank_num = 1:20
 
 	if bank_num == 1
 		filter_gain_offset = floor(border(1)/125);
-    elseif bank_num ==2
-        filter_gain_offset = floor(border(3)/125) - floor(border(1)/125);
+	elseif bank_num ==2
+		filter_gain_offset = floor(border(3)/125) - floor(border(1)/125);
 	else
 		filter_gain_offset = floor(border(bank_num+1)/125) + floor(border(bank_num)/125) - floor(border(2)/125) - floor(border(1)/125);
 	end
