@@ -291,12 +291,6 @@ int main() {
 	int block_exponent;
 	rfft_fr16(input_fr, fft_spectrum, twiddle_table, TWIDDLE_STRIDE, WINDOW_LENGTH, &block_exponent, DYNAMIC_SCALING);
 
-	fract16 power_fr[512];
-	int i;
-	for (i = 0; i < 512; ++i) {
-		power_fr[i] = float_to_fr16(power[i] / (1<<8));
-	}
-
 	fract16 power_spectrum[WINDOW_LENGTH];
 	for (i = 0; i < WINDOW_LENGTH; ++i) {
 		fract16 absolute = cabs_fr16(fft_spectrum[i]);
@@ -305,7 +299,7 @@ int main() {
 	}
 
 	float energy_melband[20] = {0.0};
-	mel_filter(power_fr, energy_melband);
+	mel_filter(power_spectrum, energy_melband);
 
 	int bank_num;
 	for (bank_num = 0; bank_num < 20; bank_num++) {
