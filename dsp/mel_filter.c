@@ -163,12 +163,18 @@ void mel_filter(fract16 power_fr[], float energy_melband[])
 int main() {
 	calc_bank_gain();
 
-	int row, column;
-	for (row = 0; row < 20; row++) {
-		for (column = 0; column < 59; column++) {
-			printf("%f\t", fr16_to_float(bank_gain[row][column]));
-		}
-		printf("\n");
+	fract16 power_fr[512];
+	int i;
+	for (i = 0; i < 512; ++i) {
+		power_fr[i] = float_to_fr16(power[i]);
+	}
+
+	float energy_melband[20] = {0.0};
+	mel_filter(power_fr, energy_melband);
+
+	int bank_num;
+	for (bank_num = 0; bank_num < 20; bank_num++) {
+		printf("%f\t", energy_melband[bank_num]);
 	}
 	return 0;
 }
