@@ -21,6 +21,7 @@ struct IIR_Coef {
 	fract32 b0, b1, b2;
 };
 
+struct IIR_Coef shelving_coef;
 
 void calc_shelving_coef(void)
 {
