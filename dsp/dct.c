@@ -200,7 +200,7 @@ void mel_filter(fract32 power_fr[], float energy_melband[], int block_exponent)
 	}
 }
 
-void calc_mfcc_coef(void)
+void calc_dct_coef(void)
 {
 	int mfcc_coef_num, bank_num;
 
@@ -212,8 +212,11 @@ void calc_mfcc_coef(void)
 }
 
 int main() {
+	/* Initialization */
 	calc_bank_gain();
 	twidfftrad2_fr16(twiddle_table, WINDOW_LENGTH);
+	calc_dct_coef();
+	/* /Initialization */
 
 	fract16 input_fr[WINDOW_LENGTH];
 	int i;
