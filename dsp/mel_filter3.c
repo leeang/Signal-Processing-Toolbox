@@ -267,6 +267,8 @@ void calc_bank_gain(void)
 
 void mel_filter(fract32 power_fr[], float energy_melband[], int block_exponent)
 {
+	int scale = 1 << block_exponent*2;
+
 	int bank_num;
 	for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
 		int offset = bank_border[bank_num]/125;
@@ -291,7 +293,7 @@ void mel_filter(fract32 power_fr[], float energy_melband[], int block_exponent)
 			energy_melband[bank_num] = energy_melband[bank_num] + fr32_to_float(temp);
 		}
 
-		energy_melband[bank_num] = energy_melband[bank_num] * (1 << block_exponent*2);
+		energy_melband[bank_num] = energy_melband[bank_num] * scale;
 		energy_melband[bank_num] = log10f(energy_melband[bank_num]);
 	}
 }
