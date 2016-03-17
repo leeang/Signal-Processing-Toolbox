@@ -3,6 +3,9 @@
 
 #include <fract.h>
 
+#define YES				1
+#define NO				0
+
 #define WINDOW_LENGTH	256
 #define PI				3.14159265358979323846
 
@@ -32,16 +35,18 @@ struct Coef get_shelving_coef(void)
 }
 
 
-void pre_emphasis(fract16 data[], int arr_length, struct Coef shelving_coef)
+void pre_emphasis(fract16 data[], int arr_length, struct Coef shelving_coef, char reset)
 {
-	fract32 xBuffer[BUFFER_SIZE];
+	static fract32 xBuffer[BUFFER_SIZE] = {0};
 	// input buffer
-	fract32 yBuffer[BUFFER_SIZE];
+	static fract32 yBuffer[BUFFER_SIZE] = {0};
 	// output buffer
 
 	int current;
-	for (current = 0; current < BUFFER_SIZE; ++current) {
-		xBuffer[current] = yBuffer[current] = float_to_fr32(0.0);
+	if (reset == YES) {
+		for (current = 0; current < BUFFER_SIZE; current++) {
+			xBuffer[current] = yBuffer[current] = 0;
+		}
 	}
 	current = 0;
 
@@ -87,7 +92,7 @@ void hamming(fract16 data[], int arr_length, fract16 hamming_coef[])
 
 float calc_energy(fract16 data[], int arr_length)
 {
-	int shift = 8;
+	int shift = 9;
 	// shift = log_2(arr_length)
 
 	fract32 energy_fr = float_to_fr32(0.0);
@@ -166,7 +171,16 @@ int main() {
 		data[index] = float_to_fr16(test_input[index]);
 	}
 
+	struct Coef shelving_coef = get_shelving_coef();
+	pre_emphasis(data, WINDOW_LENGTH, shelving_coef, NO);
+
 	float energy = calc_energy(data, WINDOW_LENGTH);
 	printf("%f\n", energy);
+
+	for (index = 0; index < WINDOW_LENGTH; ++index) {
+		float test = fr16_to_float(data[index]);
+		// printf("%f\n", fr16_to_float(data[index]));
+	}
+
 	return 0;
 }
