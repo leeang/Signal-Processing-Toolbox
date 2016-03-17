@@ -6,6 +6,9 @@
 #include <filter.h>
 
 #define WINDOW_LENGTH	512
+
+#define BANK_NUM		20
+
 #define TWIDDLE_STRIDE	1
 #define DYNAMIC_SCALING	2
 
@@ -235,7 +238,7 @@ void calc_bank_gain(void)
 	int bank_gain_index = 0;
 
 	int bank_num;
-	for (bank_num = 0; bank_num < 20; bank_num++) {
+	for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
 		int x_length_inc = bank_border[bank_num+1] - bank_border[bank_num];
 		int x_length_dec = bank_border[bank_num+2] - bank_border[bank_num+1];
 
@@ -265,7 +268,7 @@ void calc_bank_gain(void)
 void mel_filter(fract32 power_fr[], float energy_melband[], int block_exponent)
 {
 	int bank_num;
-	for (bank_num = 0; bank_num < 20; bank_num++) {
+	for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
 		int offset = bank_border[bank_num]/125;
 
 		int L = bank_border[bank_num+2]/125 - bank_border[bank_num]/125;
@@ -312,11 +315,11 @@ int main() {
 		power_spectrum[i] = mult_fr1x32(absolute, absolute);
 	}
 
-	float energy_melband[20] = {0.0};
+	float energy_melband[BANK_NUM] = {0.0};
 	mel_filter(power_spectrum, energy_melband, block_exponent);
 
 	int bank_num;
-	for (bank_num = 0; bank_num < 20; bank_num++) {
+	for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
 		printf("%f\t", energy_melband[bank_num]);
 	}
 	return 0;
