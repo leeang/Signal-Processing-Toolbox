@@ -9,7 +9,7 @@
 /* sample type */
 typedef double smp_type;
 
-#define IS_ZC(X, Y)	( (X) > 0 && (Y) < 0 ) || ( (X) < 0 && (Y) > 0 ) ? 1 : 0
+#define IS_ZC(X, Y)	( (X) > 0 && (Y) < 0 || (X) < 0 && (Y) > 0 ? 1 : 0 )
 
 int zc_count(smp_type data[], int arr_length)
 {
