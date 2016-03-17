@@ -174,7 +174,10 @@ int main() {
 	}
 
 	calc_shelving_coef();
+	calc_hamming_coef();
+
 	pre_emphasis(data, WINDOW_LENGTH, NO);
+	hamming(data);
 
 	float energy = calc_energy(data, WINDOW_LENGTH);
 	printf("%f\n", energy);
