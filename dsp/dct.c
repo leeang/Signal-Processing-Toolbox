@@ -5,6 +5,8 @@
 #include <complex.h>
 #include <filter.h>
 
+#define PI	3.14159265358979323846
+
 #define WINDOW_LENGTH	512
 
 /* Mel filter */
@@ -211,6 +213,19 @@ void calc_dct_coef(void)
 	}
 }
 
+void discrete_cosine_transform(float energy[], float mfcc_coefficient[])
+{
+	int mfcc_coef_num, bank_num;
+
+	for (mfcc_coef_num = 0; mfcc_coef_num < MFCC_COEF_NUM; mfcc_coef_num++) {
+		float sum = 0;
+		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
+			sum += energy[bank_num] * dct_coef[mfcc_coef_num][bank_num];
+		}
+		mfcc_coefficient[mfcc_coef_num] = sum;
+	}
+}
+
 int main() {
 	/* Initialization */
 	calc_bank_gain();
@@ -235,6 +250,9 @@ int main() {
 
 	float energy_melband[BANK_NUM] = {0.0};
 	mel_filter(power_spectrum, energy_melband, block_exponent);
+
+	float mfcc_coef[MFCC_COEF_NUM] = {0.0};
+	discrete_cosine_transform(energy_melband, mfcc_coef);
 
 	return 0;
 }
