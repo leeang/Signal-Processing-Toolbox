@@ -21,7 +21,10 @@ struct IIR_Coef {
 	fract32 b0, b1, b2;
 };
 
+/* Coefficients Cache */
 struct IIR_Coef shelving_coef;
+fract16 hamming_coef[WINDOW_LENGTH] = {0};
+/* /Coefficients Cache */
 
 void calc_shelving_coef(void)
 {
@@ -71,20 +74,20 @@ void pre_emphasis(fract16 data[], int arr_length, char reset)
 	}
 }
 
-void get_hamming_coef(fract16 hamming_coef[], int arr_length)
+void calc_hamming_coef(void)
 {
 	int index;
 	float w;
-	for (index = 0; index < arr_length; index++) {
-		w = 0.54 - 0.46 * cosf( 2 * PI * index / (arr_length - 1) );
+	for (index = 0; index < WINDOW_LENGTH; index++) {
+		w = 0.54 - 0.46 * cosf( 2 * PI * (float) index / (float) (WINDOW_LENGTH-1) );
 		hamming_coef[index] = float_to_fr16(w);
 	}
 }
 
-void hamming(fract16 data[], int arr_length, fract16 hamming_coef[])
+void hamming(fract16 data[])
 {
 	int index;
-	for (index = 0; index < arr_length; index++) {
+	for (index = 0; index < WINDOW_LENGTH; index++) {
 		data[index] = mult_fr1x16(data[index], hamming_coef[index]);
 	}
 }
