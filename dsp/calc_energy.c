@@ -21,21 +21,17 @@ struct IIR_Coef {
 	fract32 b0, b1, b2;
 };
 
-struct IIR_Coef get_shelving_coef(void)
+
+void calc_shelving_coef(void)
 {
-	struct IIR_Coef coefficients;
-
-	coefficients.b0 = float_to_fr32(0.465464090346913);
-	coefficients.b1 = float_to_fr32(-0.775712919663902);
-	coefficients.b2 = float_to_fr32(0.341636074816722);
-	coefficients.a1 = float_to_fr32(-0.380949232917015);
-	coefficients.a2 = float_to_fr32(0.162336478416747);
-
-	return coefficients;
+	shelving_coef.b0 = float_to_fr32(0.465464090346913);
+	shelving_coef.b1 = float_to_fr32(-0.775712919663902);
+	shelving_coef.b2 = float_to_fr32(0.341636074816722);
+	shelving_coef.a1 = float_to_fr32(-0.380949232917015);
+	shelving_coef.a2 = float_to_fr32(0.162336478416747);
 }
 
-
-void pre_emphasis(fract16 data[], int arr_length, struct IIR_Coef shelving_coef, char reset)
+void pre_emphasis(fract16 data[], int arr_length, char reset)
 {
 	static fract32 xBuffer[BUFFER_SIZE] = {0};
 	// input buffer
@@ -171,8 +167,8 @@ int main() {
 		data[index] = float_to_fr16(test_input[index]);
 	}
 
-	struct IIR_Coef shelving_coef = get_shelving_coef();
-	pre_emphasis(data, WINDOW_LENGTH, shelving_coef, NO);
+	calc_shelving_coef();
+	pre_emphasis(data, WINDOW_LENGTH, NO);
 
 	float energy = calc_energy(data, WINDOW_LENGTH);
 	printf("%f\n", energy);
