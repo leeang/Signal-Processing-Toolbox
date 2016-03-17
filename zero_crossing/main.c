@@ -9,16 +9,16 @@
 /* sample type */
 typedef double smp_type;
 
-#define IS_ZX(X, Y)	( (X) > 0 && (Y) < 0 ) || ( (X) < 0 && (Y) > 0 ) ? 1 : 0
+#define IS_ZC(X, Y)	( (X) > 0 && (Y) < 0 ) || ( (X) < 0 && (Y) > 0 ) ? 1 : 0
 
-int get_ZX_num(smp_type data[], int arr_length)
+int zc_count(smp_type data[], int arr_length)
 {
-	int ZX_num = 0;
+	int zc_num = 0;
 	for (int index = 1; index < arr_length; index++) {
-		int res = IS_ZX(data[index], data[index-1]);
-		ZX_num += res;
+		int res = IS_ZC(data[index], data[index-1]);
+		zc_num += res;
 	}
-	return ZX_num;
+	return zc_num;
 }
 
 smp_type test_input[] = { 0.000000, 0.311155, 0.604528, 0.863541, 1.073937, 
@@ -145,9 +145,9 @@ smp_type test_input[] = { 0.000000, 0.311155, 0.604528, 0.863541, 1.073937,
 int main() {
 	int window_length = 360;
 
-	int ZX_num = get_ZX_num(test_input, window_length);
+	int zc_num = zc_count(test_input, window_length);
 
-	printf("%d\n", ZX_num);
+	printf("%d\n", zc_num);
 
 	return 0;
 }
