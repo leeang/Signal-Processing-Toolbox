@@ -39,15 +39,17 @@ void pre_emphasis(fract16 data[], int arr_length, char reset)
 	static fract32 yBuffer[BUFFER_SIZE] = {0};
 	// output buffer
 
-	int current;
-	if (reset == YES) {
-		for (current = 0; current < BUFFER_SIZE; current++) {
-			xBuffer[current] = yBuffer[current] = 0;
-		}
-	}
-	current = 0;
+	static int current = 0;
 
 	int index;
+
+	if (reset == YES) {
+		for (index = 0; index < BUFFER_SIZE; index++) {
+			xBuffer[index] = yBuffer[index] = 0;
+		}
+		current = 0;
+	}
+
 	for (index = 0; index < arr_length; index++) {
 		fract32 temp_b0 = mult_fr1x32x32(shelving_coef.b0, fr16_to_fr32(data[index]));
 		fract32 temp_b1 = mult_fr1x32x32(shelving_coef.b1, xBuffer[INDEX(current-1)]);
