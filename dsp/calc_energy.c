@@ -12,13 +12,13 @@
 /* IIR filter */
 #define BUFFER_SIZE		2
 //define the buffer size
-#define INDEX(CURRENT)	((CURRENT) + BUFFER_SIZE) % BUFFER_SIZE
+#define INDEX(CURRENT)	( ((CURRENT) + BUFFER_SIZE) % BUFFER_SIZE )
 // if an index is negative, a specified position from the end of the array will be returned.
 // e.g. given an array x[8], x[INDEX(-1)] and x[INDEX(7)] both refer to x[7].
 /* /IIR filter */
 
 /* zero crossing count */
-#define IS_ZC(X, Y)		( (X) > 0 && (Y) < 0 || (X) < 0 && (Y) > 0 ? 1 : 0 )
+#define IS_ZC(X, Y)		( (X) > 0 && (Y) < 0 || (X) < 0 && (Y) > 0 )
 
 /* the coefficients of an IIR filter */
 struct IIR_Coef {
