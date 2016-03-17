@@ -16,14 +16,14 @@
 // e.g. given an array x[8], x[INDEX(-1)] and x[INDEX(7)] both refer to x[7].
 
 /* this holds the data required to update samples through a filter */
-struct Coef {
+struct IIR_Coef {
 	fract32 a1, a2;
 	fract32 b0, b1, b2;
 };
 
-struct Coef get_shelving_coef(void)
+struct IIR_Coef get_shelving_coef(void)
 {
-	struct Coef coefficients;
+	struct IIR_Coef coefficients;
 
 	coefficients.b0 = float_to_fr32(0.465464090346913);
 	coefficients.b1 = float_to_fr32(-0.775712919663902);
@@ -35,7 +35,7 @@ struct Coef get_shelving_coef(void)
 }
 
 
-void pre_emphasis(fract16 data[], int arr_length, struct Coef shelving_coef, char reset)
+void pre_emphasis(fract16 data[], int arr_length, struct IIR_Coef shelving_coef, char reset)
 {
 	static fract32 xBuffer[BUFFER_SIZE] = {0};
 	// input buffer
@@ -171,7 +171,7 @@ int main() {
 		data[index] = float_to_fr16(test_input[index]);
 	}
 
-	struct Coef shelving_coef = get_shelving_coef();
+	struct IIR_Coef shelving_coef = get_shelving_coef();
 	pre_emphasis(data, WINDOW_LENGTH, shelving_coef, NO);
 
 	float energy = calc_energy(data, WINDOW_LENGTH);
