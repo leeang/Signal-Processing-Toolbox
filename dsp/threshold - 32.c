@@ -40,23 +40,16 @@ void calc_shelving_coef(void)
 	shelving_coef.a2 = float_to_fr32(0.162336478416747);
 }
 
-void pre_emphasis(fract32 data[], int arr_length, char reset)
+void pre_emphasis(fract32 data[], int arr_length)
 {
-	static fract32 xBuffer[BUFFER_SIZE] = {0};
+	fract32 xBuffer[BUFFER_SIZE] = {0};
 	// input buffer
-	static fract32 yBuffer[BUFFER_SIZE] = {0};
+	fract32 yBuffer[BUFFER_SIZE] = {0};
 	// output buffer
 
-	static int current = 0;
+	int current = 0;
 
 	int index;
-
-	if (reset == YES) {
-		for (index = 0; index < BUFFER_SIZE; index++) {
-			xBuffer[index] = yBuffer[index] = 0;
-		}
-		current = 0;
-	}
 
 	for (index = 0; index < arr_length; index++) {
 		fract32 temp_b0 = mult_fr1x32x32(shelving_coef.b0, data[index]);
@@ -250,7 +243,7 @@ int main() {
 	calc_shelving_coef();
 	calc_hamming_coef();
 
-	pre_emphasis(data, WINDOW_LENGTH, NO);
+	pre_emphasis(data, WINDOW_LENGTH);
 	hamming(data);
 
 	float energy = calc_energy(data, WINDOW_LENGTH);
