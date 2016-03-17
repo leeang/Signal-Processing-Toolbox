@@ -204,11 +204,13 @@ void mel_filter(fract32 power_fr[], float energy_melband[], int block_exponent)
 
 void calc_dct_coef(void)
 {
+	float scale = sqrtf(2.0 / BANK_NUM);
+
 	int mfcc_coef_num, bank_num;
 
 	for (mfcc_coef_num = 0; mfcc_coef_num < MFCC_COEF_NUM; mfcc_coef_num++) {
 		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
-			dct_coef[mfcc_coef_num][bank_num] = cosf(PI * (bank_num+0.5) * (float) mfcc_coef_num / (float) BANK_NUM);
+			dct_coef[mfcc_coef_num][bank_num] = cosf(PI * (bank_num+0.5) * (float) mfcc_coef_num / (float) BANK_NUM) * scale;
 		}
 	}
 }
@@ -253,6 +255,11 @@ int main() {
 
 	float mfcc_coef[MFCC_COEF_NUM] = {0.0};
 	discrete_cosine_transform(energy_melband, mfcc_coef);
+
+	int mfcc_coef_num;
+	for (mfcc_coef_num = 0; mfcc_coef_num < MFCC_COEF_NUM; mfcc_coef_num++) {
+		printf("%f\t", mfcc_coef[mfcc_coef_num]);
+	}
 
 	return 0;
 }
