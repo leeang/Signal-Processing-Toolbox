@@ -9,14 +9,12 @@
 
 #define WINDOW_LENGTH	512
 
-/* Mel filter */
-#define BANK_NUM		20
-
 /* FFT */
 #define TWIDDLE_STRIDE	1
 #define DYNAMIC_SCALING	2
 
-/* discrete cosine transform */
+/* Mel filter */
+#define BANK_NUM		20
 #define MFCC_NUM		12
 
 /* Mel filter */
