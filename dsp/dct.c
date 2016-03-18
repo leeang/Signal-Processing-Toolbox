@@ -228,6 +228,24 @@ void discrete_cosine_transform(float energy[], float out_mfcc[])
 	}
 }
 
+void calc_mfcc(fract16 input_fr[], float out_mfcc[])
+{
+	int i;
+
+	int block_exponent;
+	rfft_fr16(input_fr, fft_spectrum, twiddle_table, TWIDDLE_STRIDE, WINDOW_LENGTH, &block_exponent, DYNAMIC_SCALING);
+
+	fract32 power_spectrum[WINDOW_LENGTH];
+	for (i = 0; i < WINDOW_LENGTH; ++i) {
+		fract16 absolute = cabs_fr16(fft_spectrum[i]);
+		power_spectrum[i] = mult_fr1x32(absolute, absolute);
+	}
+
+	float energy_melband[BANK_NUM] = {0.0};
+	mel_filter(power_spectrum, energy_melband, block_exponent);
+	discrete_cosine_transform(energy_melband, out_mfcc);
+}
+
 int main() {
 	/* Initialization */
 	calc_bank_gain();
