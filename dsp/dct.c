@@ -259,20 +259,8 @@ int main() {
 		input_fr[i] = float_to_fr16(test_input[i]);
 	}
 
-	int block_exponent;
-	rfft_fr16(input_fr, fft_spectrum, twiddle_table, TWIDDLE_STRIDE, WINDOW_LENGTH, &block_exponent, DYNAMIC_SCALING);
-
-	fract32 power_spectrum[WINDOW_LENGTH];
-	for (i = 0; i < WINDOW_LENGTH; ++i) {
-		fract16 absolute = cabs_fr16(fft_spectrum[i]);
-		power_spectrum[i] = mult_fr1x32(absolute, absolute);
-	}
-
-	float energy_melband[BANK_NUM] = {0.0};
-	mel_filter(power_spectrum, energy_melband, block_exponent);
-
 	float mfcc[MFCC_NUM] = {0.0};
-	discrete_cosine_transform(energy_melband, mfcc);
+	calc_mfcc(input_fr, mfcc);
 
 	int mfcc_num;
 	for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
