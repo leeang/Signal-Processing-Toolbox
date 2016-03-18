@@ -17,13 +17,13 @@
 #define BANK_NUM		20
 #define MFCC_NUM		12
 
-/* Mel filter */
-int bank_border[] = { 4, 361, 764, 1218, 1730, 2307, 2958, 3692, 4519, 5452, 6503, 7689, 9025, 10532, 12231, 14146, 16305, 18740, 21484, 24578, 28067, 32000 };
-fract32 bank_gain[477] = {0x0000};
-
 /* FFT */
 complex_fract32 fft_spectrum[WINDOW_LENGTH] = {0};
 complex_fract32 twiddle_table[WINDOW_LENGTH/2] = {0};
+
+/* Mel filter */
+int bank_border[] = { 4, 361, 764, 1218, 1730, 2307, 2958, 3692, 4519, 5452, 6503, 7689, 9025, 10532, 12231, 14146, 16305, 18740, 21484, 24578, 28067, 32000 };
+fract32 bank_gain[477] = {0x0000};
 
 /* discrete cosine transform */
 float dct_coef[MFCC_NUM][BANK_NUM] = {0.0};
