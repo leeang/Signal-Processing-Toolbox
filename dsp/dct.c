@@ -17,7 +17,7 @@
 #define DYNAMIC_SCALING	2
 
 /* discrete cosine transform */
-#define MFCC_COEF_NUM	12
+#define MFCC_NUM		12
 
 /* Mel filter */
 int bank_border[] = { 4, 361, 764, 1218, 1730, 2307, 2958, 3692, 4519, 5452, 6503, 7689, 9025, 10532, 12231, 14146, 16305, 18740, 21484, 24578, 28067, 32000 };
@@ -28,7 +28,7 @@ complex_fract16 fft_spectrum[WINDOW_LENGTH] = {0};
 complex_fract16 twiddle_table[WINDOW_LENGTH/2] = {0};
 
 /* discrete cosine transform */
-float dct_coef[MFCC_COEF_NUM][BANK_NUM] = {0.0};
+float dct_coef[MFCC_NUM][BANK_NUM] = {0.0};
 
 float test_input[] = {
 		-0.137543, -0.137787, -0.143433, -0.145386, -0.140533, 
@@ -206,25 +206,25 @@ void calc_dct_coef(void)
 {
 	float scale = sqrtf(2.0 / BANK_NUM);
 
-	int mfcc_coef_num, bank_num;
+	int mfcc_num, bank_num;
 
-	for (mfcc_coef_num = 0; mfcc_coef_num < MFCC_COEF_NUM; mfcc_coef_num++) {
+	for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
 		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
-			dct_coef[mfcc_coef_num][bank_num] = cosf(PI * (bank_num+0.5) * (float) mfcc_coef_num / (float) BANK_NUM) * scale;
+			dct_coef[mfcc_num][bank_num] = cosf(PI * (bank_num+0.5) * (float) mfcc_num / (float) BANK_NUM) * scale;
 		}
 	}
 }
 
-void discrete_cosine_transform(float energy[], float mfcc_coefficient[])
+void discrete_cosine_transform(float energy[], float out_mfcc[])
 {
-	int mfcc_coef_num, bank_num;
+	int mfcc_num, bank_num;
 
-	for (mfcc_coef_num = 0; mfcc_coef_num < MFCC_COEF_NUM; mfcc_coef_num++) {
+	for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
 		float sum = 0;
 		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
-			sum += energy[bank_num] * dct_coef[mfcc_coef_num][bank_num];
+			sum += energy[bank_num] * dct_coef[mfcc_num][bank_num];
 		}
-		mfcc_coefficient[mfcc_coef_num] = sum;
+		out_mfcc[mfcc_num] = sum;
 	}
 }
 
@@ -253,12 +253,12 @@ int main() {
 	float energy_melband[BANK_NUM] = {0.0};
 	mel_filter(power_spectrum, energy_melband, block_exponent);
 
-	float mfcc_coef[MFCC_COEF_NUM] = {0.0};
-	discrete_cosine_transform(energy_melband, mfcc_coef);
+	float mfcc[MFCC_NUM] = {0.0};
+	discrete_cosine_transform(energy_melband, mfcc);
 
-	int mfcc_coef_num;
-	for (mfcc_coef_num = 0; mfcc_coef_num < MFCC_COEF_NUM; mfcc_coef_num++) {
-		printf("%f\t", mfcc_coef[mfcc_coef_num]);
+	int mfcc_num;
+	for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
+		printf("%f\t", mfcc[mfcc_num]);
 	}
 
 	return 0;
