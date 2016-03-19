@@ -53,7 +53,7 @@ fract32 bank_gain[477] = {0x0000};
 float dct_coef[MFCC_NUM][BANK_NUM] = {0.0};
 
 section("sdram0") fract32 input_fr[TOTAL_LENGTH];
-section("sdram0") fract32 voiced_cepstrum[FRAME_NUM][MFCC_NUM] = {0.0};;
+section("sdram0") float voiced_cepstrum[FRAME_NUM][MFCC_NUM] = {0.0};
 
 #include "test_input.h"
 
