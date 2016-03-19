@@ -7,6 +7,7 @@
 
 #define PI	3.14159265358979323846
 
+#define TOTAL_LENGTH	48000
 #define WINDOW_LENGTH	512
 
 /* IIR filter */
@@ -49,6 +50,8 @@ fract32 bank_gain[477] = {0x0000};
 
 /* discrete cosine transform */
 float dct_coef[MFCC_NUM][BANK_NUM] = {0.0};
+
+section("sdram0") fract32 input_fr[TOTAL_LENGTH];
 
 #include "test_input.h"
 
@@ -263,13 +266,14 @@ int main() {
 	calc_dct_coef();
 	/* /Initialization */
 
-	section("sdram0") fract32 input_fr[WINDOW_LENGTH];
 	int i;
-	for (i = 0; i < WINDOW_LENGTH; ++i) {
+	for (i = 0; i < TOTAL_LENGTH; ++i) {
 		input_fr[i] = float_to_fr32(test_input[i]);
 	}
 
-	pre_emphasis(input_fr, WINDOW_LENGTH);
+	pre_emphasis(input_fr, TOTAL_LENGTH);
+	// printf("pre emphasis done\n");
+
 	hamming(input_fr);
 
 	float energy = calc_energy(input_fr, WINDOW_LENGTH);
