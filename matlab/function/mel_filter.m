@@ -1,11 +1,7 @@
-function energy_melband = mel_filter(data)
+function energy_melband = mel_filter(power_spectrum)
 	global BANK_NUM;
 	global border;
 	global bank_gain;
-
-	spectrum = fft(data);
-	magnitude = abs(spectrum);
-	power = magnitude .^ 2;
 
 	energy_melband = zeros(1, BANK_NUM);
 	for bank_num = 1:BANK_NUM
@@ -21,7 +17,7 @@ function energy_melband = mel_filter(data)
 		end
 
 		for index = 1:L
-			energy_melband(bank_num) = energy_melband(bank_num) + power(index+offset+1) * bank_gain(index+filter_gain_offset);
+			energy_melband(bank_num) = energy_melband(bank_num) + power_spectrum(index+offset+1) * bank_gain(index+filter_gain_offset);
 		end
 	end
 
