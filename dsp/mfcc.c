@@ -53,6 +53,7 @@ fract32 bank_gain[477] = {0x0000};
 float dct_coef[MFCC_NUM][BANK_NUM] = {0.0};
 
 section("sdram0") fract32 input_fr[TOTAL_LENGTH];
+section("sdram0") fract32 voiced_cepstrum[FRAME_NUM][MFCC_NUM] = {0.0};;
 
 #include "test_input.h"
 
@@ -277,20 +278,36 @@ int main() {
 
 	int frame_offset = 0;
 	fract32 frame_data[WINDOW_LENGTH];
+	int voiced_cepstrum_index = 0;
 
 	int frame_num;
+	int mfcc_num;
 	for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
-		for (index = 0; index < FRAME_NUM; index++) {
+		for (index = 0; index < WINDOW_LENGTH; index++) {
 			frame_data[index] = input_fr[index+frame_offset];
-			hamming(frame_data);
+		}
 
-			float energy = calc_energy(frame_data, WINDOW_LENGTH);
+		hamming(frame_data);
 
-			if (energy > 0.1) {
-				
+		float energy = calc_energy(frame_data, WINDOW_LENGTH);
+
+		if (energy > 0.1) {
+			float mfcc[MFCC_NUM] = {0.0};
+			calc_mfcc(frame_data, mfcc);
+
+			for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
+				voiced_cepstrum[voiced_cepstrum_index][mfcc_num] = mfcc[mfcc_num];
 			}
+			voiced_cepstrum_index++;
 		}
 		frame_offset += WINDOW_LENGTH/2;
+	}
+
+	for (frame_num = 0; frame_num < voiced_cepstrum_index; frame_num++) {
+		for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
+			printf("%f\t", voiced_cepstrum[frame_num][mfcc_num]);
+		}
+		printf("\n");
 	}
 
 	return 0;
