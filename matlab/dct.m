@@ -17,4 +17,5 @@ calc_dct_coef();
 
 load('data_512.mat');
 
+energy_melband = mel_filter(x);
 cepstrum_coefficient = discrete_cosine_transform(energy_melband);
