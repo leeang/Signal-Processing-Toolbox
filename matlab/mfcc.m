@@ -27,8 +27,6 @@ calc_bank_gain();
 global dct_coef;
 calc_dct_coef();
 
-energy = sum(x .^ 2);
-
 [shelf_b, shelf_a] = shelving(6, 1000, 16E3, 0.9, 'Treble_Shelf');
 
 shelf_b = shelf_b/4;
@@ -44,8 +42,6 @@ for frame_num = 1:FRAME_NUM
 	end
 	frame_offset = frame_offset + WINDOW_LENGTH/2;
 end
-
-energy_after_preemphasis = sum(after_preemphasis .^ 2);
 
 after_hamming = hamming(WINDOW_LENGTH) .* after_preemphasis;
 energy_after_hamming = sum(after_hamming .^ 2);
