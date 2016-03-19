@@ -40,3 +40,5 @@ for bank_num = 1:BANK_NUM
 end
 
 energy_melband = log10(energy_melband);
+
+cepstrum_coefficient = discrete_cosine_transform(energy_melband);
