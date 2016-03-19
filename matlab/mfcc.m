@@ -42,10 +42,3 @@ for frame_num = 1:FRAME_NUM
 	end
 	frame_offset = frame_offset + WINDOW_LENGTH/2;
 end
-
-after_hamming = hamming(WINDOW_LENGTH) .* after_preemphasis;
-energy_after_hamming = sum(after_hamming .^ 2);
-
-zc_num = zc_count(after_hamming);
-
-cepstrum_coefficient = calc_mfcc(after_hamming);
