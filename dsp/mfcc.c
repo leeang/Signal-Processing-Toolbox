@@ -267,9 +267,9 @@ int main() {
 	calc_dct_coef();
 	/* /Initialization */
 
-	int i;
-	for (i = 0; i < TOTAL_LENGTH; ++i) {
-		input_fr[i] = float_to_fr32(test_input[i]);
+	int index;
+	for (index = 0; index < TOTAL_LENGTH; index++) {
+		input_fr[index] = float_to_fr32(test_input[index]);
 	}
 
 	pre_emphasis(input_fr, TOTAL_LENGTH);
@@ -280,8 +280,15 @@ int main() {
 
 	int frame_num;
 	for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
-		for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
-			
+		for (index = 0; index < FRAME_NUM; index++) {
+			frame_data[index] = input_fr[index+frame_offset];
+			hamming(frame_data);
+
+			float energy = calc_energy(frame_data, WINDOW_LENGTH);
+
+			if (energy > 0.1) {
+				
+			}
 		}
 		frame_offset += WINDOW_LENGTH/2;
 	}
