@@ -379,6 +379,9 @@ int main() {
 	float energy = calc_energy(input_fr, WINDOW_LENGTH);
 	printf("%f\n", energy);
 
+	int zc_num = zc_count(input_fr, WINDOW_LENGTH);
+	printf("%d\n", zc_num);
+
 	float mfcc[MFCC_NUM] = {0.0};
 	calc_mfcc(input_fr, mfcc);
 
