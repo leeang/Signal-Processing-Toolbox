@@ -3,11 +3,17 @@ clear;
 global BANK_NUM;
 BANK_NUM = 20;
 
+global MFCC_NUM;
+MFCC_NUM = 12;
+
 global border;
 border = get_bank_border();
 
 global bank_gain;
 calc_bank_gain();
+
+global dct_coef;
+calc_dct_coef();
 
 load('data_512.mat');
 
@@ -34,15 +40,6 @@ for bank_num = 1:BANK_NUM
 end
 
 energy_melband = log10(energy_melband);
-
-F = 12;
-dct_coef = zeros(F, BANK_NUM);
-
-for n = 0:F-1
-	for k = 0:BANK_NUM-1
-		dct_coef(n+1, k+1) = cos(pi * (k+0.5) * n / BANK_NUM);
-	end
-end
 
 cepstrum_coefficient = zeros(1, F);
 for n = 0:F-1
