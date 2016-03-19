@@ -5,7 +5,9 @@ ABSPATH = pwd;
 addpath([ABSPATH '/function']);
 % add function path
 
-load('data_512');
+load('data');
+
+FRAME_NUM = 180;
 
 global WINDOW_LENGTH;
 WINDOW_LENGTH = 512;
@@ -33,6 +35,16 @@ shelf_b = shelf_b/4;
 shelf_a = shelf_a/4;
 
 after_preemphasis = filter(shelf_b, shelf_a, x);
+
+frame_offset = 0;
+
+for frame_num = 1:FRAME_NUM
+	for index = 1:WINDOW_LENGTH
+		data = x(index+frame_offset);
+	end
+	frame_offset = frame_offset + WINDOW_LENGTH/2;
+end
+
 energy_after_preemphasis = sum(after_preemphasis .^ 2);
 
 after_hamming = hamming(WINDOW_LENGTH) .* after_preemphasis;
