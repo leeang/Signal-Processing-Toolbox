@@ -9,6 +9,7 @@
 
 #define TOTAL_LENGTH	48000
 #define WINDOW_LENGTH	512
+#define FRAME_NUM		180
 
 /* IIR filter */
 #define BUFFER_SIZE		2
@@ -273,6 +274,17 @@ int main() {
 
 	pre_emphasis(input_fr, TOTAL_LENGTH);
 	// printf("pre emphasis done\n");
+
+	int frame_offset = 0;
+	fract32 frame_data[WINDOW_LENGTH];
+
+	int frame_num;
+	for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
+		for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
+			
+		}
+		frame_offset += WINDOW_LENGTH/2;
+	}
 
 	hamming(input_fr);
 
