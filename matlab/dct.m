@@ -1,15 +1,16 @@
 clear;
 
+global BANK_NUM;
 BANK_NUM = 20;
 
+global border;
+border = get_bank_border();
+
 load('data_512.mat');
-x = x';
 
 spectrum = fft(x);
 magnitude = abs(spectrum);
 power = magnitude .^ 2;
-
-border = get_bank_border();
 
 filter_gain_size = floor(border(22)/125) + floor(border(21)/125) - floor(border(2)/125) - floor(border(1)/125);
 filter_gain = zeros(1, filter_gain_size);
