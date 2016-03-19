@@ -1,4 +1,4 @@
-function bank_gain = calc_bank_gain()
+function calc_bank_gain()
 	global BANK_NUM;
 	global border;
 	global bank_gain;
