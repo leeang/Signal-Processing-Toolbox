@@ -228,7 +228,7 @@ void calc_dct_coef(void)
 	}
 }
 
-void discrete_cosine_transform(float energy[], float out_mfcc[])
+void discrete_cosine_transform(float energy[], float *ptr_to_mfcc_matrix)
 {
 	int mfcc_num, bank_num;
 
@@ -237,11 +237,11 @@ void discrete_cosine_transform(float energy[], float out_mfcc[])
 		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
 			sum += energy[bank_num] * dct_coef[mfcc_num][bank_num];
 		}
-		out_mfcc[mfcc_num] = sum;
+		*(ptr_to_mfcc_matrix+mfcc_num) = sum;
 	}
 }
 
-void calc_mfcc(fract32 input_fr[], float out_mfcc[])
+void calc_mfcc(fract32 input_fr[], float *ptr_to_mfcc_matrix)
 {
 	int i;
 
@@ -256,7 +256,7 @@ void calc_mfcc(fract32 input_fr[], float out_mfcc[])
 
 	float energy_melband[BANK_NUM] = {0.0};
 	mel_filter(power_spectrum, energy_melband, block_exponent);
-	discrete_cosine_transform(energy_melband, out_mfcc);
+	discrete_cosine_transform(energy_melband, ptr_to_mfcc_matrix);
 }
 
 int main() {
@@ -293,11 +293,7 @@ int main() {
 
 		if (energy > 0.1) {
 			float mfcc[MFCC_NUM] = {0.0};
-			calc_mfcc(frame_data, mfcc);
-
-			for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
-				voiced_cepstrum[voiced_cepstrum_index][mfcc_num] = mfcc[mfcc_num];
-			}
+			calc_mfcc(frame_data, &voiced_cepstrum[voiced_cepstrum_index][0]);
 			voiced_cepstrum_index++;
 		}
 		frame_offset += WINDOW_LENGTH/2;
