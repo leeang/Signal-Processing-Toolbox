@@ -44,14 +44,14 @@ float det_part[5] = {
 	1.100142e-05, 1.513253e-03, 7.729531e-04, 1.481335e-03, 2.977399e+03
 };
 
-void calc_emis(int row_num_max, float test_input[][FEAT_NUM], float *ptr_to_emis)
+void calc_emis(int obvs_length, float test_input[][FEAT_NUM], float *ptr_to_emis)
 {
 	int state;
 	int row_num;
 	int feat_num;
 
 	for (state = 0; state < STATE_NUM; state++) {
-		for (row_num = 0; row_num < row_num_max; row_num++) {
+		for (row_num = 0; row_num < obvs_length; row_num++) {
 			float Obvs_minus_Mean[FEAT_NUM];
 			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
 				Obvs_minus_Mean[feat_num] = test_input[row_num][feat_num] - mu[state][feat_num];
@@ -64,20 +64,20 @@ void calc_emis(int row_num_max, float test_input[][FEAT_NUM], float *ptr_to_emis
 
 			float exp_part = expf(-0.5 * trans);
 
-			*(ptr_to_emis + state * row_num_max + row_num) = det_part[state] * exp_part;
+			*(ptr_to_emis + state * obvs_length + row_num) = det_part[state] * exp_part;
 		}
 	}
 }
 
 int main()
 {
-	int row_num_max = 18;
-	float *emis = (float*) calloc(STATE_NUM * row_num_max, sizeof(float));
-	calc_emis(row_num_max, test_input, emis);
+	int obvs_length = 18;
+	float *emis = (float*) calloc(STATE_NUM * obvs_length, sizeof(float));
+	calc_emis(obvs_length, test_input, emis);
 
 	for (int i = 0; i < STATE_NUM; ++i) {
-		for (int j = 0; j < row_num_max; ++j) {
-			printf("%e\t", *(emis + i*row_num_max + j));
+		for (int j = 0; j < obvs_length; ++j) {
+			printf("%e\t", *(emis + i*obvs_length + j));
 		}
 		printf("\n");
 	}
