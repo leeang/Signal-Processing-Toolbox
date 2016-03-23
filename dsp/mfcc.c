@@ -28,7 +28,7 @@
 
 /* Mel filter */
 #define BANK_NUM		20
-#define MFCC_NUM		12
+#define FEAT_NUM		12
 
 /* the coefficients of an IIR filter */
 struct IIR_Coef {
@@ -50,10 +50,10 @@ int bank_border[] = { 4, 361, 764, 1218, 1730, 2307, 2958, 3692, 4519, 5452, 650
 fract32 bank_gain[477] = {0x0000};
 
 /* discrete cosine transform */
-float dct_coef[MFCC_NUM][BANK_NUM] = {0.0};
+float dct_coef[FEAT_NUM][BANK_NUM] = {0.0};
 
 section("sdram0") fract32 input_fr[TOTAL_LENGTH];
-section("sdram0") float voiced_cepstrum[FRAME_NUM][MFCC_NUM] = {0.0};
+section("sdram0") float voiced_cepstrum[FRAME_NUM][FEAT_NUM] = {0.0};
 
 #include "test_input.h"
 
@@ -219,25 +219,25 @@ void calc_dct_coef(void)
 {
 	float scale = sqrtf(2.0 / BANK_NUM);
 
-	int mfcc_num, bank_num;
+	int feat_num, bank_num;
 
-	for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
+	for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
 		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
-			dct_coef[mfcc_num][bank_num] = cosf(PI * (bank_num+0.5) * (float) mfcc_num / (float) BANK_NUM) * scale;
+			dct_coef[feat_num][bank_num] = cosf(PI * (bank_num+0.5) * (float) feat_num / (float) BANK_NUM) * scale;
 		}
 	}
 }
 
 void discrete_cosine_transform(float energy[], float *ptr_to_mfcc_matrix)
 {
-	int mfcc_num, bank_num;
+	int feat_num, bank_num;
 
-	for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
+	for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
 		float sum = 0;
 		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
-			sum += energy[bank_num] * dct_coef[mfcc_num][bank_num];
+			sum += energy[bank_num] * dct_coef[feat_num][bank_num];
 		}
-		*(ptr_to_mfcc_matrix+mfcc_num) = sum;
+		*(ptr_to_mfcc_matrix+feat_num) = sum;
 	}
 }
 
@@ -281,7 +281,7 @@ int main() {
 	int voiced_cepstrum_index = 0;
 
 	int frame_num;
-	int mfcc_num;
+	int feat_num;
 	for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
 		for (index = 0; index < WINDOW_LENGTH; index++) {
 			frame_data[index] = input_fr[index+frame_offset];
@@ -292,7 +292,7 @@ int main() {
 		float energy = calc_energy(frame_data, WINDOW_LENGTH);
 
 		if (energy > 0.1) {
-			float mfcc[MFCC_NUM] = {0.0};
+			float mfcc[FEAT_NUM] = {0.0};
 			calc_mfcc(frame_data, &voiced_cepstrum[voiced_cepstrum_index][0]);
 			voiced_cepstrum_index++;
 		}
@@ -300,8 +300,8 @@ int main() {
 	}
 
 	for (frame_num = 0; frame_num < voiced_cepstrum_index; frame_num++) {
-		for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
-			printf("%f\t", voiced_cepstrum[frame_num][mfcc_num]);
+		for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
+			printf("%f\t", voiced_cepstrum[frame_num][feat_num]);
 		}
 		printf("\n");
 	}
