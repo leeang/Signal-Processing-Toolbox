@@ -2,10 +2,10 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define MFCC_NUM        12
+#define FEAT_NUM        12
 #define STATE_NUM       5
 
-float test_input[18][MFCC_NUM] = {
+float test_input[18][FEAT_NUM] = {
 	{-16.681906, 6.087717, 2.390434, 0.232071, -1.225417, -1.507493, -1.282729, -1.087818, -0.981075, -0.823016, -0.912036, -0.832075},
 	{-15.754005, 7.220482, 2.731196, 0.027516, -1.921565, -1.665574, -0.962624, -0.521149, -0.394428, -0.224880, -0.590567, -0.740767},
 	{-14.886635, 7.522751, 2.376703, 0.229444, -2.547874, -1.230166, -0.998631, -0.764926, -0.405403, -0.151963, -0.252777, -0.677893},
@@ -44,22 +44,22 @@ float det_part[5] = {
 	1.100142e-05, 1.513253e-03, 7.729531e-04, 1.481335e-03, 2.977399e+03
 };
 
-void calc_emis(int row_num_max, float test_input[][MFCC_NUM], float *ptr_to_emis)
+void calc_emis(int row_num_max, float test_input[][FEAT_NUM], float *ptr_to_emis)
 {
 	int state;
 	int row_num;
-	int mfcc_num;
+	int feat_num;
 
 	for (state = 0; state < STATE_NUM; state++) {
 		for (row_num = 0; row_num < row_num_max; row_num++) {
-			float Obvs_minus_Mean[MFCC_NUM];
-			for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
-				Obvs_minus_Mean[mfcc_num] = test_input[row_num][mfcc_num] - mu[state][mfcc_num];
+			float Obvs_minus_Mean[FEAT_NUM];
+			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
+				Obvs_minus_Mean[feat_num] = test_input[row_num][feat_num] - mu[state][feat_num];
 			}
 
 			float trans = 0;
-			for (mfcc_num = 0; mfcc_num < MFCC_NUM; mfcc_num++) {
-				trans += Obvs_minus_Mean[mfcc_num] * inv_Var[state][mfcc_num] * Obvs_minus_Mean[mfcc_num];
+			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
+				trans += Obvs_minus_Mean[feat_num] * inv_Var[state][feat_num] * Obvs_minus_Mean[feat_num];
 			}
 
 			float exp_part = expf(-0.5 * trans);
