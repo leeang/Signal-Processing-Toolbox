@@ -47,22 +47,22 @@ float det_part[5] = {
 void calc_emis(int obvs_length, float obvs[][FEAT_NUM], float *ptr_to_emis)
 {
 	int state;
-	int row_num;
+	int obvs_num;
 	int feat_num;
 
 	for (state = 0; state < STATE_NUM; state++) {
-		for (row_num = 0; row_num < obvs_length; row_num++) {
+		for (obvs_num = 0; obvs_num < obvs_length; obvs_num++) {
 
 			float trans = 0;
 			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
-				float obvs_minus_mu = obvs[row_num][feat_num] - mu[state][feat_num];
+				float obvs_minus_mu = obvs[obvs_num][feat_num] - mu[state][feat_num];
 
 				trans += obvs_minus_mu * inv_Var[state][feat_num] * obvs_minus_mu;
 			}
 
 			float exp_part = expf(-0.5 * trans);
 
-			*(ptr_to_emis + state * obvs_length + row_num) = det_part[state] * exp_part;
+			*(ptr_to_emis + state * obvs_length + obvs_num) = det_part[state] * exp_part;
 
 		}
 	}
