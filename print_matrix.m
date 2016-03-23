@@ -1,17 +1,17 @@
-function print_matrix(data, variable_name, permission, variable_type)
+function print_matrix(data, variable_name, variable_type, permission)
 	[M, N] = size(data);
 
 	if nargin == 1
 		variable_name = 'data';
-		permission = 'w';
 		variable_type = '%f';
+		permission = 'w';
 	end
 	if nargin == 2
-		permission = 'w';
 		variable_type = '%f';
+		permission = 'w';
 	end
 	if nargin == 3
-		variable_type = '%f';
+		permission = 'w';
 	end
 
 	filename = 'data.c';
