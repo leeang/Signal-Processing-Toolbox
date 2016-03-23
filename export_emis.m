@@ -10,7 +10,7 @@ mu = cell(1, WORD_NUM);
 inv_Var = cell(1, WORD_NUM);
 det_part = zeros(WORD_NUM, STATE_NUM);
 
-for model_num = 1:27
+for model_num = 1:WORD_NUM
 	data = Model{model_num};
 
 	mu_matrix = zeros(STATE_NUM, MFCC_NUM);
