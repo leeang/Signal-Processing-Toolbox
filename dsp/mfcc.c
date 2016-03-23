@@ -281,7 +281,6 @@ int main() {
 	int voiced_cepstrum_index = 0;
 
 	int frame_num;
-	int feat_num;
 	for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
 		for (index = 0; index < WINDOW_LENGTH; index++) {
 			frame_data[index] = input_fr[index+frame_offset];
@@ -299,6 +298,7 @@ int main() {
 		frame_offset += WINDOW_LENGTH/2;
 	}
 
+	int feat_num;
 	for (frame_num = 0; frame_num < voiced_cepstrum_index; frame_num++) {
 		for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
 			printf("%f\t", voiced_cepstrum[frame_num][feat_num]);
