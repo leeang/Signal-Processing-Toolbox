@@ -14,7 +14,7 @@ function print_array(data, variable_name, permission, variable_type)
 		variable_type = '%f';
 	end
 
-	filename = 'array.c';
+	filename = 'data.c';
 	fid = fopen(filename, permission);
 
 	fprintf(fid, 'float %s[%d] = {', variable_name, N);

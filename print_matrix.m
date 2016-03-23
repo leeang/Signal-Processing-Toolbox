@@ -14,7 +14,7 @@ function print_matrix(data, variable_name, permission, variable_type)
 		variable_type = '%f';
 	end
 
-	filename = 'matrix.c';
+	filename = 'data.c';
 	fid = fopen(filename, permission);
 
 	fprintf(fid, 'float %s[%d][%d] = {', variable_name, M, N);
