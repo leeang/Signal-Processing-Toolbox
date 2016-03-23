@@ -44,7 +44,7 @@ float det_part[5] = {
 	1.100142e-05, 1.513253e-03, 7.729531e-04, 1.481335e-03, 2.977399e+03
 };
 
-void calc_emis(int obvs_length, float test_input[][FEAT_NUM], float *ptr_to_emis)
+void calc_emis(int obvs_length, float obvs[][FEAT_NUM], float *ptr_to_emis)
 {
 	int state;
 	int row_num;
@@ -52,14 +52,14 @@ void calc_emis(int obvs_length, float test_input[][FEAT_NUM], float *ptr_to_emis
 
 	for (state = 0; state < STATE_NUM; state++) {
 		for (row_num = 0; row_num < obvs_length; row_num++) {
-			float Obvs_minus_Mean[FEAT_NUM];
+			float obvs_minus_mu[FEAT_NUM];
 			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
-				Obvs_minus_Mean[feat_num] = test_input[row_num][feat_num] - mu[state][feat_num];
+				obvs_minus_mu[feat_num] = obvs[row_num][feat_num] - mu[state][feat_num];
 			}
 
 			float trans = 0;
 			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
-				trans += Obvs_minus_Mean[feat_num] * inv_Var[state][feat_num] * Obvs_minus_Mean[feat_num];
+				trans += obvs_minus_mu[feat_num] * inv_Var[state][feat_num] * obvs_minus_mu[feat_num];
 			}
 
 			float exp_part = expf(-0.5 * trans);
