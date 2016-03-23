@@ -278,7 +278,7 @@ int main() {
 
 	int frame_offset = 0;
 	fract32 frame_data[WINDOW_LENGTH];
-	int voiced_cepstrum_index = 0;
+	int obvs_length = 0;
 
 	int frame_num;
 	for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
@@ -292,14 +292,14 @@ int main() {
 
 		if (energy > 0.1) {
 			float mfcc[FEAT_NUM] = {0.0};
-			calc_mfcc(frame_data, &voiced_cepstrum[voiced_cepstrum_index][0]);
-			voiced_cepstrum_index++;
+			calc_mfcc(frame_data, &voiced_cepstrum[obvs_length][0]);
+			obvs_length++;
 		}
 		frame_offset += WINDOW_LENGTH/2;
 	}
 
 	int feat_num;
-	for (frame_num = 0; frame_num < voiced_cepstrum_index; frame_num++) {
+	for (frame_num = 0; frame_num < obvs_length; frame_num++) {
 		for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
 			printf("%f\t", voiced_cepstrum[frame_num][feat_num]);
 		}
