@@ -21,17 +21,16 @@ for model_num = 1:WORD_NUM
 	mu{model_num} = mu_matrix;
 
 	inv_Var_matrix = zeros(STATE_NUM, FEAT_NUM);
-	det_Var = zeros(1, STATE_NUM);
 	for index = 1:STATE_NUM
-		var = data.Var{index} .* eye(FEAT_NUM, FEAT_NUM);
-		inv_Var_matrix(index, :) = diag(inv(var));
-		det_Var(index) = det(var);
+		Var = data.Var{index} .* eye(FEAT_NUM);
+		inv_Var_matrix(index, :) = diag(inv(Var));
+
+		det_Var = det(Var);
+		det_Var = 1 / sqrt(det_Var * (2 * pi)^FEAT_NUM);
+		det_part(model_num, index) = det_Var;
 	end
 	inv_Var{model_num} = inv_Var_matrix;
 
-	det_part_array = 1 ./ sqrt(det_Var * (2 * pi)^FEAT_NUM);
-	det_part(model_num, :) = det_part_array;
-    
     trans{model_num} = data.Trans;
 end
 
