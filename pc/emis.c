@@ -28,25 +28,25 @@ float test_input[18][FEAT_NUM] = {
 
 #include "model.h"
 
-void calc_emis(int obvs_length, float obvs[][FEAT_NUM], int model_num, double *ptr_to_emis)
+void calc_emis(int obs_length, float obs[][FEAT_NUM], int model_num, double *ptr_to_emis)
 {
 	int state;
-	int obvs_num;
+	int obs_num;
 	int feat_num;
 
 	for (state = 0; state < STATE_NUM; state++) {
-		for (obvs_num = 0; obvs_num < obvs_length; obvs_num++) {
+		for (obs_num = 0; obs_num < obs_length; obs_num++) {
 
 			float trans = 0;
 			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
-				float obvs_minus_mu = obvs[obvs_num][feat_num] - mu[model_num][state][feat_num];
+				float obs_minus_mu = obs[obs_num][feat_num] - mu[model_num][state][feat_num];
 
-				trans += obvs_minus_mu * inv_Var[model_num][state][feat_num] * obvs_minus_mu;
+				trans += obs_minus_mu * inv_Var[model_num][state][feat_num] * obs_minus_mu;
 			}
 
 			double exp_part = expl(-0.5 * trans);
 
-			*(ptr_to_emis + state * obvs_length + obvs_num) = det_part[model_num][state] * exp_part;
+			*(ptr_to_emis + state * obs_length + obs_num) = det_part[model_num][state] * exp_part;
 
 		}
 	}
@@ -54,18 +54,18 @@ void calc_emis(int obvs_length, float obvs[][FEAT_NUM], int model_num, double *p
 
 int main()
 {
-	int obvs_length = 18;
+	int obs_length = 18;
 
 	double *emis;
-	emis = (double *) calloc(STATE_NUM * obvs_length, sizeof(double));
+	emis = (double *) calloc(STATE_NUM * obs_length, sizeof(double));
 
-	calc_emis(obvs_length, test_input, 0, emis);
+	calc_emis(obs_length, test_input, 0, emis);
 
 	int state_index;
-	int obvs_index;
+	int obs_index;
 	for (state_index = 0; state_index < STATE_NUM; state_index++) {
-		for (obvs_index = 0; obvs_index < obvs_length; obvs_index++) {
-			printf("%e\t", *(emis + state_index*obvs_length + obvs_index));
+		for (obs_index = 0; obs_index < obs_length; obs_index++) {
+			printf("%e\t", *(emis + state_index*obs_length + obs_index));
 		}
 		printf("\n");
 	}
