@@ -19,11 +19,11 @@ for word_num = 1:WORD_NUM
 
 		Var = data.Var{state} .* eye(FEAT_NUM);
 
-		inv_Var{word_num}(state, :) = diag(inv(Var));
+		inv_Var{word_num}(state, :) = diag(inv(Var)) * -0.5;
 
 		det_Var = det(Var);
 		det_Var = 1 / sqrt(det_Var * (2 * pi)^FEAT_NUM);
-		det_part(word_num, state) = det_Var;
+		det_part(word_num, state) = log(det_Var);
 	end
 
 	trans{word_num} = data.Trans;
