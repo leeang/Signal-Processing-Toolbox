@@ -9,6 +9,7 @@ WORD_NUM = 27;
 mu = cell(1, WORD_NUM);
 inv_Var = cell(1, WORD_NUM);
 det_part = zeros(WORD_NUM, STATE_NUM);
+trans = cell(1, WORD_NUM);
 
 for model_num = 1:WORD_NUM
 	data = Model{model_num};
@@ -30,8 +31,11 @@ for model_num = 1:WORD_NUM
 
 	det_part_array = 1 ./ sqrt(det_Var * (2 * pi)^FEAT_NUM);
 	det_part(model_num, :) = det_part_array;
+    
+    trans{model_num} = data.Trans;
 end
 
 print_3D(mu, 'mu', '%e');
 print_3D(inv_Var, 'inv_Var', '%e', 'a');
+print_3D(trans, 'trans', '%e', 'a');
 print_matrix(det_part, 'det_part', '%e', 'a');
