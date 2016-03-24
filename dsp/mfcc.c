@@ -235,8 +235,12 @@ void discrete_cosine_transform(float energy[], float *ptr_to_mfcc_matrix)
 
 	for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
 		float sum = 0;
-		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
-			sum += energy[bank_num] * dct_coef[feat_num][bank_num];
+		for (bank_num = 0; bank_num < BANK_NUM/2; bank_num++) {
+			if (feat_num%2) {
+				sum += (energy[bank_num] - energy[BANK_NUM-1-bank_num]) * dct_coef[feat_num][bank_num];
+			} else {
+				sum += (energy[bank_num] + energy[BANK_NUM-1-bank_num]) * dct_coef[feat_num][bank_num];
+			}
 		}
 		*(ptr_to_mfcc_matrix+feat_num) = sum;
 	}
