@@ -55,7 +55,10 @@ void calc_emis(int obvs_length, float obvs[][FEAT_NUM], int model_num, double *p
 int main()
 {
 	int obvs_length = 18;
-	double *emis = (double*) calloc(STATE_NUM * obvs_length, sizeof(double));
+
+	double *emis;
+	emis = (double *) calloc(STATE_NUM * obvs_length, sizeof(double));
+
 	calc_emis(obvs_length, test_input, 0, emis);
 
 	for (int i = 0; i < STATE_NUM; ++i) {
@@ -64,5 +67,8 @@ int main()
 		}
 		printf("\n");
 	}
+
+	free(emis);
+
 	return 0;
 }
