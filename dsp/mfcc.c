@@ -51,7 +51,7 @@ int bank_border[] = { 4, 361, 764, 1218, 1730, 2307, 2958, 3692, 4519, 5452, 650
 fract32 bank_gain[477] = {0x0000};
 
 /* discrete cosine transform */
-float dct_coef[FEAT_NUM][BANK_NUM] = {0.0};
+float dct_coef[FEAT_NUM][BANK_NUM/2] = {0.0};
 
 section("sdram0") fract32 input_fr[TOTAL_LENGTH];
 section("sdram0") float voiced_cepstrum[FRAME_NUM][FEAT_NUM] = {0.0};
@@ -223,7 +223,7 @@ void calc_dct_coef(void)
 	int feat_num, bank_num;
 
 	for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
-		for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
+		for (bank_num = 0; bank_num < BANK_NUM/2; bank_num++) {
 			dct_coef[feat_num][bank_num] = cosf(PI * (bank_num+0.5) * (float) feat_num / (float) BANK_NUM) * scale;
 		}
 	}
