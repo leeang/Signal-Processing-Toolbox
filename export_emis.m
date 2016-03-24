@@ -26,7 +26,7 @@ for word_num = 1:WORD_NUM
 		det_part(word_num, state) = log(det_Var);
 	end
 
-	trans{word_num} = data.Trans;
+	trans{word_num} = log(data.Trans);
 end
 
 print_3D(mu, 'mu', '%e');
