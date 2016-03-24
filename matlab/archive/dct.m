@@ -3,8 +3,8 @@ clear;
 global BANK_NUM;
 BANK_NUM = 20;
 
-global MFCC_NUM;
-MFCC_NUM = 12;
+global FEAT_NUM;
+FEAT_NUM = 12;
 
 global border;
 border = get_bank_border();
