@@ -61,9 +61,11 @@ int main()
 
 	calc_emis(obvs_length, test_input, 0, emis);
 
-	for (int i = 0; i < STATE_NUM; ++i) {
-		for (int j = 0; j < obvs_length; ++j) {
-			printf("%e\t", *(emis + i*obvs_length + j));
+	int state_index;
+	int obvs_index;
+	for (state_index = 0; state_index < STATE_NUM; state_index++) {
+		for (obvs_index = 0; obvs_index < obvs_length; obvs_index++) {
+			printf("%e\t", *(emis + state_index*obvs_length + obvs_index));
 		}
 		printf("\n");
 	}
