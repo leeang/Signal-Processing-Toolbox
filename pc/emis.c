@@ -61,11 +61,11 @@ int main()
 
 	calc_emis(obs_length, test_input, 0, emis);
 
-	int state_index;
+	int state;
 	int obs_index;
-	for (state_index = 0; state_index < STATE_NUM; state_index++) {
+	for (state = 0; state < STATE_NUM; state++) {
 		for (obs_index = 0; obs_index < obs_length; obs_index++) {
-			printf("%e\t", *(emis + state_index*obs_length + obs_index));
+			printf("%e\t", *(emis + state*obs_length + obs_index));
 		}
 		printf("\n");
 	}
