@@ -11,22 +11,22 @@ inv_Var = cell(1, WORD_NUM);
 det_part = zeros(WORD_NUM, STATE_NUM);
 trans = cell(1, WORD_NUM);
 
-for model_num = 1:WORD_NUM
-	data = Model{model_num};
+for word_num = 1:WORD_NUM
+	data = Model{word_num};
 
 	for state = 1:STATE_NUM
-		mu{model_num}(state, :) = data.Mu{state};
+		mu{word_num}(state, :) = data.Mu{state};
 
 		Var = data.Var{state} .* eye(FEAT_NUM);
 
-		inv_Var{model_num}(state, :) = diag(inv(Var));
+		inv_Var{word_num}(state, :) = diag(inv(Var));
 
 		det_Var = det(Var);
 		det_Var = 1 / sqrt(det_Var * (2 * pi)^FEAT_NUM);
-		det_part(model_num, state) = det_Var;
+		det_part(word_num, state) = det_Var;
 	end
 
-	trans{model_num} = data.Trans;
+	trans{word_num} = data.Trans;
 end
 
 print_3D(mu, 'mu', '%e');
