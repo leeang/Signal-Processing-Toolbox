@@ -44,7 +44,7 @@ float det_part[5] = {
 	1.100142e-05, 1.513253e-03, 7.729531e-04, 1.481335e-03, 2.977399e+03
 };
 
-void calc_emis(int obvs_length, float obvs[][FEAT_NUM], float *ptr_to_emis)
+void calc_emis(int obvs_length, float obvs[][FEAT_NUM], double *ptr_to_emis)
 {
 	int state;
 	int obvs_num;
@@ -60,7 +60,7 @@ void calc_emis(int obvs_length, float obvs[][FEAT_NUM], float *ptr_to_emis)
 				trans += obvs_minus_mu * inv_Var[state][feat_num] * obvs_minus_mu;
 			}
 
-			float exp_part = expf(-0.5 * trans);
+			double exp_part = expl(-0.5 * trans);
 
 			*(ptr_to_emis + state * obvs_length + obvs_num) = det_part[state] * exp_part;
 
@@ -71,7 +71,7 @@ void calc_emis(int obvs_length, float obvs[][FEAT_NUM], float *ptr_to_emis)
 int main()
 {
 	int obvs_length = 18;
-	float *emis = (float*) calloc(STATE_NUM * obvs_length, sizeof(float));
+	double *emis = (double*) calloc(STATE_NUM * obvs_length, sizeof(double));
 	calc_emis(obvs_length, test_input, emis);
 
 	for (int i = 0; i < STATE_NUM; ++i) {
