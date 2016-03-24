@@ -44,9 +44,16 @@ void calc_emis(int obs_length, float obs[][FEAT_NUM], int model_num, double *ptr
 				trans += obs_minus_mu * inv_Var[model_num][state][feat_num] * obs_minus_mu;
 			}
 
-			double exp_part = expl(-0.5 * trans);
+			double exp_part = trans;
+			// exp_part = exp(-0.5 * trans);
+			// take logarithm
+			// inv_Var[model_num][state][feat_num] has been multiplied by -0.5 in MATLAB before export
 
-			*(ptr_to_emis + state * obs_length + obs_num) = det_part[model_num][state] * exp_part;
+			*(ptr_to_emis + state * obs_length + obs_num) = det_part[model_num][state]  exp_part;
+			// det_part = 1 / ( sqrt(pow((2*PI), FEAT_NUM) * det_var[state]) );
+			// det_part[model_num][state] has been taken logarithm
+			// preceding 2 steps have been done in MATLAB before export
+			// multiplication becomes addition
 
 		}
 	}
