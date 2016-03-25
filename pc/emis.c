@@ -119,21 +119,7 @@ int main()
 {
 	int obs_length = 18;
 
-	float *emis;
-	emis = (float *) calloc(obs_length * STATE_NUM, sizeof(float));
 
-	calc_emis(obs_length, test_input, 0, emis);
-
-	int state_index;
-	int obs_index;
-	for (obs_index = 0; obs_index < obs_length; obs_index++) {
-		for (state_index = 0; state_index < STATE_NUM; state_index++) {
-			printf("%e\t", *(emis + obs_index*STATE_NUM + state_index));
-		}
-		printf("\n");
-	}
-
-	free(emis);
 
 	return 0;
 }
