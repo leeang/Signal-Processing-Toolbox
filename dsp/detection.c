@@ -78,33 +78,30 @@ void calc_shelving_coef(void)
 
 void pre_emphasis(fract32 data[], int arr_length)
 {
-	fract32 xBuffer[BUFFER_SIZE] = {0};
+	fract32 x1 = 0, x2 = 0;
 	// input buffer
-	fract32 yBuffer[BUFFER_SIZE] = {0};
+	fract32 y1 = 0, y2 = 0;
 	// output buffer
 
-	int current = 0;
-
 	int index;
-
 	for (index = 0; index < arr_length; index++) {
 		fract32 temp_b0 = mult_fr1x32x32(shelving_coef.b0, data[index]);
-		fract32 temp_b1 = mult_fr1x32x32(shelving_coef.b1, xBuffer[INDEX(current-1)]);
-		fract32 temp_b2 = mult_fr1x32x32(shelving_coef.b2, xBuffer[INDEX(current-2)]);
-		fract32 temp_a1 = mult_fr1x32x32(shelving_coef.a1, yBuffer[INDEX(current-1)]);
-		fract32 temp_a2 = mult_fr1x32x32(shelving_coef.a2, yBuffer[INDEX(current-2)]);
+		fract32 temp_b1 = mult_fr1x32x32(shelving_coef.b1, x1);
+		fract32 temp_b2 = mult_fr1x32x32(shelving_coef.b2, x2);
+		fract32 temp_a1 = mult_fr1x32x32(shelving_coef.a1, y1);
+		fract32 temp_a2 = mult_fr1x32x32(shelving_coef.a2, y2);
 
 		fract32 temp_b = add_fr1x32(add_fr1x32(temp_b0, temp_b1), temp_b2);
 		fract32 temp_a = add_fr1x32(temp_a1, temp_a2);
 		fract32 temp = sub_fr1x32(temp_b, temp_a);
 
-		yBuffer[current] = shl_fr1x32(temp, 2);
+		x2 = x1;
+		x1 = data[index];		//input
 
-		xBuffer[current] = data[index];		//input
-		data[index] = yBuffer[current];		//output
+		data[index] = shl_fr1x32(temp, 2);
 
-		current++;
-		current %= BUFFER_SIZE;
+		y2 = y1;
+		y1 = data[index];		//output
 	}
 }
 
