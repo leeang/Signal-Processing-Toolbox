@@ -87,12 +87,15 @@ float viterbi(int obs_length, float obs[][FEAT_NUM], int word_index) {
 
 			float max_phi_plus_trans = -Inf;
 
-			for (statei = 0; statei < STATE_NUM; statei++) {
+			// find max( PHI(obs_index-1, statei) + trans[word_index][statei][statej] ) when statei varies
+			statei = 0;
+			while (statei < STATE_NUM) {
 				float phi_plus_trans = PHI(obs_index-1, statei) + trans[word_index][statei][statej];
 
 				if (phi_plus_trans > max_phi_plus_trans){
 					max_phi_plus_trans = phi_plus_trans;
 				}
+				statei++;
 			}
 
 			PHI(obs_index, statej) = max_phi_plus_trans + EMIS(obs_index, statej);
@@ -101,7 +104,7 @@ float viterbi(int obs_length, float obs[][FEAT_NUM], int word_index) {
 	}
 
 	float P = -Inf;
-	// Find P = max(PHI[obs_length-1, state][...])
+	// find max( PHI(obs_length-1, statei) ) when statei changes
 	for (statei = 0; statei < STATE_NUM; statei++) {
 		float temp = PHI(obs_length-1, statei);
 		if (temp > P){
