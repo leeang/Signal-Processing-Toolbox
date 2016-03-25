@@ -4,10 +4,11 @@
 
 #define FEAT_NUM		12
 #define STATE_NUM		5
+#define WORD_NUM		27
 #define Inf				10000
 
-#define EMIS(OBS_INDEX, STATE_INDEX)	*(ptr_to_emis + OBS_INDEX * STATE_NUM + STATE_INDEX)
-#define PHI(OBS_INDEX, STATE_INDEX)		*(ptr_to_phi + OBS_INDEX * STATE_NUM + STATE_INDEX)
+#define EMIS(OBS_INDEX, STATE_INDEX)	(*(ptr_to_emis + (OBS_INDEX) * STATE_NUM + STATE_INDEX))
+#define PHI(OBS_INDEX, STATE_INDEX)		(*(ptr_to_phi + (OBS_INDEX) * STATE_NUM + STATE_INDEX))
 
 float test_input[18][FEAT_NUM] = {
 	{-16.681906, 6.087717, 2.390434, 0.232071, -1.225417, -1.507493, -1.282729, -1.087818, -0.981075, -0.823016, -0.912036, -0.832075},
@@ -61,6 +62,57 @@ void calc_emis(int obs_length, float obs[][FEAT_NUM], int word_index, float *ptr
 
 		}
 	}
+}
+
+float viterbi(int obs_length, float obs[][FEAT_NUM], int word_index) {
+
+	float *ptr_to_emis;
+	ptr_to_emis = (float *) calloc(obs_length * STATE_NUM, sizeof(float));
+
+	float *ptr_to_phi;
+	ptr_to_phi = (float *) calloc(obs_length * STATE_NUM, sizeof(float));
+
+	calc_emis(obs_length, obs, word_index, ptr_to_emis);
+
+	// initialization
+	PHI(0, 0) = EMIS(0, 0);
+
+
+	int obs_index;
+	int statei, statej;
+
+	// recursion
+	for (obs_index = 1; obs_index < obs_length; obs_index++) {
+		for (statej = 0; statej < STATE_NUM; statej++) {
+
+			float max_phi_plus_trans = -Inf;
+
+			for (statei = 0; statei < STATE_NUM; statei++) {
+				float phi_plus_trans = PHI(obs_index-1, statei) + trans[word_index][statei][statej];
+
+				if (phi_plus_trans > max_phi_plus_trans){
+					max_phi_plus_trans = phi_plus_trans;
+				}
+			}
+
+			PHI(obs_index, statej) = max_phi_plus_trans + EMIS(obs_index, statej);
+
+		}
+	}
+
+	float P = -Inf;
+	// Find P = max(PHI[obs_length-1, state][...])
+	for (statei = 0; statei < STATE_NUM; statei++) {
+		float temp = PHI(obs_length-1, statei);
+		if (temp > P){
+			P = temp;
+		}
+	}
+
+	free(ptr_to_emis);
+	free(ptr_to_phi);
+
+	return P;
 }
 
 int main()
