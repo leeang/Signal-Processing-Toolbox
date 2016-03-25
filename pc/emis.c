@@ -2,9 +2,11 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define FEAT_NUM        12
-#define STATE_NUM       5
+#define FEAT_NUM		12
+#define STATE_NUM		5
 #define Inf				10000
+
+#define PHI(OBS_INDEX, STATE_INDEX)		*(phi + STATE_NUM*OBS_INDEX + STATE_INDEX)
 
 float test_input[18][FEAT_NUM] = {
 	{-16.681906, 6.087717, 2.390434, 0.232071, -1.225417, -1.507493, -1.282729, -1.087818, -0.981075, -0.823016, -0.912036, -0.832075},
