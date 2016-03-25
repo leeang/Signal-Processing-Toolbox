@@ -283,7 +283,7 @@ int main() {
 
 	int frame_offset = 0;
 	fract32 frame_data[WINDOW_LENGTH];
-	int obvs_length = 0;
+	int obs_length = 0;
 
 	int frame_num;
 	for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
@@ -297,14 +297,14 @@ int main() {
 
 		if (energy > 0.1) {
 			float mfcc[FEAT_NUM] = {0.0};
-			calc_mfcc(frame_data, mfcc_matrix[obvs_length]);
-			obvs_length++;
+			calc_mfcc(frame_data, mfcc_matrix[obs_length]);
+			obs_length++;
 		}
 		frame_offset += WINDOW_LENGTH/2;
 	}
 
 	int feat_num;
-	for (frame_num = 0; frame_num < obvs_length; frame_num++) {
+	for (frame_num = 0; frame_num < obs_length; frame_num++) {
 		for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
 			printf("%f\t", mfcc_matrix[frame_num][feat_num]);
 		}
