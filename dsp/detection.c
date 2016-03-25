@@ -301,8 +301,8 @@ void calc_emis(int obs_length, float obs[][FEAT_NUM], int word_index, float *ptr
 	}
 }
 
-float viterbi(int obs_length, float obs[][FEAT_NUM], int word_index) {
-
+float viterbi(int obs_length, float obs[][FEAT_NUM], int word_index)
+{
 	float *ptr_to_emis;
 	ptr_to_emis = (float *) calloc(obs_length * STATE_NUM, sizeof(float));
 
@@ -358,7 +358,8 @@ float viterbi(int obs_length, float obs[][FEAT_NUM], int word_index) {
 	return probability;
 }
 
-int get_result(int obs_length, float obs[][FEAT_NUM]) {
+int get_result(int obs_length, float obs[][FEAT_NUM])
+{
 	float P_word_max = -Inf;
 	int result;
 
