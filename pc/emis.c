@@ -119,7 +119,20 @@ int main()
 {
 	int obs_length = 18;
 
+	float P_word_max = -Inf;
+	int result_index;
 
+	int word_index;
+	for (word_index=0; word_index < WORD_NUM ; word_index++) {
+		float P_word = viterbi(obs_length, test_input, word_index);
+
+		if (P_word > P_word_max) {
+			P_word_max = P_word;
+			result_index = word_index;
+		}
+	}
+
+	printf("%f\n", P_word_max);
 
 	return 0;
 }
