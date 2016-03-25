@@ -6,7 +6,8 @@
 #define STATE_NUM		5
 #define Inf				10000
 
-#define PHI(OBS_INDEX, STATE_INDEX)		*(phi + STATE_NUM*OBS_INDEX + STATE_INDEX)
+#define EMIS(OBS_INDEX, STATE_INDEX)	*(ptr_to_emis + OBS_INDEX * STATE_NUM + STATE_INDEX)
+#define PHI(OBS_INDEX, STATE_INDEX)		*(ptr_to_phi + STATE_NUM*OBS_INDEX + STATE_INDEX)
 
 float test_input[18][FEAT_NUM] = {
 	{-16.681906, 6.087717, 2.390434, 0.232071, -1.225417, -1.507493, -1.282729, -1.087818, -0.981075, -0.823016, -0.912036, -0.832075},
@@ -33,27 +34,27 @@ float test_input[18][FEAT_NUM] = {
 
 void calc_emis(int obs_length, float obs[][FEAT_NUM], int model_num, float *ptr_to_emis)
 {
-	int state;
-	int obs_num;
+	int state_index;
+	int obs_index;
 	int feat_num;
 
-	for (obs_num = 0; obs_num < obs_length; obs_num++) {
-		for (state = 0; state < STATE_NUM; state++) {
+	for (obs_index = 0; obs_index < obs_length; obs_index++) {
+		for (state_index = 0; state_index < STATE_NUM; state_index++) {
 
 			float trans = 0;
 			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
-				float obs_minus_mu = obs[obs_num][feat_num] - mu[model_num][state][feat_num];
+				float obs_minus_mu = obs[obs_index][feat_num] - mu[model_num][state_index][feat_num];
 
-				trans += obs_minus_mu * inv_Var[model_num][state][feat_num] * obs_minus_mu;
+				trans += obs_minus_mu * inv_Var[model_num][state_index][feat_num] * obs_minus_mu;
 			}
 
 			float exp_part = trans;
 			// exp_part = exp(-0.5 * trans);
 			// take logarithm
-			// inv_Var[model_num][state][feat_num] has been multiplied by -0.5 in MATLAB before export
+			// inv_Var[model_num][state_index][feat_num] has been multiplied by -0.5 in MATLAB before export
 
-			*(ptr_to_emis + obs_num * STATE_NUM + state) = det_part[model_num][state] + exp_part;
-			// det_part = 1 / ( sqrt(pow((2*PI), FEAT_NUM) * det_var[state]) );
+			*(ptr_to_emis + obs_index * STATE_NUM + state_index) = det_part[model_num][state_index] + exp_part;
+			// det_part = 1 / ( sqrt(pow((2*PI), FEAT_NUM) * det_var[state_index]) );
 			// take logarithm
 			// preceding 2 steps have been done in MATLAB before export
 			// multiplication becomes addition
@@ -67,15 +68,15 @@ int main()
 	int obs_length = 18;
 
 	float *emis;
-	emis = (float *) calloc(STATE_NUM * obs_length, sizeof(float));
+	emis = (float *) calloc(obs_length * STATE_NUM, sizeof(float));
 
 	calc_emis(obs_length, test_input, 0, emis);
 
-	int state;
+	int state_index;
 	int obs_index;
 	for (obs_index = 0; obs_index < obs_length; obs_index++) {
-		for (state = 0; state < STATE_NUM; state++) {
-			printf("%e\t", *(emis + obs_index*STATE_NUM + state));
+		for (state_index = 0; state_index < STATE_NUM; state_index++) {
+			printf("%e\t", *(emis + obs_index*STATE_NUM + state_index));
 		}
 		printf("\n");
 	}
