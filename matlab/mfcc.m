@@ -35,7 +35,6 @@ shelf_a = shelf_a/4;
 after_preemphasis = filter(shelf_b, shelf_a, x);
 
 frame_data = zeros(WINDOW_LENGTH, 1);
-voiced_cepstrum = zeros(180, 12);
 obvs_length = 1;
 
 frame_offset = 0;
@@ -50,7 +49,7 @@ for frame_num = 1:FRAME_NUM
 	zc_num = zc_count(frame_data);
 
 	if energy > 0.1
-		voiced_cepstrum(obvs_length, :) = calc_mfcc(frame_data);
+		mfcc_matrix(obvs_length, :) = calc_mfcc(frame_data);
 		obvs_length = obvs_length + 1;
 	end
 
