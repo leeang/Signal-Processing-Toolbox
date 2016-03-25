@@ -107,19 +107,18 @@ float viterbi(int obs_length, float obs[][FEAT_NUM], int word_index) {
 		}
 	}
 
-	float P = -Inf;
+	float probability = -Inf;
 	// find max( PHI(obs_length-1, statei) ) when statei changes
 	for (statei = 0; statei < STATE_NUM; statei++) {
-		float temp = PHI(obs_length-1, statei);
-		if (temp > P){
-			P = temp;
+		if (PHI(obs_length-1, statei) > probability){
+			probability = PHI(obs_length-1, statei);
 		}
 	}
 
 	free(ptr_to_emis);
 	free(ptr_to_phi);
 
-	return P;
+	return probability;
 }
 
 int main()
