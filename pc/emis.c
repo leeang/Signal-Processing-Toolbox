@@ -4,6 +4,7 @@
 
 #define FEAT_NUM        12
 #define STATE_NUM       5
+#define Inf				10000
 
 float test_input[18][FEAT_NUM] = {
 	{-16.681906, 6.087717, 2.390434, 0.232071, -1.225417, -1.507493, -1.282729, -1.087818, -0.981075, -0.823016, -0.912036, -0.832075},
@@ -34,8 +35,8 @@ void calc_emis(int obs_length, float obs[][FEAT_NUM], int model_num, float *ptr_
 	int obs_num;
 	int feat_num;
 
-	for (state = 0; state < STATE_NUM; state++) {
-		for (obs_num = 0; obs_num < obs_length; obs_num++) {
+	for (obs_num = 0; obs_num < obs_length; obs_num++) {
+		for (state = 0; state < STATE_NUM; state++) {
 
 			float trans = 0;
 			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
@@ -49,9 +50,9 @@ void calc_emis(int obs_length, float obs[][FEAT_NUM], int model_num, float *ptr_
 			// take logarithm
 			// inv_Var[model_num][state][feat_num] has been multiplied by -0.5 in MATLAB before export
 
-			*(ptr_to_emis + state * obs_length + obs_num) = det_part[model_num][state] + exp_part;
+			*(ptr_to_emis + obs_num * STATE_NUM + state) = det_part[model_num][state] + exp_part;
 			// det_part = 1 / ( sqrt(pow((2*PI), FEAT_NUM) * det_var[state]) );
-			// det_part[model_num][state] has been taken logarithm
+			// take logarithm
 			// preceding 2 steps have been done in MATLAB before export
 			// multiplication becomes addition
 
@@ -70,9 +71,9 @@ int main()
 
 	int state;
 	int obs_index;
-	for (state = 0; state < STATE_NUM; state++) {
-		for (obs_index = 0; obs_index < obs_length; obs_index++) {
-			printf("%e\t", *(emis + state*obs_length + obs_index));
+	for (obs_index = 0; obs_index < obs_length; obs_index++) {
+		for (state = 0; state < STATE_NUM; state++) {
+			printf("%e\t", *(emis + obs_index*STATE_NUM + state));
 		}
 		printf("\n");
 	}
