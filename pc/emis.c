@@ -32,7 +32,7 @@ float test_input[18][FEAT_NUM] = {
 
 #include "model.h"
 
-void calc_emis(int obs_length, float obs[][FEAT_NUM], int model_num, float *ptr_to_emis)
+void calc_emis(int obs_length, float obs[][FEAT_NUM], int word_index, float *ptr_to_emis)
 {
 	int state_index;
 	int obs_index;
@@ -43,17 +43,17 @@ void calc_emis(int obs_length, float obs[][FEAT_NUM], int model_num, float *ptr_
 
 			float trans = 0;
 			for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
-				float obs_minus_mu = obs[obs_index][feat_num] - mu[model_num][state_index][feat_num];
+				float obs_minus_mu = obs[obs_index][feat_num] - mu[word_index][state_index][feat_num];
 
-				trans += obs_minus_mu * inv_Var[model_num][state_index][feat_num] * obs_minus_mu;
+				trans += obs_minus_mu * inv_Var[word_index][state_index][feat_num] * obs_minus_mu;
 			}
 
 			float exp_part = trans;
 			// exp_part = exp(-0.5 * trans);
 			// take logarithm
-			// inv_Var[model_num][state_index][feat_num] has been multiplied by -0.5 in MATLAB before export
+			// inv_Var[word_index][state_index][feat_num] has been multiplied by -0.5 in MATLAB before export
 
-			*(ptr_to_emis + obs_index * STATE_NUM + state_index) = det_part[model_num][state_index] + exp_part;
+			EMIS(obs_index, state_index) = det_part[word_index][state_index] + exp_part;
 			// det_part = 1 / ( sqrt(pow((2*PI), FEAT_NUM) * det_var[state_index]) );
 			// take logarithm
 			// preceding 2 steps have been done in MATLAB before export
