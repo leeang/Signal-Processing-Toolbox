@@ -12,13 +12,13 @@
 #define TOTAL_LENGTH	46336
 // (FRAME_NUM+1) * WINDOW_LENGTH/2
 
-/* IIR filter */
+/* FIR filter */
 #define BUFFER_SIZE		2
 	//define the buffer size
 #define INDEX(CURRENT)	( ((CURRENT) + BUFFER_SIZE) % BUFFER_SIZE )
 	// if an index is negative, a specified position from the end of the array will be returned.
 	// e.g. given an array x[8], x[INDEX(-1)] and x[INDEX(7)] both refer to x[7].
-/* /IIR filter */
+/* /FIR filter */
 
 /* zero crossing count */
 #define IS_ZC(X, Y)		( (X) > 0 && (Y) < 0 || (X) < 0 && (Y) > 0 )
