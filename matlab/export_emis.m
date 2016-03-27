@@ -1,6 +1,11 @@
 clear;
 
-load 'Model_27_1';
+ABSPATH = pwd;
+% identify current folder (absolute path)
+addpath([ABSPATH '/function']);
+% add function path
+
+load('Model.mat');
 
 FEAT_NUM = 12;
 STATE_NUM = 5;
