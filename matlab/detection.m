@@ -35,3 +35,5 @@ shelf_b = shelf_b/4;
 shelf_a = shelf_a/4;
 
 load('data');
+
+mfcc_matrix = calc_mfcc_matrix(x);
