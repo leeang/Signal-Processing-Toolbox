@@ -5,6 +5,9 @@ ABSPATH = pwd;
 addpath([ABSPATH '/function']);
 % add function path
 
+global Model;
+load('Model.mat');
+
 global FRAME_NUM;
 FRAME_NUM = 180;
 
@@ -16,6 +19,11 @@ BANK_NUM = 20;
 
 global FEAT_NUM;
 FEAT_NUM = 12;
+
+WORD_NUM = 27;
+
+global STATE_NUM;
+STATE_NUM = 5;
 
 global border;
 border = get_bank_border();
@@ -37,3 +45,8 @@ shelf_a = shelf_a/4;
 load('data');
 
 mfcc_matrix = calc_mfcc_matrix(x);
+
+for word_index = 1:WORD_NUM
+	probability = viterbi(mfcc_matrix, word_index);
+	% Viterbi(Model{word_index}, mfcc_matrix);
+end
