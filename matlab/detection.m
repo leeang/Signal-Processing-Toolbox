@@ -46,7 +46,10 @@ load('data');
 
 mfcc_matrix = calc_mfcc_matrix(x);
 
+probability = zeros(1, WORD_NUM);
 for word_index = 1:WORD_NUM
-	probability = viterbi(mfcc_matrix, word_index);
+	probability(word_index) = viterbi(mfcc_matrix, word_index);
 	% Viterbi(Model{word_index}, mfcc_matrix);
 end
+
+[probability_max, result] = max(probability);
