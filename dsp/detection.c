@@ -61,6 +61,12 @@ fract32 bank_gain[477] = {0x0000};
 /* discrete cosine transform */
 float dct_coef[FEAT_NUM][BANK_NUM/2] = {0.0};
 
+char word_string[][12] = {
+	"one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+	"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+	"nineteen", "twenty", "zero", "on", "off", "channel", "switch", "volume up", "volume down"
+};
+
 section("sdram0") fract32 input_fr[TOTAL_LENGTH];
 section("sdram0") float mfcc_matrix[FRAME_NUM][FEAT_NUM] = {0.0};
 
@@ -416,7 +422,8 @@ int main() {
 		frame_offset += WINDOW_LENGTH/2;
 	}
 
-	get_result(obs_length, mfcc_matrix);
+	int result = get_result(obs_length, mfcc_matrix);
+	printf("%s\n", word_string[result]);
 
 	return 0;
 }
