@@ -41,15 +41,17 @@ for n = (LMS_LENGTH+1):length(cmd_noise)
 	end
 end
 
+plot_lim = [-max(cmd_noise) max(cmd_noise)];
+
 figure(1);
 subplot(3, 1, 1);
 plot(noise);
-ylim([-0.1 0.1]);
+ylim(plot_lim);
 
 subplot(3, 1, 2);
 plot(cmd_noise);
-ylim([-0.1 0.1]);
+ylim(plot_lim);
 
 subplot(3, 1, 3);
 plot(err);
-ylim([-0.1 0.1]);
+ylim(plot_lim);
