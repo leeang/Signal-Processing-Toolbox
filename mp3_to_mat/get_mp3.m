@@ -29,6 +29,7 @@ word{27} = 'volume down';
 options = weboptions('Timeout', 20);
 for word_index = 1
 	% url = ['http://fanyi.baidu.com/gettts?lan=en&text=' word{word_index}];
+	% url = ['https://ssl.gstatic.com/dictionary/static/sounds/de/0/' word{word_index} '.mp3'];
 	url = ['http://dict.youdao.com/dictvoice?type=3&audio=' word{word_index}];
 	filename = ['youdao/type3-' num2str(word_index) '.mp3'];
 	outfilename = websave(filename, url, options);
