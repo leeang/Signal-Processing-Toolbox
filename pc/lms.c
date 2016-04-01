@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-#include "noise.c"
-#include "cmd_noise.c"
+#include "lms_data.c"
 
 #define TOTAL_LENGTH	48000
 #define LMS_LENGTH		300
