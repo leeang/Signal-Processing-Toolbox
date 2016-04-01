@@ -1,3 +1,8 @@
+ABSPATH = pwd;
+% identify current folder (absolute path)
+addpath([ABSPATH '/function']);
+% add function path
+
 load('lms_data.mat');
 
 LMS_LENGTH = 300;
@@ -43,7 +48,7 @@ end
 
 plot_lim = [-max(cmd_noise) max(cmd_noise)];
 
-figure(1);
+figure;
 subplot(3, 1, 1);
 plot(noise);
 ylim(plot_lim);
@@ -55,3 +60,6 @@ ylim(plot_lim);
 subplot(3, 1, 3);
 plot(err);
 ylim(plot_lim);
+
+% print_array(noise, 'noise', '%e');
+% print_array(cmd_noise, 'cmd_noise', '%e', 'a');
