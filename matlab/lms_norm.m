@@ -5,7 +5,7 @@ STEP_SIZE = 0.04;
 
 weights = zeros(1, LMS_LENGTH);
 
-err = zeros(1, length(cmd_noise));
+err = zeros(length(cmd_noise), 1);
 
 norm_factor = 0;
 
