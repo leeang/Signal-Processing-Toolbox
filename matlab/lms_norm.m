@@ -7,10 +7,11 @@ load('lms_data.mat');
 
 LMS_LENGTH = 300;
 STEP_SIZE = 0.04;
+TOTAL_LENGTH = length(cmd_noise);
 
 weights = zeros(1, LMS_LENGTH);
 
-err = zeros(length(cmd_noise), 1);
+err = zeros(TOTAL_LENGTH, 1);
 
 norm_factor = 0;
 
