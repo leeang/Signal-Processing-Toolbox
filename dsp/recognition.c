@@ -43,7 +43,7 @@ int main() {
 	}
 
 	int result = get_result(obs_length, mfcc_matrix);
-	printf("%s\n", word_string[result]);
+	printf("Result: %s\n", word_string[result]);
 
 	return 0;
 }
