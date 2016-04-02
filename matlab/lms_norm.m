@@ -31,7 +31,7 @@ for n = 1:LMS_LENGTH
 	end
 end
 
-for n = (LMS_LENGTH+1):length(cmd_noise)
+for n = (LMS_LENGTH+1):TOTAL_LENGTH
 	output = 0;
 	for k = 1:LMS_LENGTH
 		output = output + weights(k) * noise(n-k+1);
