@@ -50,4 +50,8 @@ function err = lms_circular(cmd_noise, noise)
 			noise_buffer(k) = noise(SAMPLE_LENGTH-LMS_LENGTH+k);
 		end
 	end
+
+	for n = 1:LMS_LENGTH
+		noise_buffer(n) = noise(SAMPLE_LENGTH-LMS_LENGTH+n);
+	end
 end
