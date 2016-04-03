@@ -24,4 +24,8 @@ vector2 = vector1 + length(cmd_noise)/2;
 
 err1 = lms_circular(cmd_noise(vector1), noise(vector1));
 err2 = lms_circular(cmd_noise(vector2), noise(vector2));
+
+% err1 = lms_circular(cmd_noise, noise);
+% err2 = lms_circular(cmd_noise, noise);
+
 err_test = [err1; err2];
