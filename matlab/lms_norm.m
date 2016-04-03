@@ -5,6 +5,9 @@ addpath([ABSPATH '/function']);
 
 load('lms_data.mat');
 
+% cmd_noise = [cmd_noise; cmd_noise];
+% noise = [noise; noise];
+
 LMS_LENGTH = 300;
 STEP_SIZE = 0.04;
 TOTAL_LENGTH = length(cmd_noise);
