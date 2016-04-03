@@ -13,11 +13,11 @@ int main() {
 	/* /Initialization */
 
 	int index;
-	for (index = 0; index < TOTAL_LENGTH; index++) {
+	for (index = 0; index < SAMPLE_LENGTH; index++) {
 		input_fr[index] = float_to_fr32(test_input[index]);
 	}
 
-	pre_emphasis(input_fr, TOTAL_LENGTH);
+	pre_emphasis(input_fr, SAMPLE_LENGTH);
 	// printf("pre emphasis done\n");
 
 	int frame_offset = 0;

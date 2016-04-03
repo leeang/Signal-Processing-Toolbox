@@ -9,7 +9,7 @@
 
 #define WINDOW_LENGTH	512
 #define FRAME_NUM		180
-#define TOTAL_LENGTH	46336
+#define SAMPLE_LENGTH	46336
 // (FRAME_NUM+1) * WINDOW_LENGTH/2
 
 /* FIR filter */
@@ -67,5 +67,5 @@ const char word_string[][12] = {
 	"nineteen", "twenty", "zero", "on", "off", "channel", "switch", "volume up", "volume down"
 };
 
-section("sdram0") fract32 input_fr[TOTAL_LENGTH];
+section("sdram0") fract32 input_fr[SAMPLE_LENGTH];
 section("sdram0") float mfcc_matrix[FRAME_NUM][FEAT_NUM] = {0.0};
