@@ -12,6 +12,7 @@ double lms_square_sum = 0;
 
 double err1[SAMPLE_LENGTH] = {0};
 double err2[SAMPLE_LENGTH] = {0};
+double err[SAMPLE_LENGTH*2] = {0};
 
 void lms_circular(float cmd_noise_in[], float noise_in[], double err_out[], int arr_length) {
 	double output;
@@ -68,10 +69,11 @@ int main() {
 
 	int n;
 	for (n = 0; n < SAMPLE_LENGTH; n++) {
-		printf("%e\n", err1[n]);
+		err[n] = err1[n];
+		err[n+SAMPLE_LENGTH] = err2[n];
 	}
-	for (n = 0; n < SAMPLE_LENGTH; n++) {
-		printf("%e\n", err2[n]);
+	for (n = 0; n < SAMPLE_LENGTH*2; n++) {
+		printf("%e\n", err[n]);
 	}
 
 	return 0;
