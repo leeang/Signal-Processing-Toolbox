@@ -45,10 +45,6 @@ function err = lms_circular(cmd_noise, noise)
 		for k = 1:LMS_LENGTH
 			weights(k) = weights(k) + new_step_size * err(n) * noise(n-k+1);
 		end
-
-		for k = 1:LMS_LENGTH
-			noise_buffer(k) = noise(SAMPLE_LENGTH-LMS_LENGTH+k);
-		end
 	end
 
 	for n = 1:LMS_LENGTH
