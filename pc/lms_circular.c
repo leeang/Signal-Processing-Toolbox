@@ -13,7 +13,7 @@ double lms_square_sum = 0;
 double err1[SAMPLE_LENGTH] = {0};
 double err2[SAMPLE_LENGTH] = {0};
 
-void lms_circular(double cmd_noise_in[], double noise_in[], double err_out[], int arr_length) {
+void lms_circular(float cmd_noise_in[], float noise_in[], double err_out[], int arr_length) {
 	double output;
 	double new_step_size;
 
