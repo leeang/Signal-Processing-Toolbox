@@ -56,3 +56,7 @@ for word_index = 1:WORD_NUM
 end
 
 [probability_max, result] = max(probability);
+
+% for word_index = 1:27
+% 	fprintf('%f\t', probability(word_index))
+% end
