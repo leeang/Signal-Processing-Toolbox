@@ -3,6 +3,7 @@ function mfcc_matrix = calc_mfcc_matrix(x)
 	global WINDOW_LENGTH;
 	global BANK_NUM;
 	global FEAT_NUM;
+	global ENERGY_THRESHOLD;
 
 	global border;
 	global bank_gain;
@@ -27,7 +28,7 @@ function mfcc_matrix = calc_mfcc_matrix(x)
 		energy = sum(frame_data .^ 2);
 		zc_num = zc_count(frame_data);
 
-		if energy > 0.1
+		if energy > ENERGY_THRESHOLD
 			mfcc_matrix(obvs_length, :) = calc_mfcc(frame_data);
 			obvs_length = obvs_length + 1;
 		end

@@ -25,6 +25,9 @@ WORD_NUM = 27;
 global STATE_NUM;
 STATE_NUM = 5;
 
+global ENERGY_THRESHOLD;
+ENERGY_THRESHOLD = 0.04;
+
 global border;
 border = get_bank_border();
 
