@@ -308,3 +308,34 @@ int get_result(int obs_length, float obs[][FEAT_NUM])
 
 	return result;
 }
+
+void init_gpio(void)
+{
+	*pPORTG_FER			= 0x0000;		// Setup PG4 - PG9 for LEDs
+	*pPORTG_MUX			= 0x0000;		// Turn all LEDs on
+	*pPORTG_DIR_SET		= 0x0FC0;		// Setup port for output
+	*pPORTG_CLEAR		= 0x0FC0;		// Turn all LEDs off
+}
+
+void control_gpio(int result)
+{
+	unsigned short gpio_register;
+	if (result >=0 && result < WORD_NUM) {
+		unsigned short result2gpio[WORD_NUM] = {
+			1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+			// one, two, three, four, five, six, seven, eight, nine, error
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			// error, error, error, error, error, error, error, error, error, error
+			10, 0, 0, 11, 12, 13, 14
+			// zeor, error, error, channel, switch, volume up, volume down
+		};
+
+		gpio_register = result2gpio[result];
+	} else {
+		gpio_register = 0;
+	}
+
+	gpio_register <<= 6;
+	*pPORTG_CLEAR = 0x0FC0;
+	*pPORTG_SET = gpio_register;
+}
