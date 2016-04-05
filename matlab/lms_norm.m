@@ -18,6 +18,8 @@ err = zeros(TOTAL_LENGTH, 1);
 
 norm_factor = 0;
 
+tic;
+
 for n = 1:LMS_LENGTH
 	output = 0;
 	for k = 1:n
@@ -49,6 +51,8 @@ for n = (LMS_LENGTH+1):TOTAL_LENGTH
 		weights(k) = weights(k) + new_step_size * err(n) * noise(n-k+1);
 	end
 end
+
+toc;
 
 plot_lim = [-max(cmd_noise) max(cmd_noise)];
 
