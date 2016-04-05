@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 #include "lms_data.c"
 
@@ -17,6 +18,8 @@ int main() {
 
 	int n;
 	int k;
+
+	long clocks = clock();
 
 	for (n = 0; n < LMS_LENGTH; n++) {
 		output = 0;
@@ -49,6 +52,11 @@ int main() {
 			weights[k] += new_step_size * err[n] * noise[n-k];
 		}
 	}
+
+	clocks = clock() - clocks;
+	float time_elapsed = (float) (clocks * 1000) / CLOCKS_PER_SEC;
+	printf("Clocks: %d\n", clocks);
+	printf("Time elapsed: %f ms\n", time_elapsed);
 
 	for (n = 0; n < TOTAL_LENGTH; n++) {
 		printf("%e\n", err[n]);
