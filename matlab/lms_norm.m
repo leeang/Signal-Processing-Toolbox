@@ -71,3 +71,11 @@ ylim(plot_lim);
 
 % print_array(noise, 'noise', '%e');
 % print_array(cmd_noise, 'cmd_noise', '%e', 'a');
+
+% percent_error = (err_c-err) ./ err * 100;
+% figure;
+% plot(percent_error);
+% title('$\frac{C - MATLAB}{MATLAB} \times 100\%$', 'interpreter', 'latex');
+% xlabel('data points');
+% ylabel('percent error (%)');
+% grid on;
