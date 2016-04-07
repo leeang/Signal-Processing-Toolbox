@@ -139,7 +139,9 @@ void discrete_cosine_transform(float energy[], float mfcc_row[])
 			}
 		}
 		mfcc_row[feat_num] = sum;
+		// printf("%f\t", mfcc_row[feat_num]);
 	}
+	// printf("\n");
 }
 
 void calc_mfcc(fract32 input_fr[], float mfcc_row[])
