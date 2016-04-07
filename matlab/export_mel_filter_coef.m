@@ -9,6 +9,7 @@ WINDOW_LENGTH = 512;
 BANK_NUM = 20;
 
 plot_bool = false;
+export_bool = false;
 
 border = get_bank_border();
 
@@ -49,3 +50,10 @@ for bank_index = 1:BANK_NUM
 end
 
 save('mel_filter_coef', 'bank_gain', 'fft_index_offset', 'fft_index_length', 'bank_gain_index_offset');
+
+if export_bool
+	print_array(bank_gain, 'bank_gain', '%e');
+	print_array(fft_index_offset, 'fft_index_offset', '%d', 'a');
+	print_array(fft_index_length, 'fft_index_length', '%d', 'a');
+	print_array(bank_gain_index_offset, 'bank_gain_index_offset', '%d', 'a');
+end
