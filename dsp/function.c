@@ -89,34 +89,8 @@ int zc_count(fract32 data[], int arr_length)
 
 void calc_bank_gain(void)
 {
-	float temp;
-	int bank_gain_index = 0;
-
-	int bank_num;
-	for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
-		int x_length_inc = bank_border[bank_num+1] - bank_border[bank_num];
-		int x_length_dec = bank_border[bank_num+2] - bank_border[bank_num+1];
-
-		int offset = bank_border[bank_num] / 125;
-
-		int index = 1;
-		int frequency_x4 = (index+offset) * 125;
-
-		while (frequency_x4 <= bank_border[bank_num+1]) {
-			temp = (float)(frequency_x4 - bank_border[bank_num]) / (float)x_length_inc;
-			bank_gain[bank_gain_index] = float_to_fr32(temp);
-			index++;
-			frequency_x4 = (index+offset) * 125;
-			bank_gain_index++;
-		}
-
-		while( frequency_x4 <= bank_border[bank_num+2] ) {
-			temp = 1 - (float)(frequency_x4 - bank_border[bank_num+1]) / (float)x_length_dec;
-			bank_gain[bank_gain_index] = float_to_fr32(temp);
-			index++;
-			frequency_x4 = (index+offset) * 125;
-			bank_gain_index++;
-		}
+	for (int index = 0; index < BANK_GAIN_LEN; index++) {
+		bank_gain[index] = float_to_fr32(bank_gain_float[index]);
 	}
 }
 
@@ -126,26 +100,10 @@ void mel_filter(fract32 power_fr[], float energy_melband[], int block_exponent)
 
 	int bank_num;
 	for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
-		int offset = bank_border[bank_num]/125;
-
-		int L = bank_border[bank_num+2]/125 - bank_border[bank_num]/125;
-
-		int bank_gain_offset;
-		switch (bank_num) {
-			case 0:
-				bank_gain_offset = bank_border[0]/125;
-				break;
-			case 1:
-				bank_gain_offset = bank_border[2]/125 - bank_border[0]/125;
-				break;
-			default:
-				bank_gain_offset = bank_border[bank_num+1]/125 + bank_border[bank_num]/125 - bank_border[1]/125 - bank_border[0]/125;
-		}
-
 		int index;
-		for (index = 0; index < L; index++) {
-			fract32 temp = mult_fr1x32x32(power_fr[index+offset+1], bank_gain[index+bank_gain_offset]);
-			energy_melband[bank_num] = energy_melband[bank_num] + fr32_to_float(temp);
+		for (index = 0; index < fft_index_length[bank_num]; index++) {
+			fract32 temp = mult_fr1x32x32(power_fr[index+fft_index_offset[bank_num]], bank_gain[index + bank_gain_index_offset[bank_num]]);
+			energy_melband[bank_num] += fr32_to_float(temp);
 		}
 
 		energy_melband[bank_num] = energy_melband[bank_num] * scale;
