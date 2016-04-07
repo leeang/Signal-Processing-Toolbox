@@ -36,8 +36,8 @@ for bank_index = 1:BANK_NUM
 			bank_gain_index = bank_gain_index+1;
 		end
 	end
-	fft_index_first(bank_index) = min(fft_index(bank_index, :));
-	fft_index_last(bank_index) = max(fft_index(bank_index, :));
+	fft_index_offset(bank_index) = min(fft_index(bank_index, :)) - 1;
+	fft_index_length(bank_index) = max(fft_index(bank_index, :)) - min(fft_index(bank_index, :)) + 1;
 
 	if plot_bool
 		figure;
@@ -48,4 +48,4 @@ for bank_index = 1:BANK_NUM
 	end
 end
 
-save('mel_filter_coef', 'bank_gain', 'fft_index_first', 'fft_index_last', 'bank_gain_index_offset');
+save('mel_filter_coef', 'bank_gain', 'fft_index_offset', 'fft_index_length', 'bank_gain_index_offset');
