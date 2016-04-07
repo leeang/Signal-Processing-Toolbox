@@ -18,14 +18,15 @@ BANK_NUM = 20;
 global FEAT_NUM;
 FEAT_NUM = 12;
 
-global border;
-border = get_bank_border();
-
-global bank_gain;
-calc_bank_gain();
-
 global dct_coef;
 calc_dct_coef();
+
+% Mel filter coefficients
+global bank_gain;
+global bank_gain_index_offset;
+global fft_index_offset;
+global fft_index_length;
+load('mel_filter_coef');
 
 [shelf_b, shelf_a] = shelving(6, 1000, 16E3, 0.9, 'Treble_Shelf');
 
