@@ -28,14 +28,15 @@ STATE_NUM = 5;
 global ENERGY_THRESHOLD;
 ENERGY_THRESHOLD = 0.04;
 
-global border;
-border = get_bank_border();
-
-global bank_gain;
-calc_bank_gain();
-
 global dct_coef;
 calc_dct_coef();
+
+% Mel filter coefficients
+global bank_gain;
+global bank_gain_index_offset;
+global fft_index_offset;
+global fft_index_length;
+load('mel_filter_coef');
 
 global shelf_b;
 global shelf_a;
