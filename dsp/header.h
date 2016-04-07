@@ -12,6 +12,8 @@
 #define SAMPLE_LENGTH	46336
 // (FRAME_NUM+1) * WINDOW_LENGTH/2
 
+#define ENERGY_THRSH	0.04
+
 /* FIR filter */
 #define BUFFER_SIZE		2
 	//define the buffer size

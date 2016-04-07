@@ -37,7 +37,7 @@ int main() {
 
 		float energy = calc_energy(frame_data, WINDOW_LENGTH);
 
-		if (energy > 0.1) {
+		if (energy > ENERGY_THRSH) {
 			float mfcc[FEAT_NUM] = {0.0};
 			calc_mfcc(frame_data, mfcc_matrix[obs_length]);
 			obs_length++;
