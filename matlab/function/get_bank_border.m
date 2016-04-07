@@ -7,6 +7,5 @@ function bank_border = get_bank_border()
 
 	mf_point = linspace(min_mf, max_mf, 22);
 
-	bank_border = melf_to_f(mf_point) * 4;
-    bank_border = round(bank_border);
+	bank_border = melf_to_f(mf_point);
 end
