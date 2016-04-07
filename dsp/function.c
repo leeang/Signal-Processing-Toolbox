@@ -89,7 +89,8 @@ int zc_count(fract32 data[], int arr_length)
 
 void calc_bank_gain(void)
 {
-	for (int index = 0; index < BANK_GAIN_LEN; index++) {
+	int index;
+	for (index = 0; index < BANK_GAIN_LEN; index++) {
 		bank_gain[index] = float_to_fr32(bank_gain_float[index]);
 	}
 }
