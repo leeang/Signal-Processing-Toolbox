@@ -16,7 +16,7 @@ global BANK_NUM;
 BANK_NUM = 20;
 
 global FEAT_NUM;
-FEAT_NUM = 12;
+FEAT_NUM = 13;
 
 global dct_coef;
 calc_dct_coef();

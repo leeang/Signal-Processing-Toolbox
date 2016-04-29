@@ -18,7 +18,7 @@ global BANK_NUM;
 BANK_NUM = 20;
 
 global FEAT_NUM;
-FEAT_NUM = 12;
+FEAT_NUM = 13;
 
 WORD_NUM = 27;
 

@@ -31,7 +31,7 @@
 
 /* Mel filter */
 #define BANK_NUM		20
-#define FEAT_NUM		12
+#define FEAT_NUM		13
 #define BANK_GAIN_LEN	477
 
 /* detection */

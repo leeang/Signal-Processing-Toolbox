@@ -7,7 +7,7 @@ addpath([ABSPATH '/function']);
 
 load('Model.mat');
 
-FEAT_NUM = 12;
+FEAT_NUM = 13;
 STATE_NUM = 5;
 WORD_NUM = 27;
 
