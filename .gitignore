@@ -1,6 +1,8 @@
 *.mp3
 
 *.aux
+*.lof
 *.log
 *.synctex.gz
+*.toc
 *.out
