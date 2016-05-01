@@ -90,7 +90,7 @@ int zc_count(fract32 data[], int arr_length)
 void calc_bank_gain(void)
 {
 	int index;
-	for (index = 0; index < BANK_GAIN_LEN; index++) {
+	for (index = 0; index < BANK_GAIN_LENGTH; index++) {
 		bank_gain[index] = float_to_fr32(bank_gain_float[index]);
 	}
 }
@@ -119,7 +119,7 @@ void calc_dct_coef(void)
 	int feat_num, bank_num;
 
 	for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
-		for (bank_num = 0; bank_num < BANK_NUM/2; bank_num++) {
+		for (bank_num = 0; bank_num < BANK_NUM_HALF; bank_num++) {
 			dct_coef[feat_num][bank_num] = cosf(PI * (bank_num+0.5) * (float) feat_num / (float) BANK_NUM) * scale;
 		}
 	}
@@ -131,7 +131,7 @@ void discrete_cosine_transform(float energy[], float mfcc_row[])
 
 	for (feat_num = 0; feat_num < FEAT_NUM; feat_num++) {
 		float sum = 0;
-		for (bank_num = 0; bank_num < BANK_NUM/2; bank_num++) {
+		for (bank_num = 0; bank_num < BANK_NUM_HALF; bank_num++) {
 			if (feat_num%2) {
 				sum += (energy[bank_num] - energy[BANK_NUM-1-bank_num]) * dct_coef[feat_num][bank_num];
 			} else {

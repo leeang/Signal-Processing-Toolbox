@@ -42,7 +42,7 @@ int main() {
 			calc_mfcc(frame_data, mfcc_matrix[obs_length]);
 			obs_length++;
 		}
-		frame_offset += WINDOW_LENGTH/2;
+		frame_offset += WINDOW_LENGTH_HALF;
 	}
 
 	int result = get_result(obs_length, mfcc_matrix);
