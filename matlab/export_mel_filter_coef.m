@@ -28,8 +28,10 @@ for bank_index = 1:BANK_NUM
 
 			if (current < border(bank_index+1))
 				bank_gain_matrix(bank_index, index) = (current-border(bank_index)) / (border(bank_index+1) - border(bank_index));
+				bank_gain_matrix_sparse(bank_index, k) = bank_gain_matrix(bank_index, index);
 			else
 				bank_gain_matrix(bank_index, index) = 1 - (current-border(bank_index+1)) / (border(bank_index+2) - border(bank_index+1));
+				bank_gain_matrix_sparse(bank_index, k) = bank_gain_matrix(bank_index, index);
 			end
 
 			bank_gain(bank_gain_index) = bank_gain_matrix(bank_index, index);
@@ -50,6 +52,21 @@ for bank_index = 1:BANK_NUM
 end
 
 save('mel_filter_coef', 'bank_gain', 'fft_index_offset', 'fft_index_length', 'bank_gain_index_offset');
+
+fig = figure;
+fig.PaperSize = [6 3];
+fig.PaperPosition = [0 0 6 3];
+imagesc(bank_gain_matrix_sparse);
+vector = transpose(linspace(1, 0, 10));
+colormap([vector vector vector]);
+colorbar;
+title('Mel-filter gain', 'interpreter', 'latex');
+xlabel('Data point index', 'interpreter', 'latex');
+ylabel('Bank index', 'interpreter', 'latex');
+ax = gca;
+ax.XTick = linspace(0, 256, 9);
+grid on;
+print('mel_filter_sparse_matrix', '-dpdf');
 
 if export_bool
 	print_array(bank_gain, 'bank_gain', '%e');
