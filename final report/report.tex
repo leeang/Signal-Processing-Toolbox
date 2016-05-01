@@ -2,8 +2,49 @@
 
 \usepackage{graphicx}	% Required to insert images
 \graphicspath{{img/}}
+\usepackage{epstopdf}	% Required to insert .eps images
 \usepackage{float}		% float figure
 
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+% Line spacing
+\linespread{1.5}
+% Removes all indentation from paragraphs
+\setlength\parindent{0pt}
+
+% Set up the header and footer
+\usepackage{fancyhdr}
+\usepackage{lastpage}	% Required to determine the last page for the footer
+\pagestyle{fancy}
+\lhead{\footnotesize EW2 Word Recognition Utilized in Home Automation}
+\chead{}
+\rhead{\footnotesize Preliminary Report}
+\lfoot{\footnotesize \rightmark}
+\cfoot{}
+\rfoot{\footnotesize Page\ \thepage\ of\ \pageref{LastPage}}
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
 \begin{document}
-\input{title_page.tex}
+\input{inc/title_page.tex}
+\input{inc/contribution.tex}
+\input{inc/abstract.tex}
+\tableofcontents
+\input{introduction.tex}
+\input{LMS.tex}
+\input{feature-extraction-1.tex}
+\input{feature-extraction-2.tex}
+\input{HMM.tex}
+\input{DSP.tex}
+\input{design-analysis.tex}
+\input{system-performance.tex}
+\listoffigures
 \end{document}
