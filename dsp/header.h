@@ -8,6 +8,7 @@
 #define PI	3.14159265358979323846
 
 #define WINDOW_LENGTH	512
+#define WINDOW_LENGTH_HALF	256
 #define FRAME_NUM		180
 #define SAMPLE_LENGTH	46336
 // (FRAME_NUM+1) * WINDOW_LENGTH/2
@@ -31,8 +32,9 @@
 
 /* Mel filter */
 #define BANK_NUM		20
+#define BANK_NUM_HALF	10
 #define FEAT_NUM		13
-#define BANK_GAIN_LEN	477
+#define BANK_GAIN_LENGTH	477
 
 /* detection */
 #define STATE_NUM		5
