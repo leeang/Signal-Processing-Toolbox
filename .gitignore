@@ -6,3 +6,8 @@
 *.synctex.gz
 *.toc
 *.out
+
+*.blg
+*.bbl
+*.fdb_latexmk
+*.fls
