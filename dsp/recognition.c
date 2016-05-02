@@ -20,6 +20,8 @@ int main() {
 		input_fr[index] = float_to_fr32(test_input[index]);
 	}
 
+	float clocks = clock();
+
 	pre_emphasis(input_fr, SAMPLE_LENGTH);
 	// printf("pre emphasis done\n");
 
@@ -46,7 +48,13 @@ int main() {
 	}
 
 	int result = get_result(obs_length, mfcc_matrix);
+
+	clocks = clock() - clocks;
+	float time_elapsed = clocks * 1000 / CLOCKS_PER_SEC;
+
 	printf("Result: %s\n", word_string[result]);
+	printf("Clocks: %d\n", clocks);
+	printf("Time elapsed: %f ms\n", time_elapsed);
 
 	return 0;
 }
