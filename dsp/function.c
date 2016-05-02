@@ -128,6 +128,23 @@ void calc_dct_coef(void)
 void discrete_cosine_transform(float energy[], float mfcc_row[])
 {
 	int feat_num, bank_num;
+	float sum;
+
+	for (feat_num = 0; feat_num < FEAT_NUM; feat_num+=2) {
+		sum = 0;
+		for (bank_num = 0; bank_num < BANK_NUM_HALF; bank_num++) {
+			sum += (energy[bank_num] + energy[BANK_NUM-1-bank_num]) * dct_coef[feat_num][bank_num];
+		}
+		mfcc_row[feat_num] = sum;
+	}
+
+	for (feat_num = 1; feat_num < FEAT_NUM; feat_num+=2) {
+		sum = 0;
+		for (bank_num = 0; bank_num < BANK_NUM_HALF; bank_num++) {
+			sum += (energy[bank_num] - energy[BANK_NUM-1-bank_num]) * dct_coef[feat_num][bank_num];
+		}
+		mfcc_row[feat_num] = sum;
+	}
 }
 
 void calc_mfcc(fract32 frame_data_point[], float mfcc_row[])
