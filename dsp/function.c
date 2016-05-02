@@ -209,11 +209,12 @@ float viterbi(int obs_length, float obs[][FEAT_NUM], int word_index)
 
 	int obs_index;
 	int statei, statej;
+	float max_phi_plus_trans;
 
 	// recursion
 	for (obs_index = 1; obs_index < obs_length; obs_index++) {
 
-		float max_phi_plus_trans = -Inf;
+		max_phi_plus_trans = -Inf;
 		float phi_plus_trans = PHI(obs_index-1, 0) + trans[word_index][0][0];
 
 		if (phi_plus_trans > max_phi_plus_trans){
