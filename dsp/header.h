@@ -67,10 +67,11 @@ fract32 bank_gain[BANK_GAIN_LENGTH] = {0};
 /* discrete cosine transform */
 float dct_coef[FEAT_NUM][BANK_NUM/2] = {0.0};
 
-const char word_string[][12] = {
+const char word_string[][15] = {
 	"one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 	"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
-	"nineteen", "twenty", "zero", "on", "off", "channel", "switch", "volume up", "volume down"
+	"nineteen", "twenty", "zero", "on", "off", "channel", "switch", "volume up", "volume down",
+	"louder please"
 };
 
 section("sdram0") fract32 cmd_fr32[SAMPLE_LENGTH];

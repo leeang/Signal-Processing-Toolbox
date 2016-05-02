@@ -283,6 +283,10 @@ int get_result(int obs_length, float obs[][FEAT_NUM])
 	}
 	// printf("\n");
 
+	if (fabs(P_word_max) < 0.000001) {
+		result = 27;	// "louder please"
+	}
+
 	return result;
 }
 
