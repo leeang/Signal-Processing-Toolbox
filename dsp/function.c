@@ -74,6 +74,7 @@ float calc_energy(fract32 data[], int arr_length)
 	return energy;
 }
 
+/*
 int zc_count(fract32 data[], int arr_length)
 {
 	int zc_num = 0;
@@ -86,6 +87,7 @@ int zc_count(fract32 data[], int arr_length)
 	}
 	return zc_num;
 }
+*/
 
 void calc_bank_gain(void)
 {
