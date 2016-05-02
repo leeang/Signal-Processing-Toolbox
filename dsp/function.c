@@ -296,6 +296,8 @@ void init_gpio(void)
 
 void control_gpio(int result)
 {
+	static unsigned short flag = 0;
+
 	unsigned short gpio_register;
 	if (result >=0 && result < WORD_NUM) {
 		unsigned short result2gpio[WORD_NUM] = {
@@ -313,6 +315,9 @@ void control_gpio(int result)
 	}
 
 	gpio_register <<= 6;
+	gpio_register |= (flag << 11);
 	*pPORTG_CLEAR = 0x0FC0;
 	*pPORTG_SET = gpio_register;
+
+	flag = 1 - flag;
 }
