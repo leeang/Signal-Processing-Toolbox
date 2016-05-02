@@ -1,1 +1,30 @@
 \chapter{Digital Signal Processor}
+
+%----------------------------------------------------------------------------------------
+%	Section
+%----------------------------------------------------------------------------------------
+
+\section{ADSP-BF548 EZ-KIT Lite}
+
+\subsection{Hardware Architecture}
+
+\subsection{Performance Tuning Guidelines}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\subsection{CrossCore Embedded Studio}
+
+During ELEN90058 \textit{Signal Processing} and ELEN90052 \textit{Advanced Signal Processing}, we used CrossCore\textsuperscript{\textregistered} Embedded Studio to compile and debug code for Blackfin DSP board. Basing on Eclipse, CCES exploits the ecosystem of third-party tools already available to Eclipse developers. Thus, plenty of convenient functions such as plotting arrays of data are available to users \cite{erik-cces}\cite{cces-faq}. CCES could be an ideal substitution for VisualDSP++.\\
+
+However, the AD1980 Audio Codec on ADSP-BF548 EZ-Kit Lite Board is not supported with CCES \cite{cces-ad1980}. Analog Devices engineer Craig Gilchrist explained in \textit{EngineerZone} support community that they do not have a driver for the AD1980 Codec with CCES. In addition, he recommended AD1836 Audio Codec instead \cite{BF548-BSP}.\\
+
+Considering the project budget and potential risk, we eventually decided to stick on VisualDSP++ 5.1.2.
+
+%----------------------------------------------------------------------------------------
+%	Section
+%----------------------------------------------------------------------------------------
+
+\section{C Program}
+
+\subsection{Audioloopback}
