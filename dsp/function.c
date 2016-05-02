@@ -144,12 +144,12 @@ void discrete_cosine_transform(float energy[], float mfcc_row[])
 	// printf("\n");
 }
 
-void calc_mfcc(fract32 input_fr[], float mfcc_row[])
+void calc_mfcc(fract32 frame_data_point[], float mfcc_row[])
 {
 	int i;
 
 	int block_exponent;
-	rfft_fr32(input_fr, fft_spectrum, twiddle_table, TWIDDLE_STRIDE, WINDOW_LENGTH, &block_exponent, DYNAMIC_SCALING);
+	rfft_fr32(frame_data_point, fft_spectrum, twiddle_table, TWIDDLE_STRIDE, WINDOW_LENGTH, &block_exponent, DYNAMIC_SCALING);
 
 	fract32 power_spectrum[WINDOW_LENGTH];
 	for (i = 0; i < WINDOW_LENGTH; ++i) {

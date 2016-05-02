@@ -73,5 +73,5 @@ const char word_string[][12] = {
 	"nineteen", "twenty", "zero", "on", "off", "channel", "switch", "volume up", "volume down"
 };
 
-section("sdram0") fract32 input_fr[SAMPLE_LENGTH];
+section("sdram0") fract32 cmd_fr32[SAMPLE_LENGTH];
 section("L2_sram") float mfcc_matrix[FRAME_NUM][FEAT_NUM] = {0.0};

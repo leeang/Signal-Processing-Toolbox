@@ -17,12 +17,12 @@ int main() {
 
 	int index;
 	for (index = 0; index < SAMPLE_LENGTH; index++) {
-		input_fr[index] = float_to_fr32(test_input[index]);
+		cmd_fr32[index] = float_to_fr32(test_input[index]);
 	}
 
 	float clocks = clock();
 
-	pre_emphasis(input_fr, SAMPLE_LENGTH);
+	pre_emphasis(cmd_fr32, SAMPLE_LENGTH);
 	// printf("pre emphasis done\n");
 
 	int frame_offset = 0;
@@ -32,7 +32,7 @@ int main() {
 	int frame_num;
 	for (frame_num = 0; frame_num < FRAME_NUM; frame_num++) {
 		for (index = 0; index < WINDOW_LENGTH; index++) {
-			frame_data[index] = input_fr[index+frame_offset];
+			frame_data[index] = cmd_fr32[index+frame_offset];
 		}
 
 		hamming(frame_data);
