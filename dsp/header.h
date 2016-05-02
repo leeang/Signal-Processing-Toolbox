@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 
 #include <fract.h>
@@ -61,7 +62,7 @@ complex_fract32 fft_spectrum[WINDOW_LENGTH] = {0};
 complex_fract32 twiddle_table[WINDOW_LENGTH/2] = {0};
 
 /* Mel filter */
-fract32 bank_gain[BANK_GAIN_LEN] = {0};
+fract32 bank_gain[BANK_GAIN_LENGTH] = {0};
 
 /* discrete cosine transform */
 float dct_coef[FEAT_NUM][BANK_NUM/2] = {0.0};
