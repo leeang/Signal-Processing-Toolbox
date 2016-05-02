@@ -19,7 +19,7 @@ int main() {
 	int n;
 	int k;
 
-	float clocks = clock();
+	clock_t clocks = clock();
 
 	for (n = 0; n < LMS_LENGTH; n++) {
 		output = 0;
@@ -54,7 +54,7 @@ int main() {
 	}
 
 	clocks = clock() - clocks;
-	float time_elapsed = clocks * 1000 / CLOCKS_PER_SEC;
+	float time_elapsed = (float) clocks * 1000 / CLOCKS_PER_SEC;
 	printf("Clocks: %d\n", clocks);
 	printf("Time elapsed: %f ms\n", time_elapsed);
 
