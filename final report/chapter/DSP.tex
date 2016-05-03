@@ -8,6 +8,36 @@
 
 \subsection{Hardware Architecture}
 
+\subsubsection{Audio Codec}
+An Analog Devices AD1980 audio codec is the audio interface of the EZ-KIT Lite. The codec connects to multiple audio connectors (3.5 mm) which allow us to get audio in and out. These connectors can be easily found at the bottom left corner of the board.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in]{ang/audio-connectors}
+\caption{Audio Connectors}
+\label{audio-connectors}
+\end{figure}
+
+Fig. \ref{audio-connectors} illustrates that the top location of \texttt{J8} is for a stereo microphone and the bottom location is for a stereo line in. According to Fig. \ref{AD1980-schematic}, the difference between MIC and LINE IN is signals via MIC will be pre-amplified. The preamp gain is collaboratively controlled by MIC Volume Register (\texttt{AD1980\_REG\_MIC\_VOL\_CTRL}) and Miscellaneous Control Bit Register (\texttt{AD1980\_REG\_MIC\_VOL\_CTRL}) \cite{AC97-codec}. In addition, it can be clearly seen that AD1980 can only sample 2 channels at any given moment due to the RECORD SELECTOR multiplexer. Thus, we decide to input noisy command and noise via the left / right channel of \texttt{MIC} respectively.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=6in]{ang/AD1980-schematic}
+\caption{AD1980 Functional Block Diagram}
+\label{AD1980-schematic}
+\end{figure}
+
+%--------------------------------------------
+
+\subsubsection{Memory Hierarchy}
+The ADSP-BF548 processor supports a hierarchy of three synchronous memories.\\
+
+Internal L1 memory consists of two 32 KB data SRAM banks \cite{bf54x-hardware}. L1 memory is the highest-performing memory available to the Blackfin core and can be accessed at core clock speeds \cite{start-with-bf548}.\\
+
+Internal L2 memory consists of a single 128 KB area of SRAM. L2 is slightly lower-performing than L1, requiring two core clock cycles for access. L2 provides more capacity accompanied by higher latency. \cite{start-with-bf548}\\
+
+External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. External memory operates synchronously with the system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory \cite{start-with-bf548}.
+
 \subsection{Performance Tuning Guidelines}
 
 %--------------------------------------------
