@@ -302,22 +302,13 @@ void init_gpio(void)
 
 void control_gpio(int result)
 {
-	static unsigned short flag = 0;
+	static unsigned short flag = 1;
 
 	unsigned short gpio_register;
-	if (result >=0 && result < WORD_NUM) {
-		unsigned short result2gpio[WORD_NUM] = {
-			1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
-			// one, two, three, four, five, six, seven, eight, nine, error
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			// error, error, error, error, error, error, error, error, error, error
-			10, 0, 0, 11, 12, 13, 14
-			// zeor, error, error, channel, switch, volume up, volume down
-		};
-
-		gpio_register = result2gpio[result];
+	if (result >= 0 && result < WORD_NUM) {
+		gpio_register = result;
 	} else {
-		gpio_register = 0;
+		gpio_register = WORD_NUM;
 	}
 
 	gpio_register <<= 6;
