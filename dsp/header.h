@@ -23,6 +23,7 @@
 #define LMS_LENGTH_MASK		127
 #define LMS_STEP_SIZE		0.1
 #define UPDATE_INTERVAL		4
+#define MOD(CURRENT)		( ((CURRENT) + LMS_LENGTH) & LMS_LENGTH_MASK )
 
 #define ENERGY_THRSH		0.04
 
@@ -91,4 +92,6 @@ section("sdram0") fract32 cmd_fr32[SAMPLE_LENGTH];
 /* MFCC matrix */
 section("L2_sram") float mfcc_matrix[FRAME_NUM][FEAT_NUM] = {0.0};
 
+/* LMS static variables */
 float weights[LMS_LENGTH] = {0.0};
+float noise_buffer[LMS_LENGTH] = {0.0};
