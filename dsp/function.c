@@ -17,7 +17,7 @@ void lms(int chunk_index)
 
 		float output = 0;
 		for (k = 0; k < LMS_LENGTH; k++) {
-			output += weights[k] * noise_buffer[(current-k + LMS_LENGTH) & LMS_LENGTH_MASK];
+			output += weights[k] * noise_buffer[MOD(current-k)];
 		}
 
 		float err = cmd_noise[n] - output;
@@ -29,7 +29,7 @@ void lms(int chunk_index)
 			float new_step_size = LMS_STEP_SIZE / (1 + square_sum);
 
 			for (k = 0; k < LMS_LENGTH; k++) {
-				weights[k] += new_step_size * err * noise_buffer[(current-k + LMS_LENGTH) & LMS_LENGTH_MASK];
+				weights[k] += new_step_size * err * noise_buffer[MOD(current-k)];
 			}
 
 			update_counter = 0;
