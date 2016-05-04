@@ -18,6 +18,7 @@ void lms(int chunk_index)
 		float output = 0;
 		for (k = 0; k < LMS_LENGTH; k++) {
 			output += weights[k] * noise_buffer[MOD(current-k)];
+			// MOD(CURRENT) macro is explained in header.h
 		}
 
 		float err = cmd_noise[n] - output;
