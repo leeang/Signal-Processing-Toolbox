@@ -27,12 +27,12 @@ for n = 1:LMS_LENGTH
 	err(n) = cmd_noise(n) - output;
 
 	if mod(n, UPDATE_INTERVAL) == 1
-	norm_factor = norm_factor + noise(n)^2;
-	new_step_size = STEP_SIZE / (1+norm_factor);
+		norm_factor = norm_factor + noise(n)^2 * UPDATE_INTERVAL;
+		new_step_size = STEP_SIZE / (1+norm_factor);
 
-	for k = 1:n
-		weights(k) = weights(k) + new_step_size * err(n) * noise(n-k+1);
-	end
+		for k = 1:n
+			weights(k) = weights(k) + new_step_size * err(n) * noise(n-k+1);
+		end
 	end
 end
 
@@ -45,12 +45,12 @@ for n = (LMS_LENGTH+1):TOTAL_LENGTH
 	err(n) = cmd_noise(n) - output;
 
 	if mod(n, UPDATE_INTERVAL) == 1
-	norm_factor = norm_factor - noise(n-LMS_LENGTH)^2 + noise(n)^2;
-	new_step_size = STEP_SIZE / (1+norm_factor);
+		norm_factor = norm_factor - noise(n-LMS_LENGTH)^2 * UPDATE_INTERVAL + noise(n)^2 * UPDATE_INTERVAL;
+		new_step_size = STEP_SIZE / (1+norm_factor);
 
-	for k = 1:LMS_LENGTH
-		weights(k) = weights(k) + new_step_size * err(n) * noise(n-k+1);
-	end
+		for k = 1:LMS_LENGTH
+			weights(k) = weights(k) + new_step_size * err(n) * noise(n-k+1);
+		end
 	end
 end
 
