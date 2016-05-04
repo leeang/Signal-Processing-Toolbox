@@ -15,6 +15,13 @@
 #define SAMPLE_LENGTH		46336
 // (FRAME_NUM+1) * WINDOW_LENGTH/2
 
+#define CHUNCK_NUM			8
+#define CHUNCK_LENGTH		5792
+// CHUNCK_LENGTH = SAMPLE_LENGTH / CHUNCK_NUM
+
+#define LMS_LENGTH			128
+#define LMS_STEP_SIZE		0.1
+
 #define ENERGY_THRSH		0.04
 
 /* FIR filter */
@@ -74,5 +81,12 @@ const char word_string[][15] = {
 	"louder please"
 };
 
+/* input buffers */
+section("sdram0") float cmd_noise[CHUNCK_LENGTH] = {0.0};
+section("sdram0") float noise[CHUNCK_LENGTH] = {0.0};
 section("sdram0") fract32 cmd_fr32[SAMPLE_LENGTH];
+
+/* MFCC matrix */
 section("L2_sram") float mfcc_matrix[FRAME_NUM][FEAT_NUM] = {0.0};
+
+float weights[LMS_LENGTH] = {0.0};
