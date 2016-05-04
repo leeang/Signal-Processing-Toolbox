@@ -1,3 +1,44 @@
+void lms(int chunk_index)
+{
+	static float square_sum = 0;
+	static int current = 0;
+
+	int offset = chunk_index * CHUNCK_LENGTH;
+	int update_counter = 0;
+
+	int n;
+	int k;
+
+	for (n = 0; n < CHUNCK_LENGTH; n++) {
+		float noise_last = noise_buffer[current];
+		// keep the last element that will be overwritten
+		noise_buffer[current] = noise[n];
+		// overwrite the last element by newest data point
+
+		float output = 0;
+		for (k = 0; k < LMS_LENGTH; k++) {
+			output += weights[k] * noise_buffer[(current-k + LMS_LENGTH) & LMS_LENGTH_MASK];
+		}
+
+		float err = cmd_noise[n] - output;
+		cmd_fr32[n+offset] = float_to_fr32(err);
+
+		update_counter++;
+		if (update_counter == UPDATE_INTERVAL) {
+			square_sum = square_sum + (noise_buffer[current] * noise_buffer[current] - noise_last * noise_last) * UPDATE_INTERVAL;
+			float new_step_size = LMS_STEP_SIZE / (1 + square_sum);
+
+			for (k = 0; k < LMS_LENGTH; k++) {
+				weights[k] += new_step_size * err * noise_buffer[(current-k + LMS_LENGTH) & LMS_LENGTH_MASK];
+			}
+
+			update_counter = 0;
+		}
+
+		current = (current + 1) & LMS_LENGTH_MASK;
+	}
+}
+
 void lms_pass(int chunk_index)
 {
 	int offset = chunk_index * CHUNCK_LENGTH;
