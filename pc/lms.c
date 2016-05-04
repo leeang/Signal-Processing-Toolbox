@@ -3,9 +3,9 @@
 
 #include "lms_data.c"
 
-#define TOTAL_LENGTH	48000
-#define LMS_LENGTH		300
-#define LMS_STEP_SIZE	0.04
+#define TOTAL_LENGTH	46336
+#define LMS_LENGTH		128
+#define LMS_STEP_SIZE	0.1
 
 double err[TOTAL_LENGTH] = { 0.0 };
 

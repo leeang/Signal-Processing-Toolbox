@@ -24,16 +24,9 @@
 #define LMS_STEP_SIZE		0.1
 #define UPDATE_INTERVAL		4
 #define MOD(CURRENT)		( ((CURRENT) + LMS_LENGTH) & LMS_LENGTH_MASK )
+// for the case LMS_LENGTH = 128, MOD(-1) = 127, MOD(0) = 0, MOD(1) = 1
 
 #define ENERGY_THRSH		0.04
-
-/* FIR filter */
-#define BUFFER_SIZE			2
-	//define the buffer size
-#define INDEX(CURRENT)		( ((CURRENT) + BUFFER_SIZE) % BUFFER_SIZE )
-	// if an index is negative, a specified position from the end of the array will be returned.
-	// e.g. given an array x[8], x[INDEX(-1)] and x[INDEX(7)] both refer to x[7].
-/* /FIR filter */
 
 /* zero crossing count */
 #define IS_ZC(X, Y)		( (X) > 0 && (Y) < 0 || (X) < 0 && (Y) > 0 )
