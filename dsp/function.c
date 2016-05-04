@@ -36,6 +36,7 @@ void lms(int chunk_index)
 		}
 
 		current = (current + 1) & LMS_LENGTH_MASK;
+		// current increments from 0 to LMS_LENGTH-1 and then starts from 0 again.
 	}
 }
 
