@@ -5,6 +5,7 @@
 #include "model.h"
 #include "function.c"
 #include "test_input.h"
+#include "lms_data.h"
 
 int main() {
 	/* Initialization */
