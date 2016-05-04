@@ -8,14 +8,14 @@
 #define LMS_STEP_SIZE	0.1
 #define UPDATE_INTERVAL	4
 
-double err[TOTAL_LENGTH] = { 0.0 };
+float err[TOTAL_LENGTH] = { 0.0 };
 
 int main() {
-	double weights[LMS_LENGTH] = { 0.0 };
+	float weights[LMS_LENGTH] = { 0.0 };
 
-	double output;
-	double square_sum = 0;
-	double new_step_size;
+	float output;
+	float square_sum = 0;
+	float new_step_size;
 
 	int n;
 	int k;
