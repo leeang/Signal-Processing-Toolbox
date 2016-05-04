@@ -1,3 +1,13 @@
+void lms_pass(int chunk_index)
+{
+	int offset = chunk_index * CHUNCK_LENGTH;
+
+	int n;
+	for (n = 0; n < CHUNCK_LENGTH; n++) {
+		cmd_fr32[n + offset] = float_to_fr32(cmd_noise[n]);
+	}
+}
+
 void calc_shelving_coef(void)
 {
 	shelving_coef.b0 = float_to_fr32(0.465464090346913);
@@ -306,9 +316,9 @@ void control_gpio(int result)
 
 	unsigned short gpio_register;
 	if (result >= 0 && result < WORD_NUM) {
-		gpio_register = result;
+		gpio_register = result + 1;
 	} else {
-		gpio_register = WORD_NUM;
+		gpio_register = 0;
 	}
 
 	gpio_register <<= 6;
