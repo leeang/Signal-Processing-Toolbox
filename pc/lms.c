@@ -31,12 +31,12 @@ int main() {
 		err[n] = cmd_noise[n] - output;
 
 		if (n%UPDATE_INTERVAL == 0) {
-		square_sum += noise[n] * noise[n];
-		new_step_size = LMS_STEP_SIZE / (1+square_sum);
+			square_sum += noise[n] * noise[n] * UPDATE_INTERVAL;
+			new_step_size = LMS_STEP_SIZE / (1+square_sum);
 
-		for (k = 0; k <= n; k++) {
-			weights[k] += new_step_size * err[n] * noise[n-k];
-		}
+			for (k = 0; k <= n; k++) {
+				weights[k] += new_step_size * err[n] * noise[n-k];
+			}
 		}
 	}
 
@@ -49,12 +49,12 @@ int main() {
 		err[n] = cmd_noise[n] - output;
 
 		if (n%UPDATE_INTERVAL == 0) {
-		square_sum = square_sum - noise[n-LMS_LENGTH] * noise[n-LMS_LENGTH] + noise[n] * noise[n];
-		new_step_size = LMS_STEP_SIZE / (1+square_sum);
+			square_sum = square_sum - noise[n-LMS_LENGTH] * noise[n-LMS_LENGTH] * UPDATE_INTERVAL + noise[n] * noise[n] * UPDATE_INTERVAL;
+			new_step_size = LMS_STEP_SIZE / (1+square_sum);
 
-		for (k = 0; k < LMS_LENGTH; k++) {
-			weights[k] += new_step_size * err[n] * noise[n-k];
-		}
+			for (k = 0; k < LMS_LENGTH; k++) {
+				weights[k] += new_step_size * err[n] * noise[n-k];
+			}
 		}
 	}
 
