@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#include "lms_data.c"
+#include "lms_data.h"
 
 #define TOTAL_LENGTH	46336
 #define LMS_LENGTH		128
