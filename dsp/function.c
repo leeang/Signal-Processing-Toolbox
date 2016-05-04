@@ -4,7 +4,7 @@ void lms(int chunk_index)
 	static int current = 0;
 
 	int offset = chunk_index * CHUNCK_LENGTH;
-	int update_counter = 0;
+	int update_counter = UPDATE_INTERVAL;
 
 	int n;
 	int k;
@@ -23,7 +23,6 @@ void lms(int chunk_index)
 		float err = cmd_noise[n] - output;
 		cmd_fr32[n+offset] = float_to_fr32(err);
 
-		update_counter++;
 		if (update_counter == UPDATE_INTERVAL) {
 			square_sum = square_sum + (noise_buffer[current] * noise_buffer[current] - noise_last * noise_last) * UPDATE_INTERVAL;
 			float new_step_size = LMS_STEP_SIZE / (1 + square_sum);
@@ -34,6 +33,7 @@ void lms(int chunk_index)
 
 			update_counter = 0;
 		}
+		update_counter++;
 
 		current = (current + 1) & LMS_LENGTH_MASK;
 		// current increments from 0 to LMS_LENGTH-1 and then starts from 0 again.
