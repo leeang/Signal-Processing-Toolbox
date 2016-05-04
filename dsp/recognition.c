@@ -4,8 +4,10 @@
 #include "mel_filter.h"
 #include "model.h"
 #include "function.c"
-#include "test_input.h"
+// #include "test_input.h"
 #include "lms_data.h"
+
+section("sdram0") float cmd_float[SAMPLE_LENGTH];
 
 int main() {
 	/* Initialization */
@@ -16,9 +18,22 @@ int main() {
 	calc_dct_coef();
 	/* /Initialization */
 
+	int chunk_index = 0;
+	for (chunk_index = 0; chunk_index < CHUNCK_NUM; chunk_index++) {
+		int offset = chunk_index * CHUNCK_LENGTH;
+
+		int index;
+		for (index = 0; index < CHUNCK_LENGTH; index++) {
+			cmd_noise[index] = cmd_noise_all[offset + index];
+			noise[index] = noise_all[offset + index];
+		}
+
+		lms(chunk_index);
+	}
+
 	int index;
 	for (index = 0; index < SAMPLE_LENGTH; index++) {
-		cmd_fr32[index] = float_to_fr32(test_input[index]);
+		cmd_float[index] = fr32_to_float(cmd_fr32[index]);
 	}
 
 	clock_t clocks = clock();
