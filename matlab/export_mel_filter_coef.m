@@ -44,8 +44,10 @@ for bank_index = 1:BANK_NUM
 
 	if bank_index == 9
 		fig = figure;
-		fig.PaperSize = [8 6];
-		fig.PaperPosition = [0 0 8 6];
+		fig.Units = 'inches';
+		pos = fig.Position;
+		fig.PaperSize = [pos(3) pos(4)];
+		fig.PaperPositionMode = 'Auto';
 		subplot(2, 1, 1);
 		plot([border(bank_index) border(bank_index+1) border(bank_index+2)], [0 1 0]);
 		hold on;
@@ -70,8 +72,11 @@ end
 save('mel_filter_coef', 'bank_gain', 'fft_index_offset', 'fft_index_length', 'bank_gain_index_offset');
 
 fig = figure;
-fig.PaperSize = [6 3];
-fig.PaperPosition = [0 0 6 3];
+fig.Units = 'inches';
+fig.Position(3) = fig.Position(3) * 1.5;
+pos = fig.Position;
+fig.PaperSize = [pos(3) pos(4)];
+fig.PaperPositionMode = 'Auto';
 imagesc(bank_gain_matrix_sparse);
 vector = transpose(linspace(1, 0, 10));
 colormap([vector vector vector]);
