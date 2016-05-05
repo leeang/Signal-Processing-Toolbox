@@ -26,10 +26,12 @@ int main() {
 		int index;
 		for (index = 0; index < CHUNCK_LENGTH; index++) {
 			cmd_noise[index] = cmd_noise_all[offset + index];
+			// cmd_noise[index] = test_input[offset + index];
 			noise[index] = noise_all[offset + index];
 		}
 
 		lms(chunk_index);
+		// lms_pass(chunk_index);
 	}
 
 	int index;
@@ -54,7 +56,7 @@ int main() {
 
 		hamming(frame_data);
 
-		float energy = calc_energy(frame_data, WINDOW_LENGTH);
+		fract32 energy = calc_energy(frame_data);
 
 		if (energy > energy_threshold) {
 			float mfcc[FEAT_NUM] = {0.0};
