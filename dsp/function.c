@@ -147,7 +147,7 @@ void calc_bank_gain(void)
 	}
 }
 
-void mel_filter(fract32 power[], float energy_melband[], int block_exponent)
+void mel_filter(fract32 power[], float energy[], int block_exponent)
 {
 	int scale = 1 << block_exponent*2;
 
@@ -159,11 +159,11 @@ void mel_filter(fract32 power[], float energy_melband[], int block_exponent)
 				power[index + fft_index_offset[bank_num]],
 				bank_gain[index + bank_gain_index_offset[bank_num]]
 			);
-			energy_melband[bank_num] += fr32_to_float(filtered_power);
+			energy[bank_num] += fr32_to_float(filtered_power);
 		}
 
-		energy_melband[bank_num] = energy_melband[bank_num] * scale;
-		energy_melband[bank_num] = log10f(energy_melband[bank_num]);
+		energy[bank_num] = energy[bank_num] * scale;
+		energy[bank_num] = log10f(energy[bank_num]);
 	}
 }
 
@@ -215,9 +215,9 @@ void calc_mfcc(fract32 frame_data_point[], float mfcc_row[])
 		power_spectrum[i] = mult_fr1x32x32(absolute, absolute);
 	}
 
-	float energy_melband[BANK_NUM] = {0.0};
-	mel_filter(power_spectrum, energy_melband, block_exponent);
-	discrete_cosine_transform(energy_melband, mfcc_row);
+	float bank_energy[BANK_NUM] = {0.0};
+	mel_filter(power_spectrum, bank_energy, block_exponent);
+	discrete_cosine_transform(bank_energy, mfcc_row);
 }
 
 void calc_emis(int obs_length, float obs[][FEAT_NUM], int word_index, float *ptr_to_emis)
