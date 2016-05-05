@@ -107,22 +107,19 @@ void hamming(fract32 data[])
 	}
 }
 
-float calc_energy(fract32 data[], int arr_length)
+fract32 calc_energy(fract32 data[])
 {
-	int shift = 9;
-	// shift = log_2(arr_length)
-
-	fract32 energy_fr = float_to_fr32(0.0);
+	fract32 energy = 0;
 
 	int index;
-	for (index = 0; index < arr_length; index++) {
-		fract32 temp = mult_fr1x32x32(data[index], data[index]);
-		temp = shl_fr1x32(temp, -shift);
-		// right shift in case of overflow
-		energy_fr = add_fr1x32(energy_fr, temp);
-	}
+	for (index = 0; index < WINDOW_LENGTH; index++) {
+		fract32 power = mult_fr1x32x32(data[index], data[index]);
 
-	float energy = fr32_to_float(energy_fr) * (1<<shift);
+		power = shr_fr1x32(power, ENERGY_RIGHT_SHIFT);
+		// right shift before accumulation in case of overflow
+
+		energy = add_fr1x32(energy, power);
+	}
 
 	return energy;
 }
