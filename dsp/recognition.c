@@ -4,7 +4,7 @@
 #include "mel_filter.h"
 #include "model.h"
 #include "function.c"
-// #include "test_input.h"
+#include "cmd.h"
 #include "lms_data.h"
 
 section("sdram0") float cmd_float[SAMPLE_LENGTH];
@@ -26,7 +26,7 @@ int main() {
 		int index;
 		for (index = 0; index < CHUNCK_LENGTH; index++) {
 			cmd_noise[index] = cmd_noise_all[offset + index];
-			// cmd_noise[index] = test_input[offset + index];
+			// cmd_noise[index] = cmd[offset + index];
 			noise[index] = noise_all[offset + index];
 		}
 
