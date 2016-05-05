@@ -153,16 +153,18 @@ void mel_filter(fract32 power[], float energy[], int block_exponent)
 
 	int bank_num;
 	for (bank_num = 0; bank_num < BANK_NUM; bank_num++) {
+		float energy_float = 0;
+
 		int index;
 		for (index = 0; index < fft_index_length[bank_num]; index++) {
 			fract32 filtered_power = mult_fr1x32x32(
 				power[index + fft_index_offset[bank_num]],
 				bank_gain[index + bank_gain_index_offset[bank_num]]
 			);
-			energy[bank_num] += fr32_to_float(filtered_power);
+			energy_float += fr32_to_float(filtered_power);
 		}
 
-		energy[bank_num] = log10f(energy[bank_num] * scale);
+		energy[bank_num] = log10f(energy_float * scale);
 	}
 }
 
