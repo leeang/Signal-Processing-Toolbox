@@ -41,5 +41,5 @@ grid on;
 title('pre-emphasis filter amplitude response', 'interpreter', 'latex');
 xlabel('frequency (Hz)', 'interpreter', 'latex');
 ylabel('magnitude (dB)', 'interpreter', 'latex');
-legend('shelving', 'high pass', 'location', 'southeast');
+legend('shelving', 'high-pass FIR', 'location', 'southeast');
 print('pre_emphasis_filter', '-dpdf');
