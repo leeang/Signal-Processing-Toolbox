@@ -26,10 +26,12 @@
 #define MOD(CURRENT)		( ((CURRENT) + LMS_LENGTH) & LMS_LENGTH_MASK )
 // for the case LMS_LENGTH = 128, MOD(-1) = 127, MOD(0) = 0, MOD(1) = 1
 
-#define ENERGY_THRSH		0.04
+#define ENERGY_THRESHOLD	0.04
+#define ENERGY_RIGHT_SHIFT	9
+// ENERGY_RIGHT_SHIFT = log2(WINDOW_LENGTH)
 
 /* zero crossing count */
-#define IS_ZC(X, Y)		( (X) > 0 && (Y) < 0 || (X) < 0 && (Y) > 0 )
+#define IS_ZC(X, Y)			( (X) > 0 && (Y) < 0 || (X) < 0 && (Y) > 0 )
 
 /* FFT */
 #define TWIDDLE_STRIDE		1
@@ -58,6 +60,7 @@ struct IIR_Coef {
 /* Global Coefficients */
 struct IIR_Coef shelving_coef;
 fract32 hamming_coef[WINDOW_LENGTH] = {0};
+fract32 energy_threshold = 0;
 /* /Global Coefficients */
 
 /* FFT */

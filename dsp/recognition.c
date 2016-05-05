@@ -16,6 +16,7 @@ int main() {
 	calc_bank_gain();
 	twidfftrad2_fr32(twiddle_table, WINDOW_LENGTH);
 	calc_dct_coef();
+	energy_threshold = float_to_fr32(ENERGY_THRESHOLD / (float) WINDOW_LENGTH);
 	/* /Initialization */
 
 	int chunk_index = 0;
@@ -55,7 +56,7 @@ int main() {
 
 		float energy = calc_energy(frame_data, WINDOW_LENGTH);
 
-		if (energy > ENERGY_THRSH) {
+		if (energy > energy_threshold) {
 			float mfcc[FEAT_NUM] = {0.0};
 			calc_mfcc(frame_data, mfcc_matrix[obs_length]);
 			obs_length++;
