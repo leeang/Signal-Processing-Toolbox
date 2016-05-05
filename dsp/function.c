@@ -162,8 +162,7 @@ void mel_filter(fract32 power[], float energy[], int block_exponent)
 			energy[bank_num] += fr32_to_float(filtered_power);
 		}
 
-		energy[bank_num] = energy[bank_num] * scale;
-		energy[bank_num] = log10f(energy[bank_num]);
+		energy[bank_num] = log10f(energy[bank_num] * scale);
 	}
 }
 
