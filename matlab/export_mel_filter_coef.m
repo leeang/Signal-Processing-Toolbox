@@ -8,6 +8,7 @@ clear;
 WINDOW_LENGTH = 512;
 BANK_NUM = 20;
 
+plot_bool = false;
 export_bool = false;
 
 border = get_bank_border();
@@ -60,7 +61,9 @@ for bank_index = 1:BANK_NUM
 		title('filtered power spectrum', 'interpreter', 'latex');
 		xlabel('frequency (Hz)', 'interpreter', 'latex');
 		legend('bank gain', 'filtered power spectrum');
-		print('mel_bank_9', '-dpdf');
+		if plot_bool
+			print('mel_bank_9', '-dpdf');
+		end
 	end
 end
 
@@ -79,7 +82,9 @@ ylabel('Bank index', 'interpreter', 'latex');
 ax = gca;
 ax.XTick = linspace(0, 256, 9);
 grid on;
-print('mel_filter_sparse_matrix', '-dpdf');
+if plot_bool
+	print('mel_filter_sparse_matrix', '-dpdf');
+end
 
 if export_bool
 	print_array(bank_gain, 'bank_gain', '%e');
