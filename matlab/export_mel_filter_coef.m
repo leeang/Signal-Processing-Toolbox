@@ -81,7 +81,7 @@ imagesc(bank_gain_matrix_sparse);
 vector = transpose(linspace(1, 0, 10));
 colormap([vector vector vector]);
 colorbar;
-title('Mel-filter gain', 'interpreter', 'latex');
+title('Mel filter gain', 'interpreter', 'latex');
 xlabel('Data point index', 'interpreter', 'latex');
 ylabel('Bank index', 'interpreter', 'latex');
 ax = gca;
