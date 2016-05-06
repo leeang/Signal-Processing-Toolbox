@@ -26,20 +26,32 @@ load('../data');
 
 x = transpose(x);
 N = length(x);
+frequency_vector = (0:N/2-1) / N * 16E3;
+
 X = fft(x);
+X = X(1:N/2);
 X = abs(X);
 
-X = X(1:N/2);
-frequency_vector = (0:N/2-1) / N * 16E3;
+x_emphasized = filter(b_shelf, a_shelf, x);
+X_emphasized = fft(x_emphasized);
+X_emphasized = X_emphasized(1:N/2);
+X_emphasized = abs(X_emphasized);
 
 fig = figure;
 fig.Units = 'inches';
 pos = fig.Position;
 fig.PaperSize = [pos(3) pos(4)];
 fig.PaperPositionMode = 'Auto';
+subplot(2, 1, 1);
 stem(frequency_vector, X, 'marker', 'none');
 grid on;
 title('word \textit{zero} frequency spectrum', 'interpreter', 'latex');
+xlabel('frequency (Hz)', 'interpreter', 'latex');
+ylabel('magnitude (linear scale)', 'interpreter', 'latex');
+subplot(2, 1, 2);
+stem(frequency_vector, X_emphasized, 'marker', 'none');
+grid on;
+title('after pre-emphasis', 'interpreter', 'latex');
 xlabel('frequency (Hz)', 'interpreter', 'latex');
 ylabel('magnitude (linear scale)', 'interpreter', 'latex');
 print('zero_fft', '-dpng', '-r300');
