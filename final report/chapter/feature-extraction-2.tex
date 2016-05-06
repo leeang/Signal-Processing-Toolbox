@@ -68,6 +68,68 @@ Fig. \ref{zero_fft} shows the spectra of word `zero' before and after pre-emphas
 
 \subsection{Framing \& Windowing}
 
+Speech is time-varying signals. Due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period (approximately 30 ms) \cite{brandstein1995practical}. The time period of 30 ms indicates 30 ms $\times$ 16000 Hz = 480. We take $N = 512$ samples per frame to achieve a power 2 for efficient Fast Fourier Transform.\\
+
+The framing operation can be finished by multiplying the signal by a moving window. For the $j$-th frame and frame length $N$, mathematical equation is given in (\ref{windowing-eq}).
+
+\begin{equation}
+\label{windowing-eq}
+s_j[n] =
+\begin{cases}
+w[n] s[n+jN] & N = 1, 2, \dots, N\\
+0, & \text{otherwise}
+\end{cases}
+\end{equation}
+
+The simplest and easiest-to-implement one is a rectangular window represented by (\ref{rectagular-window-eq}).
+\begin{equation}
+\label{rectagular-window-eq}
+w[n] =
+\begin{cases}
+1, & N = 1, 2, \dots, N\\
+0, & \text{otherwise}
+\end{cases}
+\end{equation}
+
+However, the selection of a proper window always involves a trade-off between high \textbf{frequency resolution} and low \textbf{spectral leakage}. On the one hand, convolution with mainlobe smooths the estimate over nearby frequencies and the frequency resolution is determined by the width of the mainlobe. On the other hand, the sidelobes cause sidelobe energy to appear in the spectrum, i.e. spectral leakage. (from ELEN90058 \textit{Signal Processing} lecture slides by Erik \textsc{Weyer})
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/windows_time}
+\caption{Windows in Time Domain}
+\label{windows_time}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/windows_frequency}
+\caption{Windows in Frequency Domain}
+\label{windows_frequency}
+\end{minipage}
+\end{figure}
+
+\begin{table}[H]
+\begin{tabu} to \textwidth {XXXXX}
+\toprule
+Windows &Rectangular &Hanning &Hamming &Blackman\\
+\hline
+Mainlobe width &$0.125 \pi$ &$0.2353 \pi$ &$0.2985 \pi$ &$0.4 \pi$\\
+\hline
+Peak sidelobe &-13.2 dB &-31.5 dB &-39.8 dB &-58.6 dB\\
+\bottomrule
+\end{tabu}
+\caption{Windows Properties for $N = 16$}
+\label{windows_table}
+\end{table}
+
+In terms of the windows involved in Fig. \ref{windows_time}, Fig. \ref{windows_frequency} and Table \ref{windows_table}, \textit{rectangular} window has the best frequency resolution (narrowest mainlobe) at the expense of highest spectral leakage (biggest sidelode peak) while \textit{Blackman} window has the lowest spectral leakage (smallest sidelode peak) accompanied by worst frequency resolution (widest mainlobe). Eventually, we choose an intermediate \textit{Hamming} window given in (\ref{hamming-eq}).
+
+\begin{equation}
+\label{hamming-eq}
+w[n] = \alpha - \beta \cos \bigg( \frac{2 \pi n}{N-1} \bigg) \quad n = 1, 2, \dots, N
+\end{equation}
+where $\alpha = 25/46 \approx 0.54$ and $\beta = 1 - \alpha \approx 0.46$.
+
 %--------------------------------------------
 %--------------------------------------------
 
