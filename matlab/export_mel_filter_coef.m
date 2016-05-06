@@ -73,7 +73,7 @@ save('mel_filter_coef', 'bank_gain', 'fft_index_offset', 'fft_index_length', 'ba
 
 fig = figure;
 fig.Units = 'inches';
-fig.Position(3) = fig.Position(3) * 1.5;
+fig.Position(3) = fig.Position(3) * 4 / 3;
 pos = fig.Position;
 fig.PaperSize = [pos(3) pos(4)];
 fig.PaperPositionMode = 'Auto';
