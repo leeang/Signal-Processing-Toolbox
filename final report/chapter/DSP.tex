@@ -31,9 +31,138 @@ Fig. \ref{audio-connectors} illustrates that the top location of \texttt{J8} is 
 
 \subsection{Performance Tuning Guidelines}
 
+\subsubsection{Data Types}
+
+The compiler directly supports ten scalar data types as shown in Table \ref{fixed-point-data-types} and Table \ref{floating-point-data-types}. Note that \texttt{long} is equivalent to \texttt{int} and \texttt{double} is equivalent to \texttt{float}.
+
+\begin{table}[H]
+\centering
+\begin{tabu} to \textwidth {XXXX}
+\toprule
+Type &Size &Min &Max\\
+\hline
+\texttt{char} &8-bit &-128 &127\\
+\hline
+\texttt{unsigned char} &8-bit &0 &255\\
+\hline
+\texttt{short} &16-bit &-32,768 &32,767\\
+\hline
+\texttt{unsigned short} &16-bit &0 &65,535\\
+\hline
+\texttt{int} &32-bit &-2,147,483,648 &2,147,483,647\\
+\hline
+\texttt{unsigned int} &32-bit &0 &4,294,967,295\\
+\hline
+\texttt{long} &32-bit &-2,147,483,648 &2,147,483,647\\
+\hline
+\texttt{unsigned long} &32-bit &0 &4,294,967,295\\
+\bottomrule
+\end{tabu}
+\caption{Fixed-Point Data Types}
+\label{fixed-point-data-types}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabu} to \textwidth {XXX}
+\toprule
+Type &Size &Range\\
+\hline
+\texttt{float} &32-bit &$\pm 1.18 \times 10^{-38}$ to $\pm 3.4 \times 10^{38}$\\
+\hline
+\texttt{double} &32-bit &$\pm 1.18 \times 10^{-38}$ to $\pm 3.4 \times 10^{38}$\\
+\bottomrule
+\end{tabu}
+\caption{Floating-Point Data Types}
+\label{floating-point-data-types}
+\end{table}
+
+Fig. \ref{ang/smallest-denormalized-number}, Fig. \ref{ang/largest-denormalized-number}, Fig. \ref{ang/smallest-normalized-number} and Fig. \ref{ang/largest-normalized-number} demonstrate the internal representation of a single precision floating-point number. The floating-point number is interpreted as denormalized value when exponent part is equal to $(00000000)_2$. Hence, the total length of mantissa is $23 + 1$ bits, in other words, the precision is $\log_{10}(2^{24}) \approx 7.225$ decimal digits. The value range is summarized in Table \ref{floating-point-range}.
+
+\begin{equation}
+value =
+\begin{cases}
+(-1)^{b_{31}} \times (0.b_{22}b_{21} \dots b_{0})_2 \times 2^{- 126} &\text{denormalized}\\
+(-1)^{b_{31}} \times (1.b_{22}b_{21} \dots b_{0})_2 \times 2^{(b_{30}b_{29} \dots b_{23})_2 - 127} &\text{normalized}
+\end{cases}
+\end{equation}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/smallest-denormalized-number}
+\caption{Smallest Denormalized Number}
+\label{ang/smallest-denormalized-number}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/largest-denormalized-number}
+\caption{Largest Denormalized Number}
+\label{ang/largest-denormalized-number}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/smallest-normalized-number}
+\caption{Smallest Normalized Number}
+\label{ang/smallest-normalized-number}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/largest-normalized-number}
+\caption{Largest Normalized Number}
+\label{ang/largest-normalized-number}
+\end{minipage}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabu} to \textwidth {XX}
+\toprule
+Number &Value\\
+\hline
+smallest denormalized number &$\pm 2^{-23} \times 2^{-126} \approx \pm 1.4 \times 10^{-45}$\\
+\hline
+largest denormalized number &$\pm (1-2^{-23}) \times 2^{-126} \approx \pm 1.18 \times 10^{-38}$\\
+\hline
+smallest normalized number &$\pm 1 \times 2^{-126} \approx \pm 1.18 \times 10^{-38}$\\
+\hline
+largest normalized number &$\pm (2-2^{-23}) \times 2^{127} \approx \pm 3.4 \times 10^{38}$\\
+\bottomrule
+\end{tabu}
+\caption{Floating-Point Range}
+\label{floating-point-range}
+\end{table}
+
+Fractional data types \texttt{fract16} and \texttt{fract32} can be represented as \texttt{short} and \texttt{int} respectively. Fig. \ref{bf_fract_represent} shows the internal representation of \texttt{fract16} and \texttt{fract32} (from National Instruaments). The properties of fractional data types are listed in Table \ref{fractional-data-types}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in]{ang/bf_fract_represent}
+\caption{Internal Representation of Fractional Data Types}
+\label{bf_fract_represent}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabu} to \textwidth {XXXX}
+\toprule
+Type &Size &Range &Resolution\\
+\hline
+\texttt{fract16} &16-bit &$-1$ to $1 - 2^{-15}$ &$2^{-15}$\\
+\hline
+\texttt{fract32} &32-bit &$-1$ to $1 - 2^{-31}$ &$2^{-31}$\\
+\bottomrule
+\end{tabu}
+\caption{Fractional Data Types}
+\label{fractional-data-types}
+\end{table}
+
 %--------------------------------------------
 
-\subsubsection{Memory Hierarchy}
+\subsection{Memory Hierarchy}
 The ADSP-BF548 processor supports a hierarchy of three synchronous memories.\\
 
 Internal L1 memory consists of two 32 KB data SRAM banks \cite{bf54x-hardware}. L1 memory is the highest-performing memory available to the Blackfin core and can be accessed at core clock speeds \cite{start-with-bf548}.\\
