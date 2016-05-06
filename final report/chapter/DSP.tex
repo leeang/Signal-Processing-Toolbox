@@ -29,6 +29,10 @@ Fig. \ref{audio-connectors} illustrates that the top location of \texttt{J8} is 
 
 %--------------------------------------------
 
+\subsection{Performance Tuning Guidelines}
+
+%--------------------------------------------
+
 \subsubsection{Memory Hierarchy}
 The ADSP-BF548 processor supports a hierarchy of three synchronous memories.\\
 
@@ -36,9 +40,7 @@ Internal L1 memory consists of two 32 KB data SRAM banks \cite{bf54x-hardware}. 
 
 Internal L2 memory consists of a single 128 KB area of SRAM. L2 is slightly lower-performing than L1, requiring two core clock cycles for access. L2 provides more capacity accompanied by higher latency. \cite{start-with-bf548}\\
 
-External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. External memory operates synchronously with the system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory \cite{start-with-bf548}.
-
-\subsection{Performance Tuning Guidelines}
+External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. External memory operates synchronously with the system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory \cite{start-with-bf548}. 64 MB (67108864 bytes) is enormous given that each \texttt{float} / \texttt{fract32} variable occupies 4 bytes. Hence, we will pre-compute reusable coefficients as long as fetching them from external memory is faster than computing them. In fact, L1 \& L2 are big enough to store these coefficients, decisions will be elaborated in detail in the following \textit{C Program} section.
 
 %--------------------------------------------
 %--------------------------------------------
@@ -82,3 +84,10 @@ b_2 = \frac{1.366544}{4} = 0.341636
 \end{align*}
 
 Filter coefficients are converted into \texttt{fract32} once by \texttt{calc\_shelving\_coef()} function when initializing the system. Finally, all computations in \texttt{pre\_emphasis()} function are fixed-point arithmetic.
+
+%--------------------------------------------
+%--------------------------------------------
+
+\subsection{Hamming Window}
+
+
