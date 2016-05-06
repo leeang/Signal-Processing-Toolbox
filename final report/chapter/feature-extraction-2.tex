@@ -35,7 +35,7 @@ A 1st-order FIR filter represented by (\ref{high-pass-filter}) is widely impleme
 
 \begin{equation}
 \label{shelving-filter}
-y[n] = \frac{1}{a_0} \big( b_0 x[n] + b_1 x[n-1] + b_2 x[n-3] - a_1 y[n-1] - a_2 y[n-2] \big)
+y[n] = \frac{1}{a_0} \Big( b_0 x[n] + b_1 x[n-1] + b_2 x[n-3] - a_1 y[n-1] - a_2 y[n-2] \Big)
 \end{equation}
 
 Suggested by Professor Erik \textsc{Weyer}, we try to devise a shelving filter represented by (\ref{shelving-filter}) to pre-emphasize the speech signal. By trial and error, we eventually manage to obtain a appropriate filter that amplifies high frequency without attenuating low frequencies (shown in Fig. \ref{pre_emphasis_filter} by blue solid line), where
