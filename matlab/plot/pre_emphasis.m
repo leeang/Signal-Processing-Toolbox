@@ -22,8 +22,8 @@ xlabel('frequency (Hz)', 'interpreter', 'latex');
 ylabel('magnitude (linear scale)', 'interpreter', 'latex');
 print('zero_fft', '-dpng', '-r300');
 
-a_shelf = [0.250000000000000 -0.380949232917015 0.162336478416747];
-b_shelf = [0.465464090346913 -0.775712919663902 0.341636074816722];
+a_shelf = [1 -1.52379693166806 0.649345913666990];
+b_shelf = [1.86185636138765 -3.10285167865561 1.36654429926689];
 [h_shelf, w_shelf] = freqz(b_shelf, a_shelf);
 
 b_high_pass = [1 -0.95];
