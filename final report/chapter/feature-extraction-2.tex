@@ -35,23 +35,26 @@ A 1st-order FIR filter represented by (\ref{high-pass-filter}) is widely impleme
 
 \begin{equation}
 \label{shelving-filter}
-y[n] = \frac{1}{a_0} \big( b_0 x[n] + b_1 x[n-1] + b_2 x[n-3] \big) - (a_1 y[n-1] + a_2 y[n-2])
+y[n] = \frac{1}{a_0} \big( b_0 x[n] + b_1 x[n-1] + b_2 x[n-3] - a_1 y[n-1] - a_2 y[n-2] \big)
 \end{equation}
 
 Suggested by Professor Erik \textsc{Weyer}, we try to devise a shelving filter represented by (\ref{shelving-filter}) to pre-emphasize the speech signal. By trial and error, we eventually manage to obtain a appropriate filter that amplifies high frequency without attenuating low frequencies (shown in Fig. \ref{pre_emphasis_filter} by blue solid line), where
 
-\begin{align*}
+\begin{align}
+\label{shleving-coef}
 &\begin{cases}
-a_0 = 0.25\\
-a_1 = -0.380949\\
-a_2 = 0.162336
+a_0 = 1\\
+a_1 = -1.523796\\
+a_2 = 0.649345
 \end{cases}
 &\begin{cases}
-b_0 = 0.465464\\
-b_1 = -0.775712\\
-b_2 = 0.341636
+b_0 = 1.861856\\
+b_1 = -3.102851\\
+b_2 = 1.366544
 \end{cases}
-\end{align*}
+\end{align}
+
+Fig. \ref{zero_fft} shows the spectra of word `zero' before and after pre-emphasis filter.
 
 \begin{figure}[H]
 \centering
