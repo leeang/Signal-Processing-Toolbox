@@ -23,9 +23,9 @@ ylabel('magnitude (dB)', 'interpreter', 'latex');
 legend('shelving', 'high-pass FIR', 'location', 'southeast');
 print('pre_emphasis_filter', '-dpdf');
 
-load('../data');
+load('../data/21');
 
-x = transpose(x);
+x = transpose(data);
 N = length(x);
 frequency_vector = (0:N/2-1) / N * 16E3;
 
