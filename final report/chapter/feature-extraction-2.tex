@@ -20,18 +20,10 @@ $T_s$ should be carefully chosen in order to avoid distortion caused by aliasing
 The speech production system inherently attenuates speech signal by a negative spectral slope per decade. In addition, human hearing is more sensitive to frequency band above 1 kHz \cite{picone1993signal}. However, as is depicted in Fig. \ref{zero_fft}, frequency components below 1 kHz predominantly comprise the spectrum. Hence, it is advantageous to employ a high-pass filter to amplify the high frequency range.
 
 \begin{figure}[H]
-\begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/zero_fft}
-\caption{Word `zero' Spectral Analysis}
-\label{zero_fft}
-\end{minipage}
-\begin{minipage}[t]{0.5\linewidth}
-\centering
-\includegraphics[width=\textwidth]{ang/pre_emphasis_filter}
+\includegraphics[width=6in]{ang/pre_emphasis_filter}
 \caption{Pre-emphasis Filters Comparison}
 \label{pre_emphasis_filter}
-\end{minipage}
 \end{figure}
 
 \begin{equation}
@@ -60,6 +52,13 @@ b_1 = -0.775712\\
 b_2 = 0.341636
 \end{cases}
 \end{align*}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ang/zero_fft}
+\caption{Word `zero' Spectral Analysis}
+\label{zero_fft}
+\end{figure}
 
 %--------------------------------------------
 %--------------------------------------------
