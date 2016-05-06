@@ -1,5 +1,7 @@
 clear;
 
+word_input = 1;
+
 ABSPATH = pwd;
 % identify current folder (absolute path)
 addpath([ABSPATH '/function']);
@@ -46,9 +48,9 @@ global shelf_a;
 shelf_b = shelf_b/4;
 shelf_a = shelf_a/4;
 
-load('data');
+load(['data/' num2str(word_input) '.mat']);
 
-mfcc_matrix = calc_mfcc_matrix(x);
+mfcc_matrix = calc_mfcc_matrix(data);
 
 probability = zeros(1, WORD_NUM);
 for word_index = 1:WORD_NUM
