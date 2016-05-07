@@ -249,7 +249,7 @@ Filter coefficients are converted into \texttt{fract32} once by \texttt{calc\_sh
 
 \subsection{Hamming Window}
 
-For the window length $N = 512$, Hamming window weight $w[n]$ has 512 elements. Table \ref{clocks-hamming} summarizes the efficiency of different methods to obtain $w[n]$. $512/2 = 256$ (due to symmetry) \texttt{fract32} data points occupy 1 kB. There is no reason to recompute them every time. Considering they are most frequently used (180 times per 3-second recording), we store them in the fastest L1 memory. During the initialization session, \texttt{calc\_hamming\_coef} function pre-computes them and converts them into \texttt{frac32}. All computations in \texttt{hamming()} function are fixed-point arithmetic.
+For the window length $N = 512$, Hamming window weight $w[n]$ has 512 elements. Table \ref{clocks-hamming} summarizes the efficiency of different methods to obtain $w[n]$. $512/2 = 256$ (due to symmetry) \texttt{fract32} data points occupy 1 KB. There is no reason to recompute them every time. Considering they are most frequently used (180 times per 3-second recording), we store them in the fastest L1 memory. During the initialization session, \texttt{calc\_hamming\_coef} function pre-computes them and converts them into \texttt{frac32}. All computations in \texttt{hamming()} function are fixed-point arithmetic.
 
 \begin{table}[H]
 \centering
