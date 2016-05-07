@@ -145,9 +145,9 @@ where $\alpha = 25/46 \approx 0.54$ and $\beta = 1 - \alpha \approx 0.46$.
 \end{minipage}
 \end{figure}
 
-Fig. \ref{hamming_bell_shape} shows the effect of the framing operation instructed by (\ref{eq:rectagular-window}) and (\ref{eq:hamming}) for $N = 512$. The red dash-dot ellipse in subplot 2 demonstrates the loss of information (data points near two borders are severely attenuated) due to the bell shape of the Hamming window shown in Fig. \ref{hamming_overlap} subplot 1.\\
+Fig. \ref{hamming_bell_shape} shows the effect of the framing operation instructed by (\ref{eq:rectagular-window}) and (\ref{eq:hamming}) for $N = 512$. The \textcolor{red}{red} dash-dot ellipse in subplot 2 demonstrates the loss of information (data points near two borders are severely attenuated) due to the bell shape of the Hamming window shown in Fig. \ref{hamming_overlap} subplot 1.\\
 
-In order to avoid information loss, we overlap each frame by half of the frame size. We choose to overlap a half primarily because the data points most attenuated in current frame will have largest gain in the next frame (shown by the green dash-dot rectangle in Fig. \ref{hamming_overlap}). Thus, information is effectively preserved.
+In order to avoid information loss, we overlap each frame by half of the frame size. We choose to overlap a half primarily because the data points most attenuated in current frame will have largest gain in the next frame (shown by the \textcolor{green}{green} dash-dot rectangle in Fig. \ref{hamming_overlap}). Thus, information is effectively preserved.
 
 %--------------------------------------------
 %--------------------------------------------
@@ -207,7 +207,7 @@ We manually identify the unvoiced region and voiced region (the remains are sile
 \end{minipage}
 \end{figure}
 
-In the case of word \textit{zero}, Fig. \ref{threshold_example1} shows the waveform and corresponding frame energy as well as the zero-crossing count of each frame. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}. We can clearly see that unvoiced frames have low energy but high zero-crossing count, voiced frames have high energy but low zero-crossing count while silent frames have not only low energy but also low zero-crossing count. The relationships are summarized in Table \ref{table:thresholds}.
+In the case of word \textit{zero}, Fig. \ref{threshold_example1} shows the waveform and corresponding frame energy as well as the zero-crossing count of each frame. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}. The \textcolor{green}{green} dash-dot rectangle stands for the unvoiced region while the \textcolor{red}{red} dashed rectangle indicates voiced region. We can clearly see that unvoiced frames have low energy but high zero-crossing count, voiced frames have high energy but low zero-crossing count while silent frames have not only low energy but also low zero-crossing count. The relationships are summarized in Table \ref{table:thresholds}.
 
 \begin{table}[H]
 \centering
