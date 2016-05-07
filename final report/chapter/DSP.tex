@@ -8,9 +8,14 @@
 
 This section primarily summarizes the hardware-related information that helps developers write more robust and efficient C code.
 
+%--------------------------------------------
+%--------------------------------------------
+
 \subsection{Hardware Architecture}
 
 \textbf{Audio Codec} in charge of sampling speech and \textbf{Memory Hierarchy} that restricts the storage of variables are highly significant to the implementation on the DSP board.
+
+%--------------------------------------------
 
 \subsubsection{Audio Codec}
 An Analog Devices AD1980 audio codec is the audio interface of the EZ-KIT Lite. The codec connects to multiple audio connectors (3.5 mm) which allow us to get audio in and out. These connectors can be easily found at the bottom left corner of the board.
@@ -30,6 +35,8 @@ Fig. \ref{audio-connectors} illustrates that the top location of \texttt{J8} is 
 \caption{AD1980 Functional Block Diagram}
 \label{AD1980-schematic}
 \end{figure}
+
+%--------------------------------------------
 
 \subsubsection{Memory Hierarchy}
 The ADSP-BF548 processor supports a hierarchy of three synchronous memories.\\
@@ -161,6 +168,8 @@ The value range of \texttt{float} is summarized in Table \ref{floating-point-ran
 \log(xy) = \log(x) + \log(y)
 \end{equation}
 
+%--------------------------------------------
+
 \subsubsection{Fractional Data Types}
 
 Fractional data types \texttt{fract16} and \texttt{fract32} can be represented as \texttt{short} and \texttt{int} respectively. Fig. \ref{bf_fract_represent} shows the internal representation of \texttt{fract16} and \texttt{fract32} (from National Instruments). The properties of fractional data types are listed in Table \ref{fractional-data-types}.
@@ -260,3 +269,8 @@ fetch from external memory &30878 &0.051463 ms\\
 \caption{Action Efficiency for Hamming Weights}
 \label{clocks-hamming}
 \end{table}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\subsection{Frame Energy}
