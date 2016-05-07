@@ -27,11 +27,21 @@ Fig. \ref{audio-connectors} illustrates that the top location of \texttt{J8} is 
 \label{AD1980-schematic}
 \end{figure}
 
+\subsubsection{Memory Hierarchy}
+The ADSP-BF548 processor supports a hierarchy of three synchronous memories.\\
+
+Internal L1 memory consists of two 32 KB data SRAM banks \cite{bf54x-hardware}. L1 memory is the highest-performing memory available to the Blackfin core and can be accessed at core clock speeds \cite{start-with-bf548}.\\
+
+Internal L2 memory consists of a single 128 KB area of SRAM. L2 is slightly lower-performing than L1, requiring two core clock cycles for access. L2 provides more capacity accompanied by higher latency. \cite{start-with-bf548}\\
+
+External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. External memory operates synchronously with the system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory \cite{start-with-bf548}. 64 MB (67108864 bytes) is enormous given that each \texttt{float} / \texttt{fract32} variable occupies 4 bytes. Hence, we will pre-compute reusable coefficients as long as fetching them from external memory is faster than computing them. In fact, L1 \& L2 are big enough to store these coefficients, decisions will be elaborated in detail in the following \textit{C Program} section.
+
+%--------------------------------------------
 %--------------------------------------------
 
-\subsection{Performance Tuning Guidelines}
+\subsection{Data Types}
 
-\subsubsection{Data Types}
+\subsubsection{Directly Supported Data Types}
 
 The compiler directly supports ten scalar data types as shown in Table \ref{fixed-point-data-types} and Table \ref{floating-point-data-types}. Note that \texttt{long} is equivalent to \texttt{int} and \texttt{double} is equivalent to \texttt{float}.
 
@@ -149,7 +159,7 @@ The value range of \texttt{float} is summarized in Table \ref{floating-point-ran
 
 \subsubsection{Fractional Data Types}
 
-Fractional data types \texttt{fract16} and \texttt{fract32} can be represented as \texttt{short} and \texttt{int} respectively. Fig. \ref{bf_fract_represent} shows the internal representation of \texttt{fract16} and \texttt{fract32} (from National Instruaments). The properties of fractional data types are listed in Table \ref{fractional-data-types}.
+Fractional data types \texttt{fract16} and \texttt{fract32} can be represented as \texttt{short} and \texttt{int} respectively. Fig. \ref{bf_fract_represent} shows the internal representation of \texttt{fract16} and \texttt{fract32} (from National Instruments). The properties of fractional data types are listed in Table \ref{fractional-data-types}.
 
 \begin{figure}[H]
 \centering
@@ -174,15 +184,9 @@ Type &Size &Range &Resolution\\
 \end{table}
 
 %--------------------------------------------
+%--------------------------------------------
 
-\subsection{Memory Hierarchy}
-The ADSP-BF548 processor supports a hierarchy of three synchronous memories.\\
-
-Internal L1 memory consists of two 32 KB data SRAM banks \cite{bf54x-hardware}. L1 memory is the highest-performing memory available to the Blackfin core and can be accessed at core clock speeds \cite{start-with-bf548}.\\
-
-Internal L2 memory consists of a single 128 KB area of SRAM. L2 is slightly lower-performing than L1, requiring two core clock cycles for access. L2 provides more capacity accompanied by higher latency. \cite{start-with-bf548}\\
-
-External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. External memory operates synchronously with the system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory \cite{start-with-bf548}. 64 MB (67108864 bytes) is enormous given that each \texttt{float} / \texttt{fract32} variable occupies 4 bytes. Hence, we will pre-compute reusable coefficients as long as fetching them from external memory is faster than computing them. In fact, L1 \& L2 are big enough to store these coefficients, decisions will be elaborated in detail in the following \textit{C Program} section.
+\subsection{Performance Tuning Guidelines}
 
 %--------------------------------------------
 %--------------------------------------------
