@@ -31,7 +31,7 @@ The speech production system inherently attenuates speech signal by a negative s
 y[n] = x[n] - \alpha x[n-1]
 \end{equation}
 
-A 1st-order FIR filter represented by (\ref{high-pass-filter}) is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}. The merits of this FIR filter include simplicity and efficiency. However, Fig. \ref{pre_emphasis_filter} (red dash-dot line) shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified. Considering the potential interference caused by high-frequency noise, attenuating low frequencies too much will result in the decline of signal-to-noise ratio (SNR).
+A 1st-order FIR filter represented by (\ref{high-pass-filter}) is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}. The merits of this FIR filter include simplicity and efficiency. However, Fig. \ref{pre_emphasis_filter} (\textcolor{red}{red} dash-dot line) shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified. Considering the potential interference caused by high-frequency noise, attenuating low frequencies too much will result in the decline of signal-to-noise ratio (SNR).
 
 \begin{equation}
 \label{shelving-filter}
@@ -207,7 +207,7 @@ We manually identify the unvoiced region and voiced region (the remains are sile
 \end{minipage}
 \end{figure}
 
-In the case of word \textit{zero}, Fig. \ref{threshold_example1} shows the waveform and corresponding frame energy as well as the zero-crossing count of each frame. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}. The \textcolor{green}{green} dash-dot rectangle stands for the unvoiced region while the \textcolor{red}{red} dashed rectangle indicates voiced region. We can clearly see that unvoiced frames have low energy but high zero-crossing count, voiced frames have high energy but low zero-crossing count while silent frames have not only low energy but also low zero-crossing count. The relationships are summarized in Table \ref{table:thresholds}.
+In the case of word \textit{zero}, Fig. \ref{threshold_example1} shows the waveform and corresponding frame energy as well as the zero-crossing count of each frame. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}. The \textcolor{green_html}{green} dash-dot rectangle stands for the unvoiced region while the \textcolor{red}{red} dashed rectangle indicates voiced region. We can clearly see that unvoiced frames have low energy but high zero-crossing count, voiced frames have high energy but low zero-crossing count while silent frames have not only low energy but also low zero-crossing count. The relationships are summarized in Table \ref{table:thresholds}.
 
 \begin{table}[H]
 \centering

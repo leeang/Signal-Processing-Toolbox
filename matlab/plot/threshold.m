@@ -2,7 +2,7 @@ clear;
 
 WINDOW_LENGTH = 512;
 
-green_color = [0 128 0]/255;
+green_html = [0 128 0]/255;
 
 ABSPATH = pwd;
 addpath([ABSPATH '/../function']);
@@ -84,7 +84,7 @@ title('frame zero-crossing count (zoomed in)', 'interpreter', 'latex');
 xlabel('frame index', 'interpreter', 'latex');
 ylabel('zero-crossing count', 'interpreter', 'latex');
 
-annotation('rectangle', [0.19 0.125 0.06 0.79], 'LineStyle' ,'-.', 'color', green_color);
+annotation('rectangle', [0.19 0.125 0.06 0.79], 'LineStyle' ,'-.', 'color', green_html);
 annotation('rectangle', [0.252 0.125 0.3 0.79], 'LineStyle' ,'--', 'color', 'red');
 
 print('threshold_example2', '-dpng', '-r300');
