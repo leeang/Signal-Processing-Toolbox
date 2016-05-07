@@ -119,10 +119,10 @@ Peak sidelobe &-13.2 dB &-31.5 dB &-39.8 dB &-58.6 dB\\
 \bottomrule
 \end{tabu}
 \caption{Windows Properties for $N = 16$}
-\label{windows_table}
+\label{table:windows}
 \end{table}
 
-In terms of the windows involved in Fig. \ref{windows_time}, Fig. \ref{windows_frequency} and Table \ref{windows_table}, \textit{rectangular} window has the best frequency resolution (narrowest mainlobe) at the expense of highest spectral leakage (biggest sidelode peak) while \textit{Blackman} window has the lowest spectral leakage (smallest sidelode peak) accompanied by worst frequency resolution (widest mainlobe). Eventually, we choose an intermediate \textit{Hamming} window given in (\ref{eq:hamming}).
+In terms of the windows involved in Fig. \ref{windows_time}, Fig. \ref{windows_frequency} and Table \ref{table:windows}, \textit{rectangular} window has the best frequency resolution (narrowest mainlobe) at the expense of highest spectral leakage (biggest sidelode peak) while \textit{Blackman} window has the lowest spectral leakage (smallest sidelode peak) accompanied by worst frequency resolution (widest mainlobe). Eventually, we choose an intermediate \textit{Hamming} window given in (\ref{eq:hamming}).
 
 \begin{equation}
 \label{eq:hamming}
@@ -183,7 +183,6 @@ As is illustrated in Fig. \ref{zero_crossing_illustration}, a zero-crossing is a
 \begin{align}
 \label{eq:frame-zcc}
 zcc_s[j] &= \sum_{i=1}^{N-1} \Lambda ( s_j[i], s_j[i+1] )\\
-\label{eq:windowing}
 \Lambda ( a, b ) &=
 \begin{cases}
 1, &\text{if } ab < 0\\
@@ -191,7 +190,7 @@ zcc_s[j] &= \sum_{i=1}^{N-1} \Lambda ( s_j[i], s_j[i+1] )\\
 \end{cases}
 \end{align}
 
-Fig. \ref{threshold_example1} shows the waveform of word \textit{zero} and corresponding frame energy as well as frame zero-crossing count. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}.
+We manually identify the unvoiced region and voiced region (the remains are silent region) of several different words by hearing the sound and observing the waveform.
 
 \begin{figure}[H]
 \begin{minipage}[t]{0.5\linewidth}
@@ -208,7 +207,38 @@ Fig. \ref{threshold_example1} shows the waveform of word \textit{zero} and corre
 \end{minipage}
 \end{figure}
 
-We manually identify the unvoiced and voiced region of the 3-second recording by hearing the sound and observing the waveform. The green dash-dot rectangle indicates the unvoiced region while the red dash rectangle shows the voiced region.
+In the case of word \textit{zero}, Fig. \ref{threshold_example1} shows the waveform and corresponding frame energy as well as the zero-crossing count of each frame. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}. We can clearly see that unvoiced frames have low energy but high zero-crossing count, voiced frames have high energy but low zero-crossing count while silent frames have not only low energy but also low zero-crossing count. The relationships are summarized in Table \ref{table:thresholds}.
+
+\begin{table}[H]
+\centering
+\begin{tabu} to 0.8\textwidth {XXX}
+\toprule
+Type &Energy &Zero-crossing count\\
+\hline
+Voiced &high &low\\
+\hline
+Unvoiced &low &high\\
+\hline
+Silent &low &low\\
+\bottomrule
+\end{tabu}
+\caption{Properties of Different Frame Types}
+\label{table:thresholds}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5in]{ang/threshold1}
+\caption{Methodology to Find Thresholds}
+\label{threshold1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5in]{ang/threshold2}
+\caption{Decision-making Strategy}
+\label{threshold2}
+\end{figure}
 
 %--------------------------------------------
 %--------------------------------------------
