@@ -152,9 +152,63 @@ In order to avoid information loss, we overlap each frame by half of the frame s
 %--------------------------------------------
 %--------------------------------------------
 
-\subsection{Threshold}
+\subsection{Thresholds}
 
-\subsubsection{Frame Energy}
+An important task involved in speech recognition is to distinguish the informative speech (voiced \& unvoiced) frames for further processing (MFCC) from the useless silent frames that will be discarded. The basic decision rule is based on the three types of speech signals (voiced, unvoiced \& silent) explained in previous section. \textbf{Energy} and \textbf{zero-crossing count} are two major metrics to determine whether a frame is voiced, unvoiced or silent.
+
+%--------------------------------------------
+
+\subsubsection{Energy}
+
+The energy of a finite-length discrete signal $s_j[n]$ ($N = 1, 2, \dots, N$) is the sum of the square of the amplitudes. We define the energy of the $j$-th frame
+
+\begin{equation}
+\label{eq:frame-energy}
+E_s[j] = \sum_{i=1}^{N} |s_j[i]|^2 = \sum_{i=1}^{N} (s_j[i])^2
+\end{equation}
+
+%--------------------------------------------
+
+\subsubsection{Zero-crossing count}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in]{ang/zero_crossing_illustration}
+\caption{Zero Crossing Illustration (from Wikipedia)}
+\label{zero_crossing_illustration}
+\end{figure}
+
+As is illustrated in Fig. \ref{zero_crossing_illustration}, a zero-crossing is a point where the \textbf{sign} of a signal changes, represented by a crossing of the time axis where amplitude is zero in the graph. Zero-crossing count is the times of zero-crossing occurrence in a stipulated period. Zero-crossing count of the $j$-th frame can be mathematically represented in (\ref{eq:frame-zcc}).
+
+\begin{align}
+\label{eq:frame-zcc}
+zcc_s[j] &= \sum_{i=1}^{N-1} \Lambda ( s_j[i], s_j[i+1] )\\
+\label{eq:windowing}
+\Lambda ( a, b ) &=
+\begin{cases}
+1, &\text{if } ab < 0\\
+0, &\text{otherwise}
+\end{cases}
+\end{align}
+
+Fig. \ref{threshold_example1} shows the waveform of word \textit{zero} and corresponding frame energy as well as frame zero-crossing count. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}.
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/threshold_example1}
+\caption{Waveform, enery \& zcc}
+\label{threshold_example1}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/threshold_example2}
+\caption{Zoomed-in Version}
+\label{threshold_example2}
+\end{minipage}
+\end{figure}
+
+We manually identify the unvoiced and voiced region of the 3-second recording by hearing the sound and observing the waveform. The green dash-dot rectangle indicates the unvoiced region while the red dash rectangle shows the voiced region.
 
 %--------------------------------------------
 %--------------------------------------------
