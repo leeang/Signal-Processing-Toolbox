@@ -1,6 +1,8 @@
 clear;
 load('../data/21');
 
+green_color = [0 128 0]/255;
+
 x = data((1:1024)+19000);
 
 y(1:512) = x(1:512) .* hamming(512);
@@ -15,7 +17,7 @@ fig.PaperPositionMode = 'Auto';
 subplot(2, 1, 1);
 plot(1:512, hamming(512));
 hold on;
-plot(513:1024, hamming(512));
+plot(513:1024, hamming(512), '-.');
 grid on;
 xlim([0 1024]);
 ax = gca;
@@ -28,8 +30,8 @@ legend('window 1', 'window 2');
 subplot(2, 1, 2);
 plot(1:512, hamming(512));
 hold on;
-plot((1:512)+256, hamming(512));
-plot((1:512)+512, hamming(512));
+plot((1:512)+256, hamming(512), '-.');
+plot((1:512)+512, hamming(512), '--');
 grid on;
 xlim([0 1024]);
 ax = gca;
@@ -39,7 +41,7 @@ xlabel('data point index', 'interpreter', 'latex');
 ylabel('gain', 'interpreter', 'latex');
 legend('window 1', 'window 2', 'window 3');
 
-annotation('rectangle', [0.46 0.12 0.12 0.33], 'LineStyle' ,'-.', 'color', 'cyan');
+annotation('rectangle', [0.46 0.12 0.12 0.33], 'LineStyle' ,'-.', 'color', green_color);
 
 print('hamming_overlap', '-dpdf');
 

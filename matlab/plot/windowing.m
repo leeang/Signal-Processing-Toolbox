@@ -38,7 +38,7 @@ plot(0:N-1, b_rect);
 hold on;
 plot(0:N-1, b_hanning, '--');
 plot(0:N-1, b_hamming, '-.');
-plot(0:N-1, b_blackman, ':', 'LineWidth', 1.5);
+plot(0:N-1, b_blackman, ':', 'LineWidth', 2);
 grid on;
 legend('rectangular', 'hannning', 'hamming', 'blackman')
 title('windows in time domain ($N = 16$)', 'interpreter', 'latex');
