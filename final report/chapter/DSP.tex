@@ -143,6 +143,10 @@ largest normalized number &$\pm (2-2^{-23}) \times 2^{127} \approx \pm 3.4 \time
 
 The value range of \texttt{float} is summarized in Table \ref{floating-point-range}. The smallest denormalized number has a marked impact on calculating emission probabilities which can easily reach $e^{-200} = 1.3839 \times 10^{-87}$. Fortunately, all computation involved between probabilities are multiplications, hence we take common logarithm before conducting multiplications and convert all multiplications into additions.
 
+\begin{equation}
+\log(xy) = \log(x) + \log(y)
+\end{equation}
+
 \subsubsection{Fractional Data Types}
 
 Fractional data types \texttt{fract16} and \texttt{fract32} can be represented as \texttt{short} and \texttt{int} respectively. Fig. \ref{bf_fract_represent} shows the internal representation of \texttt{fract16} and \texttt{fract32} (from National Instruaments). The properties of fractional data types are listed in Table \ref{fractional-data-types}.
