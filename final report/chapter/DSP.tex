@@ -77,15 +77,20 @@ Type &Size &Range\\
 \label{floating-point-data-types}
 \end{table}
 
-Fig. \ref{ang/smallest-denormalized-number}, Fig. \ref{ang/largest-denormalized-number}, Fig. \ref{ang/smallest-normalized-number} and Fig. \ref{ang/largest-normalized-number} demonstrate the internal representation of a single precision floating-point number. The floating-point number is interpreted as denormalized value when exponent part is equal to $(00000000)_2$. Hence, the total length of mantissa is $23 + 1$ bits, in other words, the precision is $\log_{10}(2^{24}) \approx 7.225$ decimal digits. The value range is summarized in Table \ref{floating-point-range}.
+Fig. \ref{ang/smallest-denormalized-number} to Fig. \ref{ang/largest-normalized-number} demonstrate the internal representation of a single precision floating-point number. The actual mantissa (fraction part) includes 23 fraction bits to the right of the binary point and an \textit{implicit leading bit} to the left of the binary point. When the exponent part is equal to $(00000000)_2$, the implicit leading bit is with value 0 (denormalized); otherwise, the implicit leading bit takes 1 (normalized). Hence, the total length of mantissa is $(23 + 1)$ bits; in other words, \texttt{float} has a precision of $\log_{10}(2^{24}) \approx 7.225$ decimal digits. This deduction is significant to exporting model and coefficients from MATLAB.
 
-\begin{equation}
-value =
+\begin{align}
+value &=
 \begin{cases}
 (-1)^{b_{31}} \times (0.b_{22}b_{21} \dots b_{0})_2 \times 2^{- 126} &\text{denormalized}\\
 (-1)^{b_{31}} \times (1.b_{22}b_{21} \dots b_{0})_2 \times 2^{(b_{30}b_{29} \dots b_{23})_2 - 127} &\text{normalized}
+\end{cases}\\
+&=
+\begin{cases}
+(-1)^{b_{31}} \times \sum_{i=1}^{23} b_{23-i} 2^{-i} \times 2^{- 126} &\text{denormalized}\\
+(-1)^{b_{31}} \times ( 1 + \sum_{i=1}^{23} b_{23-i} 2^{-i} ) \times 2^{\sum_{i=0}^{7} b_{i+23} 2^i - 127} &\text{normalized}
 \end{cases}
-\end{equation}
+\end{align}
 
 \begin{figure}[H]
 \begin{minipage}[t]{0.5\linewidth}
