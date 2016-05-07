@@ -270,7 +270,18 @@ fetch from external memory &30878 &0.051463 ms\\
 \label{clocks-hamming}
 \end{table}
 
+From (\ref{eq:windowing}), we have
+\begin{equation}
+s_j[n] = w[n] s[n+jN] \quad n = 1, 2, \dots, N
+\end{equation}
+We have known $|s[n+jN]| \le 1$, thus
+\begin{equation}
+\label{hamming-inequation}
+|s_j[n]| = |w[n]| \cdot |s[n+jN]| \le |w[n]| \quad n = 1, 2, \dots, N
+\end{equation}
+
 %--------------------------------------------
 %--------------------------------------------
 
-\subsection{Frame Energy}
+\subsection{Thresholds}
+\subsubsection{Frame Energy}
