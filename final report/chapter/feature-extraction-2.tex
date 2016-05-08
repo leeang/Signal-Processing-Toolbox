@@ -154,7 +154,7 @@ In order to avoid information loss, we overlap each frame by half of the frame s
 
 \subsection{Thresholds}
 
-An important task involved in speech recognition is to distinguish the informative speech (voiced \& unvoiced) frames for further processing (MFCC) from the useless silent frames that will be discarded. The basic decision rule is based on the three types of speech signals (voiced, unvoiced \& silent) explained in previous section. \textbf{Energy} and \textbf{zero-crossing count} are two major metrics to determine whether a frame is voiced, unvoiced or silent.
+An important task involved in speech recognition is to distinguish the informative speech (voiced \& unvoiced) frames for further processing (MFCC) from the useless silent frames that will be discarded. The basic decision-making strategy is based on the three types of speech signals (voiced, unvoiced \& silent) explained in previous section. \textbf{Energy} and \textbf{zero-crossing count} are two major metrics to determine whether a frame is voiced, unvoiced or silent.
 
 %--------------------------------------------
 
@@ -189,6 +189,10 @@ zcc_s[j] &= \sum_{i=1}^{N-1} \Lambda ( s_j[i], s_j[i+1] )\\
 0, &\text{otherwise}
 \end{cases}
 \end{align}
+
+%--------------------------------------------
+
+\subsubsection{Features of Different Frame Types}
 
 We manually identify the unvoiced region and voiced region (the remains are silent region) of several different words by hearing the sound and observing the waveform.
 
@@ -226,6 +230,10 @@ Silent &low &low\\
 \label{table:thresholds}
 \end{table}
 
+%--------------------------------------------
+
+\subsubsection{Find Thresholds}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{ang/threshold1}
@@ -233,10 +241,11 @@ Silent &low &low\\
 \label{threshold1}
 \end{figure}
 
+\subsubsection{Decision Rule}
 \begin{figure}[H]
 \centering
 \includegraphics[width=5in]{ang/threshold2}
-\caption{Decision-making Strategy}
+\caption{Decision Rule}
 \label{threshold2}
 \end{figure}
 
