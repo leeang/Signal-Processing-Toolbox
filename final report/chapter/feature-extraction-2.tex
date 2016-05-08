@@ -68,7 +68,7 @@ Fig. \ref{zero_fft} shows the spectra of word `zero' before and after pre-emphas
 
 \subsection{Framing \& Windowing}
 
-Speech is time-varying signals. Due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period (approximately 30 ms) \cite{brandstein1995practical}. The time period of 30 ms indicates 30 ms $\times$ 16000 Hz = 480. We take $N = 512$ samples per frame which is a power 2 in order to conduct efficient Fast Fourier Transform during the following \textit{power spectrum} procedure.\\
+Speech signals are time-varying signals, but due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period (approximately 30 ms) \cite{brandstein1995practical}. The time period of 30 ms indicates 30 ms $\times$ 16000 Hz = 480 samples per frame. We take $N = 512$ to achieve a power of 2 in order that Fast Fourier Transform can be effectively conducted during the following \textit{power spectrum} procedure.\\
 
 The framing operation can be finished by multiplying the signal by a moving window. For the $j$-th frame and frame length $N$, mathematical equation is given in (\ref{eq:windowing}).
 
@@ -266,6 +266,48 @@ Fig. \ref{threshold2} shows the decision-making strategy based on the thresholds
 Once informative frames are picked out by discarding the silent frames, the next stage is to calculate the Mel-frequency cepstral coefficients for each frame. This task consists of 4 sub-procedures: power spectrum, bank filtering, log scaling and discrete cosine transform. 
 
 \subsubsection{Power Spectrum}
+
+Discrete Fourier Transform (\ref{eq:dft}) constitutes the cornerstone of spectrum analysis.
+\begin{equation}
+\label{eq:dft}
+S_j[k] = \sum_{n=1}^{N} s_j[n] W_N^{(n-1) k} \quad k = 1, 2, \dots, N
+\end{equation}
+\begin{equation}
+W_N = e^{\frac{- 2\pi i}{N}}
+\end{equation}
+
+It can be clearly seen that the computations required by DFT increase dramatically as length $N$ increases. Due to the high computational requirement, direct implementation of DFT for large sequences has not been feasible. However, Fast Fourier Transform has made implementation of DFT practical in real-time processing.\\
+
+The principles of FFT algorithms involve a divide-and-conquer approach in which an $N$-point DFT is divided into successively smaller DFTs. One of the most popular FFT algorithms is Radix-2 which restricts the sample length to a power of two. Therefore, we chose the frame length $N = 512 = 2^9$ to make full use of the FFT function. Table \ref{table:radix-2} summarizes and compares the computational requirements of DFT and Radix-2 based FFT.
+
+\begin{table}[H]
+\begin{tabu} to \textwidth {X[c]X[c]X[c]}
+\toprule
+&$N$ &$N = 512$\\
+\hline
+DFT multiplications &$N^2$ &262144\\
+\hline
+DFT additions &$N^2 - N$ &261632\\
+\hline
+FFT multiplications &$\frac{N}{2} \log_2(N)$ &2304\\
+\hline
+FFT additions &$N \log_2(N)$ &4608\\
+\bottomrule
+\end{tabu}
+\caption{Computational Requirements of DFT and Radix-2 FFT}
+\label{table:radix-2}
+\end{table}
+
+We have known that the DFT $X[k]$ of a real sequence $x[n]$ is a conjugate symmetric sequence (from ELEN90058 \textit{Signal Processing} Workshop 3), i.e.
+\begin{equation}
+X[k] = X^*[\langle-k\rangle_{N}] = X^*[N-k]
+\end{equation}
+
+When computing the power spectrum, we are motivated to use this symmetry property and discard the last $(\frac{N}{2} - 1)$ points.
+\begin{equation}
+\label{eq:power-spectrum}
+\hat{S}_j[k] = |S_j(k)|^2 \quad k = 1, 2, \dots, \frac{N}{2} + 1
+\end{equation}
 
 %--------------------------------------------
 
