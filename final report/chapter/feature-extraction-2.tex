@@ -68,7 +68,7 @@ Fig. \ref{zero_fft} shows the spectra of word `zero' before and after pre-emphas
 
 \subsection{Framing \& Windowing}
 
-Speech is time-varying signals. Due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period (approximately 30 ms) \cite{brandstein1995practical}. The time period of 30 ms indicates 30 ms $\times$ 16000 Hz = 480. We take $N = 512$ samples per frame to achieve a power 2 for efficient Fast Fourier Transform.\\
+Speech is time-varying signals. Due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period (approximately 30 ms) \cite{brandstein1995practical}. The time period of 30 ms indicates 30 ms $\times$ 16000 Hz = 480. We take $N = 512$ samples per frame which is a power 2 in order to conduct efficient Fast Fourier Transform during the following \textit{power spectrum} procedure.\\
 
 The framing operation can be finished by multiplying the signal by a moving window. For the $j$-th frame and frame length $N$, mathematical equation is given in (\ref{eq:windowing}).
 
@@ -261,7 +261,9 @@ Fig. \ref{threshold2} shows the decision-making strategy based on the thresholds
 %--------------------------------------------
 %--------------------------------------------
 
-\subsection{Mel Filter Bank Processing}
+\subsection{Mel-frequency Cepstral Coefficients Extraction}
+
+Once informative frames are picked out by discarding the silent frames, the next stage is to calculate the Mel-frequency cepstral coefficients for each frame. This task consists of 4 sub-procedures: power spectrum, bank filtering, log scaling and discrete cosine transform. 
 
 \subsubsection{Power Spectrum}
 
