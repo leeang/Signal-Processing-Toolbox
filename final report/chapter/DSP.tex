@@ -249,7 +249,7 @@ Filter coefficients are converted into \texttt{fract32} once by \texttt{calc\_sh
 
 \subsection{Hamming Window}
 
-For the window length $N = 512$, Hamming window weight $w[n]$ has 512 elements. Table \ref{clocks-hamming} summarizes the efficiency of different methods to obtain $w[n]$. $512/2 = 256$ (due to symmetry) \texttt{fract32} data points occupy 1 KB. There is no reason to recompute them every time. Considering they are most frequently used (180 times per 3-second recording), we store them in the fastest L1 memory. During the initialization session, \texttt{calc\_hamming\_coef} function pre-computes them and converts them into \texttt{frac32}. All computations in \texttt{hamming()} function are fixed-point arithmetic.
+For the window length $N = 512$, Hamming window weight $w[n]$ has 512 elements. Table \ref{clocks-hamming} summarizes the efficiency of different methods to obtain $w[n]$. $512/2 = 256$ (due to symmetry) \texttt{fract32} data points occupy 1 KB. There is no reason to recompute them every time. Considering they are most frequently used (180 times per 3-second recording), we store them in the fastest L1 memory. During the initialization session, \texttt{calc\_hamming\_coef} function pre-computes them and converts them into \texttt{fract32}. All computations in \texttt{hamming()} function are fixed-point arithmetic.
 
 \begin{table}[H]
 \centering
@@ -313,4 +313,16 @@ From (\ref{eq:frame-energy}) and (\ref{hamming-inequation}), we have
 
 Right-shifting leads to loss in precision. However, we calculate frame energy only for comparison with the threshold, i.e. the exact value will not be used in further computations, thus the error will not be accumulated. In addition, the change of recording device and environment voice influence much more than the error caused by right-shifting.\\
 
-\texttt{calc\_energy()} function calculates the scaled energy of a frame. Note that the energy threshold (\texttt{ENERGY\_THRESHOLD}) should be scaled by $\frac{1}{256}$ before converted into \texttt{frac32} format during system initialization. Finally, all computations and comparisons related to frame energy are fixed-point arithmetic.
+\texttt{calc\_energy()} function calculates the scaled energy of a frame. Note that the energy threshold (\texttt{ENERGY\_THRESHOLD}) should be scaled by $\frac{1}{256}$ before converted into \texttt{fract32} format during system initialization. Finally, all computations and comparisons related to frame energy are fixed-point arithmetic.
+
+%--------------------------------------------
+%--------------------------------------------
+
+\subsection{MFCC extraction}
+\subsubsection{Power Spectrum}
+
+We have known that the DFT of a $N$-point real sequence can be obtained from one $\frac{N}{2}$-point complex-valued DFT and additional computations (from ELEN90058 \textit{Signal Processing} lecture slides by Erik \textsc{Weyer}). VisualDSP++ has a built-in function called \texttt{rfft\_fr32} to exploit this property.\\
+
+\texttt{rfft\_fr32()} function takes 7 arguments. The first two are time domain real sequence input and spectrum output. The third one is the twiddle table calculated once by \texttt{twidfftrad2\_fr32()} function during system initialization. The fourth parameter is the twiddle stride that should be set to 1 because the twiddle table is tailored to this FFT. The fifth argument is the FFT size which equals the window length $N = 512$. The last two are block exponent and scaling method. We select dynamic scaling mode that will inspect intermediate results and only apply scaling where required to prevent overflow. In this mode, precision can be better preserved than in static scaling method, although inspections leads to an negative impact on performance. The block exponent returned will be the number of times that the function scales the intermediate set of results.\\
+
+Once the spectrum is obtained, we invoke \texttt{cabs\_fr32()} function to compute the magnitude of each data point (data type: \texttt{complex\_fract32}), the product of the magnitude and itself is the power of each point.
