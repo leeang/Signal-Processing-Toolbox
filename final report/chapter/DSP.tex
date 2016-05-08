@@ -313,4 +313,4 @@ From (\ref{eq:frame-energy}) and (\ref{hamming-inequation}), we have
 
 Right-shifting leads to loss in precision. However, we calculate frame energy only for comparison with the threshold, i.e. the exact value will not be used in further computations, thus the error will not be accumulated. In addition, the change of recording device and environment voice influence much more than the error caused by right-shifting.\\
 
-\texttt{calc\_energy()} function calculates the scaled energy of a frame. Note that the energy threshold (\texttt{ENERGY\_THRESHOLD}) should be scaled by $\frac{1}{256}$ before converted into \texttt{frac32} format. Finally, all computations and comparisons related to frame energy are fixed-point arithmetic.
+\texttt{calc\_energy()} function calculates the scaled energy of a frame. Note that the energy threshold (\texttt{ENERGY\_THRESHOLD}) should be scaled by $\frac{1}{256}$ before converted into \texttt{frac32} format during system initialization. Finally, all computations and comparisons related to frame energy are fixed-point arithmetic.
