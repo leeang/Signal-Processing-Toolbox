@@ -164,7 +164,7 @@ The energy of a finite-length discrete signal $s_j[n]$ ($N = 1, 2, \dots, N$) is
 
 \begin{equation}
 \label{eq:frame-energy}
-E_s[j] = \sum_{i=1}^{N} |s_j[i]|^2 = \sum_{i=1}^{N} (s_j[i])^2
+E_s[j] = \sum_{n=1}^{N} |s_j[n]|^2 = \sum_{n=1}^{N} (s_j[n])^2
 \end{equation}
 
 %--------------------------------------------
@@ -182,7 +182,7 @@ As is illustrated in Fig. \ref{zero_crossing_illustration}, a zero-crossing is a
 
 \begin{align}
 \label{eq:frame-zcc}
-zcc_s[j] &= \sum_{i=1}^{N-1} \Lambda ( s_j[i], s_j[i+1] )\\
+zcc_s[j] &= \sum_{n=1}^{N-1} \Lambda ( s_j[n], s_j[n+1] )\\
 \Lambda ( a, b ) &=
 \begin{cases}
 1, &\text{if } ab < 0\\

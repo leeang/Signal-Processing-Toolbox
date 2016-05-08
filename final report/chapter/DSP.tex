@@ -276,8 +276,24 @@ s_j[n] = w[n] s[n+jN] \quad n = 1, 2, \dots, N
 \end{equation}
 We have known $|s[n+jN]| \le 1$, thus
 \begin{equation}
-\label{hamming-inequation}
 |s_j[n]| = |w[n]| \cdot |s[n+jN]| \le |w[n]| \quad n = 1, 2, \dots, N
+\end{equation}
+\begin{equation}
+\Longrightarrow |s_j[n]|^2 \le |w[n]|^2 \quad n = 1, 2, \dots, N
+\end{equation}
+\begin{equation}
+\Longrightarrow \sum_{n=1}^{N} |s_j[n]|^2 \le \sum_{n=1}^{N} |w[n]|^2
+\end{equation}
+
+Based on (\ref{eq:hamming}), for Hamming window length $N = 512$,
+\begin{equation}
+\sum_{n=1}^{N} |w[n]|^2 = 203.0778 < 256
+\end{equation}
+
+Hence,
+\begin{equation}
+\label{hamming-inequation}
+\sum_{n=1}^{N} |s_j[n]|^2 \le \sum_{n=1}^{N} |w[n]|^2 < 256
 \end{equation}
 
 %--------------------------------------------
@@ -285,3 +301,16 @@ We have known $|s[n+jN]| \le 1$, thus
 
 \subsection{Thresholds}
 \subsubsection{Frame Energy}
+
+From (\ref{eq:frame-energy}) and (\ref{hamming-inequation}), we have
+\begin{align}
+\label{energy-inequation}
+&E_s[j] = \sum_{n=1}^{N} |s_j[n]|^2 < 256\\
+&\Longrightarrow \sum_{n=1}^{N} \frac{1}{256} |s_j[n]|^2 < 1
+\end{align}
+
+(\ref{energy-inequation}) shows that the frame energy will not overflow if we scale the square of amplitudes by $\frac{1}{256}$ before accumulation. Right-shifting the square of amplitudes by $\log_2(256) = 8$ bits is equivalent to multiplying by $\frac{1}{256}$.\\
+
+Right-shifting leads to loss in precision. However, we calculate frame energy only for comparison with the threshold, i.e. the exact value will not be used in further computations, thus the error will not be accumulated. In addition, the change of recording device and environment voice influence much more than the error caused by right-shifting.\\
+
+\texttt{calc\_energy()} function calculates the scaled energy of a frame. Note that the energy threshold (\texttt{ENERGY\_THRESHOLD}) should be scaled by $\frac{1}{256}$ before converted into \texttt{frac32} format. Finally, all computations and comparisons related to frame energy are fixed-point arithmetic.
