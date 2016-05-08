@@ -31,14 +31,14 @@ The speech production system inherently attenuates speech signal by a negative s
 y[n] = x[n] - \alpha x[n-1]
 \end{equation}
 
-A 1st-order FIR filter represented by (\ref{high-pass-filter}) is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}. The merits of this FIR filter include simplicity and efficiency. However, Fig. \ref{pre_emphasis_filter} (\textcolor{red}{red} dash-dot line) shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified. Considering the potential interference caused by high-frequency noise, attenuating low frequencies too much will result in the decline of signal-to-noise ratio (SNR).
+A 1st-order FIR filter represented by (\ref{high-pass-filter}) is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}. The merits of this FIR filter include simplicity and efficiency. However, Fig. \ref{pre_emphasis_filter} (\textcolor{red_matlab}{red} dash-dot line) shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified. Considering the potential interference caused by high-frequency noise, attenuating low frequencies too much will result in the decline of signal-to-noise ratio (SNR).
 
 \begin{equation}
 \label{shelving-filter}
 y[n] = \frac{1}{a_0} \Big( b_0 x[n] + b_1 x[n-1] + b_2 x[n-3] - a_1 y[n-1] - a_2 y[n-2] \Big)
 \end{equation}
 
-Suggested by Professor Erik \textsc{Weyer}, we try to devise a shelving filter represented by (\ref{shelving-filter}) to pre-emphasize the speech signal. By trial and error, we eventually manage to obtain a appropriate filter that amplifies high frequency without attenuating low frequencies (shown in Fig. \ref{pre_emphasis_filter} by blue solid line), where
+Suggested by Professor Erik \textsc{Weyer}, we try to devise a shelving filter represented by (\ref{shelving-filter}) to pre-emphasize the speech signal. By trial and error, we eventually manage to obtain a appropriate filter that amplifies high frequency without attenuating low frequencies (shown in Fig. \ref{pre_emphasis_filter} by \textcolor{blue_matlab}{blue} solid line), where
 
 \begin{align}
 \label{shleving-coef}
