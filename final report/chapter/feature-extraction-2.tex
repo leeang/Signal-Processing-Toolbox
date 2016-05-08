@@ -234,17 +234,26 @@ Silent &low &low\\
 
 \subsubsection{Find Thresholds}
 
+Fig. \ref{threshold1} shows the methods taken to find the energy threshold and the zero-crossing threshold. At the beginning, we manually identify the voiced and unvoiced frames of different words. Then, we calculate the average energy of these voiced frames and take noise level into consideration, finally determine a frame energy threshold. Analogously, we calculate the mean zero-crossing count of unvoiced frames and take the noise frequency into account, eventually obtain the zero-crossing threshold.\\
+
+Note that thresholds are subject to the change of recording devices and environment noise. Hence, they have to be calibrated after the system is implemented on the DSP board and integrated with the \textit{Least Mean Square} noise cancellation scheme.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=5in]{ang/threshold1}
+\includegraphics[width=6in]{ang/threshold1}
 \caption{Methodology to Find Thresholds}
 \label{threshold1}
 \end{figure}
 
+%--------------------------------------------
+
 \subsubsection{Decision Rule}
+
+Fig. \ref{threshold2} shows the decision-making strategy based on the thresholds obtained from above. Firstly, we calculate the energy of a frame and compare the energy with the threshold. A frame with higher energy is regarded as a voiced frame. Then, compute the zero-crossing count of low energy frame. If zero-crossing count is higher than the threshold, this frame is considered as unvoiced frame; otherwise, this frame will be discarded.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=5in]{ang/threshold2}
+\includegraphics[width=6in]{ang/threshold2}
 \caption{Decision Rule}
 \label{threshold2}
 \end{figure}
