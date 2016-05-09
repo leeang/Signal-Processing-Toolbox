@@ -80,17 +80,17 @@ pos = fig.Position;
 fig.PaperSize = [pos(3) pos(4)];
 fig.PaperPositionMode = 'Auto';
 imagesc(bank_gain_matrix_sparse);
-vector = transpose(linspace(1, 0, 10));
+vector = transpose(linspace(1, 0, 50));
 colormap([vector vector vector]);
 colorbar;
-title('Mel filter gain', 'interpreter', 'latex');
+title('Mel filter bank gain', 'interpreter', 'latex');
 xlabel('Data point index', 'interpreter', 'latex');
 ylabel('Bank index', 'interpreter', 'latex');
 ax = gca;
 ax.XTick = linspace(0, 256, 9);
 grid on;
 if plot_bool
-	print('mel_filter_sparse_matrix', '-dpdf');
+	print('mel_filter_bank_gain', '-dpdf');
 end
 
 if export_bool
