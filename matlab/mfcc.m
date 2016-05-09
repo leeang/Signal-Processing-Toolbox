@@ -25,7 +25,7 @@ calc_dct_coef();
 global bank_gain;
 global bank_gain_index_offset;
 global fft_index_offset;
-global fft_index_length;
+global bank_length;
 load('mel_filter_coef');
 
 [shelf_b, shelf_a] = shelving(6, 1000, 16E3, 0.9, 'Treble_Shelf');
