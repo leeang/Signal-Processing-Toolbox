@@ -76,7 +76,7 @@ The framing operation can be finished by multiplying the signal by a moving wind
 \label{eq:windowing}
 s_j[n] =
 \begin{cases}
-w[n] s[n+jN] & N = 1, 2, \dots, N\\
+w[n] s[n+jN] & n = 1, 2, \dots, N\\
 0, & \text{otherwise}
 \end{cases}
 \end{equation}
@@ -86,7 +86,7 @@ The simplest and easiest-to-implement window is a rectangular window represented
 \label{eq:rectagular-window}
 w[n] =
 \begin{cases}
-1, & N = 1, 2, \dots, N\\
+1, & n = 1, 2, \dots, N\\
 0, & \text{otherwise}
 \end{cases}
 \end{equation}
