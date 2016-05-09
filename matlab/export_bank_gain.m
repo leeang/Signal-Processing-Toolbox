@@ -10,6 +10,11 @@ BANK_NUM = 20;
 
 border = get_bank_border();
 
+fft_index = cell(1, BANK_NUM);
+bank_length = zeros(1, BANK_NUM);
+bank_gain_index_offset = zeros(1, BANK_NUM);
+fft_index_offset = zeros(1, BANK_NUM);
+
 bank_gain_index = 1;
 for bank_index = 1:BANK_NUM
 
