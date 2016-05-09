@@ -126,7 +126,7 @@ In terms of the windows involved in Fig. \ref{windows_time}, Fig. \ref{windows_f
 
 \begin{equation}
 \label{eq:hamming}
-w[n] = \alpha - \beta \cos \bigg( \frac{2 \pi n}{N-1} \bigg) \quad n = 1, 2, \dots, N
+w[n] = \alpha - \beta \cos \left( \frac{2 \pi n}{N-1} \right) \quad n = 1, 2, \dots, N
 \end{equation}
 where $\alpha = 25/46 \approx 0.54$ and $\beta = 1 - \alpha \approx 0.46$.
 
@@ -313,16 +313,52 @@ When computing the power spectrum, we are motivated to use this symmetry propert
 
 \subsubsection{Bank Filtering}
 
+The energy within each mel-scale bank can be computed by (\ref{eq:mel-filter}).
+\begin{equation}
+\label{eq:mel-filter}
+X_j[m] = \sum^{\frac{N}{2} + 1}_{k=1} \hat{S}_j[k] H_{mel}[m, k]
+\end{equation}
+where $H_{mel}[m, k]$ is the gain of $k$-th power data point within bank $m$ and $m = 1, 2, \dots, M$.\\
+
+\begin{equation}
+\label{eq:mel-bank-gain}
+H_{mel}[m, k] =
+\begin{cases}
+0 &f_{d2c}(k) \le f[m-1]\\
+\displaystyle\frac{k - f[m-1]}{f[m] - f[m-1]} &f[m-1] < f_{d2c}(k) \le f[m]\\
+\displaystyle\frac{f[m+1] - k}{f[m+1] - f[m]} &f[m] < f_{d2c}(k) \le f[m+1]\\
+0 &f_{d2c}(k) > f[m+1]
+\end{cases}
+\end{equation}
+where $f_{d2c}(k) = (k-1) \cdot \frac{F_s}{N}$ transforms the DFT data point into continuous-time frequency.
+
+$f[m] \in [0, 8000]$ Hz are equally spaced in the mel-scale and can be computed by (\ref{eq:bank-boundary}). We take $f_{\min}$ = 1 Hz and $f_{\max} = \frac{F_s}{2}$ = 8000 Hz as per the system specification and $M = 20$ according to \cite{davis1980comparison}.
+\begin{equation}
+\label{eq:bank-boundary}
+f[m] = \mel^{-1} \left( \mel(f_{\min}) + m \cdot \frac{\mel(f_{\max}) - \mel(f_{\min})}{M + 1} \right)
+\end{equation}
+where $m = 0, 1, \dots, M+1$ and the mel-scale to frequency transform $\mel^{-1}(f_{mel})$ is the inverse function of (\ref{eq:mel-function}).
+\begin{equation}
+\label{eq:mel-function-inverse}
+f = \mel^{-1}(f_{mel}) = 700 \left( 10^{\left(\frac{f_{mel}}{2595}\right)} - 1 \right); \quad f \text{ in Hz}
+\end{equation}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{ang/mel_triangle}
 \caption{Mel Filter Banks}
+\label{mel_triangle}
 \end{figure}
+
+Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) and (\ref{eq:bank-boundary}) is essentially a band-pass filter for each bank. $H_{mel}$ offers maximal gain 1 at $f[m]$ (the `central frequency' of this bank in mel-scale) and then linearly decreases to 0 until reaching adjacent frequency boundaries ($f[m-1]$ and $f[m+1]$) on both sides.\\
+
+Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ for bank $m = 9$ from (\ref{eq:mel-filter}). In subplot 1, each power data point $\hat{S}_j[k]$ (\textcolor{gold_matlab}{gold circle $\circ$}) is multiplied by corresponding gain $H_{mel}[m, k]|_{m=9}$ (\textcolor{orange_matlab}{orange asterisk $*$}). Filtered power data points are shown in subplot 2 by \textcolor{orange_matlab}{orange cross $\times$}. Then, the sum of all filtered power data points is the energy $X_j[m]$ within filter bank $m = 9$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{ang/mel_bank_9}
+\includegraphics[width=\textwidth]{ang/bank_filter_demostration}
 \caption{Bank Filtering Demonstration}
+\label{bank_filter_demostration}
 \end{figure}
 
 %--------------------------------------------

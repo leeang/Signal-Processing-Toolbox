@@ -60,7 +60,7 @@ stem(frequency{bank_index}, amplitude{bank_index} .* bank_gain{bank_index}, 'x')
 title('filtered power spectrum', 'interpreter', 'latex');
 xlabel('frequency (Hz)', 'interpreter', 'latex');
 legend('gain', 'filtered power');
-print(['mel_bank_' num2str(bank_index)], '-dpdf');
+print('bank_filter_demostration', '-dpdf');
 
 fig = figure;
 fig.Units = 'inches';
