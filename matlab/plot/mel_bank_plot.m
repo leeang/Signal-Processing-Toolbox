@@ -73,7 +73,7 @@ color_vector = transpose(linspace(1, 0, 50));
 colormap([color_vector color_vector color_vector]);
 colorbar;
 title('Mel filter bank gain', 'interpreter', 'latex');
-xlabel('data point $j = 1, 2, \dots, 257$', 'interpreter', 'latex');
+xlabel('power $\hat{S}(k) \quad (k = 1, 2, \dots, 257)$', 'interpreter', 'latex');
 ylabel('bank $m = 1, 2, \dots, 20$', 'interpreter', 'latex');
 ax = gca;
 ax.XTick = linspace(0, 256, 9);
