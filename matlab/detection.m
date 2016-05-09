@@ -37,7 +37,7 @@ calc_dct_coef();
 global bank_gain;
 global bank_gain_index_offset;
 global fft_index_offset;
-global fft_index_length;
+global bank_length;
 load('mel_filter_coef');
 
 global shelf_b;
