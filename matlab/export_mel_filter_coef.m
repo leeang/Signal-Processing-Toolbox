@@ -39,6 +39,8 @@ end
 
 save('mel_filter_coef', 'bank_gain', 'fft_index_offset', 'bank_length', 'bank_gain_index_offset');
 
+return;
+
 print_array(bank_gain, 'bank_gain_float', '%e');
 print_array(fft_index_offset, 'fft_index_offset', '%d', 'a');
 print_array(bank_length, 'bank_length', '%d', 'a');
