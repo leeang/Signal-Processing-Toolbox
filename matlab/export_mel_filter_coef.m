@@ -48,21 +48,23 @@ for bank_index = 1:BANK_NUM
 		pos = fig.Position;
 		fig.PaperSize = [pos(3) pos(4)];
 		fig.PaperPositionMode = 'Auto';
+
 		subplot(2, 1, 1);
 		plot([border(bank_index) border(bank_index+1) border(bank_index+2)], [0 1 0]);
 		hold on;
-		plot(frequency(bank_index, :), bank_gain_matrix(bank_index, :), 'x');
+		plot(frequency(bank_index, :), bank_gain_matrix(bank_index, :), '*');
 		stem(frequency(bank_index, :), amplitude(bank_index, :), ':');
 		title(['power spectrum overlaid with filter bank ' num2str(bank_index)], 'interpreter', 'latex');
 		xlabel('frequency (Hz)', 'interpreter', 'latex');
-		legend('bank gain (continuous)', 'bank gain (discrete)', 'power spectrum data points');
+		legend('gain (continuous)', 'gain (discrete)', 'power data points');
+
 		subplot(2, 1, 2);
 		plot([border(bank_index) border(bank_index+1) border(bank_index+2)], [0 1 0]);
 		hold on;
-		stem(frequency(bank_index, :), amplitude(bank_index, :) .* bank_gain_matrix(bank_index, :));
+		stem(frequency(bank_index, :), amplitude(bank_index, :) .* bank_gain_matrix(bank_index, :), 'x');
 		title('filtered power spectrum', 'interpreter', 'latex');
 		xlabel('frequency (Hz)', 'interpreter', 'latex');
-		legend('bank gain', 'filtered power spectrum');
+		legend('gain', 'filtered power');
 		if plot_bool
 			print('mel_bank_9', '-dpdf');
 		end
