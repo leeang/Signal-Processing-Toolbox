@@ -1,6 +1,6 @@
 clear;
 
-word_input = 1;
+word_input = 21;
 
 ABSPATH = pwd;
 % identify current folder (absolute path)
