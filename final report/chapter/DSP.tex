@@ -321,8 +321,12 @@ Right-shifting leads to loss in precision. However, we calculate frame energy on
 \subsection{MFCC extraction}
 \subsubsection{Power Spectrum}
 
-We have known that the DFT of a $N$-point real sequence can be obtained from one $\frac{N}{2}$-point complex-valued DFT and additional computations (from ELEN90058 \textit{Signal Processing} lecture slides by Erik \textsc{Weyer}). VisualDSP++ has a built-in function called \texttt{rfft\_fr32} to exploit this property.\\
+We have known that the DFT of a $N$-point real sequence can be obtained from one $\frac{N}{2}$-point complex-valued DFT and additional computations (from ELEN90058 \textit{Signal Processing} lecture slides by Erik \textsc{Weyer}). VisualDSP++ has a built-in function called \texttt{rfft\_fr32()} to exploit this property.\\
 
 \texttt{rfft\_fr32()} function takes 7 arguments. The first two are time domain real sequence input and spectrum output. The third one is the twiddle table calculated once by \texttt{twidfftrad2\_fr32()} function during system initialization. The fourth parameter is the twiddle stride that should be set to 1 because the twiddle table is tailored to this FFT. The fifth argument is the FFT size which equals the window length $N = 512$. The last two are block exponent and scaling method. We select dynamic scaling mode that will inspect intermediate results and only apply scaling where required to prevent overflow. In this mode, precision can be better preserved than in static scaling method, although inspections leads to an negative impact on performance. The block exponent returned will be the number of times that the function scales the intermediate set of results.\\
 
 Once the spectrum is obtained, we invoke \texttt{cabs\_fr32()} function to compute the magnitude of each data point (data type: \texttt{complex\_fract32}), the product of the magnitude and itself is the power of each point.
+
+%--------------------------------------------
+
+\subsubsection{Bank Filtering}
