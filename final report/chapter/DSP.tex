@@ -330,3 +330,31 @@ Once the spectrum is obtained, we invoke \texttt{cabs\_fr32()} function to compu
 %--------------------------------------------
 
 \subsubsection{Bank Filtering}
+
+%----------------------------------------------------------------------------------------
+%	Section
+%----------------------------------------------------------------------------------------
+
+\section{Performance}
+
+Fig. \ref{probability_comparison} compares the probabilities of 27 words computed by MATLAB and DSP: no apparent difference can be seen. In fact, the relative error defined in (\ref{eq:relative_error}) is of the order of magnitude of $10^{-5}$ as shown in Fig. \ref{probability_error}.
+
+\begin{equation}
+\label{eq:relative_error}
+\text{relative error} = \frac{\text{result from DSP} - \text{result from MATLAB}}{\text{result from MATLAB}}
+\end{equation}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/probability_comparison}
+\caption{Result Comparison}
+\label{probability_comparison}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/probability_error}
+\caption{Relative Error of Probabilities}
+\label{probability_error}
+\end{minipage}
+\end{figure}
