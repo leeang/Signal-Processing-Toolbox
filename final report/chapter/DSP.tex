@@ -46,7 +46,7 @@ Internal L1 memory consists of two 32 KB data SRAM banks \cite{bf54x-hardware}. 
 
 Internal L2 memory consists of a single 128 KB area of SRAM. L2 is slightly lower-performing than L1, requiring two core clock cycles for access. L2 provides more capacity accompanied by higher latency. \cite{start-with-bf548}\\
 
-External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. External memory operates synchronously with the system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory \cite{start-with-bf548}. 64 MB (67108864 bytes) is enormous given that each \texttt{float} / \texttt{fract32} variable occupies 4 bytes. Hence, we will pre-compute reusable coefficients as long as fetching them from external memory is faster than computing them. In fact, L1 \& L2 are big enough to store these coefficients, decisions will be elaborated in detail in the following \textit{C Program} section.
+External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. External memory operates synchronously with the system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory \cite{start-with-bf548}. 64 MB (67108864 bytes) is enormous given that each \texttt{float} / \texttt{fract32} variable occupies 4 bytes. Hence, we will pre-compute reusable coefficients as long as fetching them from external memory is faster than computing them. In fact, L1 \& L2 are big enough to store these coefficients, decisions will be elaborated in \autoref{section:c_program}.
 
 %--------------------------------------------
 %--------------------------------------------
@@ -219,6 +219,7 @@ Considering the project budget and potential risk, we eventually decided to stic
 %----------------------------------------------------------------------------------------
 
 \section{C Program}
+\label{section:c_program}
 
 \subsection{Audioloopback}
 
