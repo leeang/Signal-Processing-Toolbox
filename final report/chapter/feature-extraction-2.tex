@@ -376,15 +376,10 @@ Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of b
 
 \begin{equation}
 \label{eq:dct}
-\hat{C}_j[n] = w_{dct}[n] \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) n \right) \quad n = 0, 1, \dots, F-1
+\hat{C}_j[n] = w_{dct}[n] \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right) \quad n = 1, 2, \dots, F
 \end{equation}
 where
 \begin{equation}
 \label{eq:dct-weight}
-w_{dct}[n] =
-\begin{cases}
-\displaystyle\sqrt{\frac{1}{M}} &n = 0\\
-\displaystyle\sqrt{\frac{2}{M}} &n = 1, \dots, F-1
-\end{cases}
+w_{dct}[n] = \sqrt{\frac{2}{M}}
 \end{equation}
-$w_{dct}[n]$ given in (\ref{eq:dct-weight}) makes the DCT-II matrix orthogonal and this normalization is adopted by MATLAB \texttt{dct()} function.

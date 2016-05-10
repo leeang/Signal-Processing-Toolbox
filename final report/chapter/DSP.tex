@@ -266,7 +266,7 @@ fetch from L2 &12827 &0.021378 ms\\
 fetch from external memory &30878 &0.051463 ms\\
 \bottomrule
 \end{tabu}
-\caption{Action Efficiency for Hamming Weights}
+\caption{Efficiency of Approaches to Obtain $w[n]$}
 \label{clocks-hamming}
 \end{table}
 
@@ -330,6 +330,66 @@ Once the spectrum is obtained, we invoke \texttt{cabs\_fr32()} function to compu
 %--------------------------------------------
 
 \subsubsection{Bank Filtering}
+
+%--------------------------------------------
+
+\subsubsection{Discrete Cosine Transform}
+
+We define
+\begin{align}
+\label{eq:dct-coef}
+H_{dct}[n, m] &= w_{dct}[n] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right)\\
+&= \sqrt{\frac{2}{M}} \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right)
+\end{align}
+where $n = 1, 2, \dots, F$ and $m = 1, 2, \dots, M$.\\
+
+Thereby, (\ref{eq:dct}) becomes
+\begin{equation}
+\label{eq:dct-coef-form}
+\hat{C}_j[n] = \sum^{M}_{m=1} \hat{X}_j[m] H_{dct}[n, m] \quad n = 1, 2, \dots, F
+\end{equation}
+
+It can be proven that for even $M$ and odd $F$
+\begin{equation}
+H_{dct}[n, m] =
+\begin{cases}
+H_{dct}[n, M-m+1] & n = 1, 3, \dots, F\\
+-H_{dct}[n, M-m+1] & n = 2, 4, \dots, F-1
+\end{cases}
+\end{equation}
+
+By utilizing this symmetry, (\ref{eq:dct-coef-form}) can be simplified as
+\begin{equation}
+\label{eq:dct-symmetric-form}
+\hat{C}_j[n] = 
+\begin{cases}
+\displaystyle\sum^{M/2}_{m=1} (\hat{X}_j[m] + \hat{X}_j[M-m+1]) H_{dct}[n, m] & n = 1, 3, \dots, F\\
+\displaystyle\sum^{M/2}_{m=1} (\hat{X}_j[m] - \hat{X}_j[M-m+1]) H_{dct}[n, m] & n = 2, 4, \dots, F-1
+\end{cases}
+\end{equation}
+
+To calculate $\hat{C}_j[n]$ for each $n$, (\ref{eq:dct-coef-form}) requires $M$ multiplications and $(M - 1)$ additions while (\ref{eq:dct-symmetric-form}) requires $M/2$ multiplications (reduced by 50\%) and $(M - 1)$ additions. Furthermore, only a half pre-computed coefficients need to be stored in memory.\\
+
+We pre-compute $H_{dct}[n, m]$ by \texttt{calc\_dct\_coef()} while initializing the system. Table \ref{clocks-dct} summarizes the efficiency of different methods to obtain $H_{dct}[n, m]$. It can be clearly seen that fetching from external memory is even 40 times faster than directly computing.
+
+\begin{table}[H]
+\centering
+\begin{tabu} to \textwidth {XXX}
+\toprule
+Action &clocks &time elapsed\\
+\hline
+compute &172281 &0.287135 ms\\
+\hline
+fetch from L1 &3889 &0.006482 ms\\
+\hline
+fetch from L2 &4929 &0.008215 ms\\
+\hline
+fetch from external memory &9367 &0.015612 ms\\
+\bottomrule
+\end{tabu}
+\caption{Efficiency of Approaches to Obtain $H_{dct}[n, m]$}
+\label{clocks-dct}
+\end{table}
 
 %----------------------------------------------------------------------------------------
 %	Section
