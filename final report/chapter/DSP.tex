@@ -163,9 +163,10 @@ largest normalized number &$\pm (2-2^{-23}) \times 2^{127} \approx \pm 3.4 \time
 \label{floating-point-range}
 \end{table}
 
-The value range of \texttt{float} is summarized in Table \ref{floating-point-range}. The smallest denormalized number has a marked impact on calculating emission probabilities which can easily reach $e^{-200} = 1.3839 \times 10^{-87}$. Fortunately, all computation involved between probabilities are multiplications, hence we take common logarithm before conducting multiplications and convert all multiplications into additions.
+The value range of \texttt{float} is summarized in Table \ref{floating-point-range}. The smallest denormalized number has a marked impact on calculating emission probabilities which can easily reach $e^{-200} = 1.3839 \times 10^{-87}$. Fortunately, all computation involved between probabilities are multiplications, hence we take common logarithm before conducting multiplications and convert all multiplications into additions based on (\ref{log-property}).
 
 \begin{equation}
+\label{log-property}
 \log(xy) = \log(x) + \log(y)
 \end{equation}
 
