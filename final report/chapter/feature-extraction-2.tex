@@ -17,29 +17,37 @@ $T_s$ should be carefully chosen in order to avoid distortion caused by aliasing
 
 \subsection{Pre-emphasis}
 
-The speech production system inherently attenuates speech signal by a negative spectral slope per decade. In addition, human hearing is more sensitive to frequency band above 1 kHz \cite{picone1993signal}. However, as is depicted in Fig. \ref{zero_fft}, frequency components below 1 kHz predominantly comprise the spectrum. Hence, it is advantageous to employ a high-pass filter to amplify the high frequency range.
+The speech production system inherently attenuates speech signal by a negative spectral slope per decade. In addition, human hearing is more sensitive to frequency band above 1 kHz \cite{picone1993signal}. However, as is depicted in Fig. \ref{zero_fft}, frequency components below 1 kHz predominantly comprise the spectrum. Hence, it is advantageous to employ a high-pass filter to amplify the high frequency range.\\
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=6in]{ang/pre_emphasis_filter}
-\caption{Pre-emphasis Filters Comparison}
-\label{pre_emphasis_filter}
-\end{figure}
+A 1st-order FIR filter represented by (\ref{high-pass-filter}) is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}. The merits of this FIR filter include simplicity and efficiency. However, Fig. \ref{pre_emphasis_filter} (\textcolor{orange_matlab}{orange} dash-dot line) shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified. Considering the potential interference caused by high-frequency noise, attenuating low frequencies too much will result in the decline of signal-to-noise ratio (SNR).
 
 \begin{equation}
 \label{high-pass-filter}
 y[n] = x[n] - \alpha x[n-1]
 \end{equation}
 
-A 1st-order FIR filter represented by (\ref{high-pass-filter}) is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}. The merits of this FIR filter include simplicity and efficiency. However, Fig. \ref{pre_emphasis_filter} (\textcolor{orange_matlab}{orange} dash-dot line) shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified. Considering the potential interference caused by high-frequency noise, attenuating low frequencies too much will result in the decline of signal-to-noise ratio (SNR).
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/pre_emphasis_filter}
+\caption{Pre-emphasis Filters}
+\label{pre_emphasis_filter}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/zero_fft}
+\caption{Spectra of Word \textit{zero}}
+\label{zero_fft}
+\end{minipage}
+\end{figure}
+
+Suggested by Professor Erik \textsc{Weyer}, we try to devise a \textit{shelving filter} represented by (\ref{shelving-filter}) to pre-emphasize the speech signal. By trial and error, we eventually manage to obtain a appropriate filter that amplifies high frequency components without attenuating frequencies lower than 1 kHz (shown in Fig. \ref{pre_emphasis_filter} by \textcolor{navy_matlab}{navy} solid line). Fig. \ref{zero_fft} shows the spectra of word \textit{zero} before and after this pre-emphasis filter.
 
 \begin{equation}
 \label{shelving-filter}
 y[n] = \frac{1}{a_0} \Big( b_0 x[n] + b_1 x[n-1] + b_2 x[n-3] - a_1 y[n-1] - a_2 y[n-2] \Big)
 \end{equation}
-
-Suggested by Professor Erik \textsc{Weyer}, we try to devise a shelving filter represented by (\ref{shelving-filter}) to pre-emphasize the speech signal. By trial and error, we eventually manage to obtain a appropriate filter that amplifies high frequency without attenuating low frequencies (shown in Fig. \ref{pre_emphasis_filter} by \textcolor{navy_matlab}{navy} solid line), where
-
+where
 \begin{align}
 \label{shleving-coef}
 &\begin{cases}
@@ -53,15 +61,6 @@ b_1 = -3.102851\\
 b_2 = 1.366544
 \end{cases}
 \end{align}
-
-Fig. \ref{zero_fft} shows the spectra of word `zero' before and after pre-emphasis filter.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{ang/zero_fft}
-\caption{Word `zero' Spectral Analysis}
-\label{zero_fft}
-\end{figure}
 
 %--------------------------------------------
 %--------------------------------------------
