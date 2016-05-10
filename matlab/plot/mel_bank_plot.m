@@ -40,6 +40,7 @@ bank_index = 9;
 
 fig = figure;
 fig.Units = 'inches';
+fig.Position(3) = fig.Position(3) * 4 / 3;
 pos = fig.Position;
 fig.PaperSize = [pos(3) pos(4)];
 fig.PaperPositionMode = 'Auto';

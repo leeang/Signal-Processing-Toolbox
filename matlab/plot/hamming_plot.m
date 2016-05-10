@@ -41,7 +41,7 @@ xlabel('data point index', 'interpreter', 'latex');
 ylabel('gain', 'interpreter', 'latex');
 legend('window 1', 'window 2', 'window 3');
 
-annotation('rectangle', [0.46 0.112 0.12 0.336], 'LineStyle' ,'-.', 'color', green_html);
+annotation('rectangle', [0.46 0.112 0.12 0.335], 'LineStyle' ,'-.', 'color', green_html);
 
 print('hamming_overlap', '-dpdf');
 
