@@ -361,6 +361,11 @@ Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of b
 \label{bank_filter_demostration}
 \end{figure}
 
+It is easy to prove that $H_{mel}[m, 0]$ = $H_{mel}[m, \frac{N}{2}+1] = 0$, $\forall m = 1, 2, \dots, M$. Fig. \ref{mel_triangle} also visualizes this property. Hence, (\ref{eq:power-spectrum}) can be further simplified, i.e. only the first half of the \textbf{complex} spectrum need to be taken into consideration.
+\begin{equation}
+\hat{S}_j[k] = |S_j(k)|^2 \quad k = 2, \dots, \frac{N}{2}
+\end{equation}
+
 %--------------------------------------------
 
 \subsubsection{Log Scaling}
