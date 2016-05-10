@@ -1,0 +1,17 @@
+\appendix
+\chapter{}
+
+\section{Shelving Filter Design}
+\label{shelving-appendix}
+For gain $G$ in dB, center frequency of transition band $F_c$ in Hz and sampling frequency $F_s$, coefficients of a high-frequency boost second-order shelving filter is calculated by following equations as described in \cite{DAFX_book}.
+
+\begin{align}
+\begin{split}
+b_0 &= \frac{V_0 + \sqrt{2V_0} K + K^2}{1 + \sqrt{2} K + K^2}\\
+b_1 &= \frac{2 (K^2 - V_0)}{1 + \sqrt{2} K + K^2}\\
+b_2 &= \frac{V_0 - \sqrt{2V_0} K + K^2}{1 + \sqrt{2} K + K^2}\\
+a_1 &= \frac{2 (K^2 - 1)}{1 + \sqrt{2} K + K^2}\\
+a_2 &= \frac{1 - \sqrt{2}K + K^2}{1 + \sqrt{2}K + K^2}
+\end{split}
+\end{align}
+where $a_0 = 1$, $K = \tan(\pi F_c / F_s)$ and $V_0 = 10^{G/20}$.
