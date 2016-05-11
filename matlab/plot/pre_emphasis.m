@@ -22,7 +22,7 @@ ylabel('magnitude (dB)', 'interpreter', 'latex');
 legend('shelving', 'high-pass FIR', 'location', 'southeast');
 print('pre_emphasis_filter', '-dpdf');
 
-load('../data/21');
+load('../data/google-uk-21');
 
 x = transpose(data);
 N = length(x);
