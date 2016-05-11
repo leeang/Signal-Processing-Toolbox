@@ -42,11 +42,11 @@ Fig. \ref{audio-connectors} illustrates that the top location of \texttt{J8} is 
 \subsubsection{Memory Hierarchy}
 The ADSP-BF548 processor supports a hierarchy of three synchronous memories.\\
 
-Internal L1 memory consists of two 32 KB data SRAM banks \cite{bf54x-hardware}. L1 memory is the highest-performing memory available to the Blackfin core and can be accessed at core clock speeds \cite{start-with-bf548}.\\
+Internal L1 memory offers two 32 KB SRAM banks for data \cite{bf54x-hardware}. ``L1 memory is the highest-performing memory available to the Blackfin core and can be accessed at core clock speeds.''\cite{start-with-bf548}\\
 
-Internal L2 memory consists of a single 128 KB area of SRAM. L2 is slightly lower-performing than L1, requiring two core clock cycles for access. L2 provides more capacity accompanied by higher latency. \cite{start-with-bf548}\\
+Internal L2 memory consists of a single 128 KB area of SRAM. ``L2 is somewhat lower-performing than L1, requiring two core clock cycles for access.'' L2 provides larger capacity accompanied by higher latency. \cite{start-with-bf548} Totally, 32768 variables of 32-bit data type (e.g. \texttt{float} and \texttt{fract32}) can be stored in L2.\\
 
-External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. External memory operates synchronously with the system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory \cite{start-with-bf548}. 64 MB (67108864 bytes) is enormous given that each \texttt{float} / \texttt{fract32} variable occupies 4 bytes. Hence, we will pre-compute reusable coefficients as long as fetching them from external memory is faster than computing them. In fact, L1 \& L2 are big enough to store these coefficients, decisions will be elaborated in \autoref{section:c_program}.
+External memory is a 64 MB DDR SDRAM that exists external to the processor mounted on the DSP board. ``External memory operates synchronously with the processor's system clock rather than the core clock, causing access time to SDRAM to be relatively slower than to L1 or L2 memory.''\cite{start-with-bf548} 64 MB (67108864 bytes) is enormous given that each \texttt{float} / \texttt{fract32} variable occupies 4 bytes. Hence, we will pre-compute reusable coefficients as long as fetching them from external memory is faster than computing them. In fact, L1 \& L2 are big enough to store these coefficients, decisions will be elaborated in \autoref{section:c_program}.
 
 %--------------------------------------------
 %--------------------------------------------
