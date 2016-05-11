@@ -218,6 +218,36 @@ Considering the project budget and potential risk, we eventually decided to stic
 %	Section
 %----------------------------------------------------------------------------------------
 
+\section{Software Development}
+
+\subsection{Software Process}
+We develop the software system of our project according to the following set of activities.
+\begin{enumerate}
+\item Determine system specification.
+\item Design algorithm in MATLAB.
+\item Optimize program efficiency in MATLAB, e.g. pre-computing, taking advantage of symmetry, scaling data in order to use fixed-point arithmetic.
+\item Develop evolutionarily. Implementation and validation are interleaved.
+\begin{enumerate}
+	\item Implement each function in C language on DSP board.
+	\item Validate each function by comparing the outcomes calculated by DSP with the expected results from MATLAB. Round off errors are allowed but differences are supposed to be within precision tolerance.
+\end{enumerate}
+\item Adjust algorithm in MATLAB if the original design is infeasible to implement due to precision and speed restriction of DSP board.
+\item Tune performance by optimizing efficiency and improving accuracy.
+\end{enumerate}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\subsection{Revision Control \& Source Code Management}
+
+We host and manage our code on GitHub which helps us control revisions and manage source code better. Reviewing what has been modified before committing the change to the server minimizes the possibility of misoperation. Besides, we hope our work could contribute to the open-source community inversely because we have benefited from open-source spirit so much.\\
+
+Project Repository: \url{https://github.com/leeang/Word-Recognition}
+
+%----------------------------------------------------------------------------------------
+%	Section
+%----------------------------------------------------------------------------------------
+
 \section{C Program}
 \label{section:c_program}
 
