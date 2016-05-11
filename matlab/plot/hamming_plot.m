@@ -1,9 +1,9 @@
 clear;
-load('../data/21');
+load('../data/google-uk-21');
 
 green_html = [0 128 0]/255;
 
-x = data((1:1024)+19000);
+x = data((1:1024)+19500);
 
 y(1:512) = x(1:512) .* hamming(512);
 y(513:1024) = x(513:1024) .* hamming(512);
