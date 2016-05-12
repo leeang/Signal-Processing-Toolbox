@@ -31,6 +31,8 @@
 
 % hypertext
 \usepackage{hyperref}
+\usepackage{nameref}
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \textsl{\nameref*{#1}}}}
 
 % Margins
 \usepackage{geometry}
