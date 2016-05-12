@@ -6,6 +6,8 @@ addpath([ABSPATH '/function']);
 clear;
 
 WINDOW_LENGTH = 512;
+
+global BANK_NUM;
 BANK_NUM = 20;
 
 border = get_bank_border();
