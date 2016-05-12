@@ -27,3 +27,99 @@ where $a_0 = 1$, $K = \tan(\pi F_c / F_s)$ and $V_0 = 10^{G/20}$.
 %----------------------------------------------------------------------------------------
 
 \section{Digital Signal Processor}
+
+\subsection{Fixed-Point Data Types}
+
+\begin{table}[H]
+\centering
+\begin{tabu} to \textwidth {XXXX}
+\toprule
+Type &Size &Min &Max\\
+\hline
+\texttt{char} &8-bit &-128 &127\\
+\hline
+\texttt{unsigned char} &8-bit &0 &255\\
+\hline
+\texttt{short} &16-bit &-32,768 &32,767\\
+\hline
+\texttt{unsigned short} &16-bit &0 &65,535\\
+\hline
+\texttt{int} &32-bit &-2,147,483,648 &2,147,483,647\\
+\hline
+\texttt{unsigned int} &32-bit &0 &4,294,967,295\\
+\hline
+\texttt{long} &32-bit &-2,147,483,648 &2,147,483,647\\
+\hline
+\texttt{unsigned long} &32-bit &0 &4,294,967,295\\
+\bottomrule
+\end{tabu}
+\caption{Fixed-Point Data Types}
+\label{fixed-point-data-types}
+\end{table}
+
+\subsection{Floating-Point Data Types}
+\label{subsection:float-data-type}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/smallest-denormalized-number}
+\caption{Smallest Denormalized Number}
+\label{ang/smallest-denormalized-number}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/largest-denormalized-number}
+\caption{Largest Denormalized Number}
+\label{ang/largest-denormalized-number}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/smallest-normalized-number}
+\caption{Smallest Normalized Number}
+\label{ang/smallest-normalized-number}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{ang/largest-normalized-number}
+\caption{Largest Normalized Number}
+\label{ang/largest-normalized-number}
+\end{minipage}
+\end{figure}
+
+Fig. \ref{ang/smallest-denormalized-number} to Fig. \ref{ang/largest-normalized-number} demonstrate the internal representation of a single-precision floating-point number. The actual mantissa (fraction part) includes 23 fraction bits to the right of the binary point and an \textit{implicit leading bit} to the left of the binary point. When the exponent part is equal to $(00000000)_2$, the implicit leading bit is with value 0 (denormalized); otherwise, the implicit leading bit takes 1 (normalized). Hence, the total length of mantissa is $(23 + 1)$ bits; in other words, \texttt{float} has a precision of $\log_{10}(2^{24}) \approx 7.225$ decimal digits.
+
+\begin{align}
+value &=
+\begin{cases}
+(-1)^{b_{31}} \times (0.b_{22}b_{21} \dots b_{0})_2 \times 2^{- 126} &\text{denormalized}\\
+(-1)^{b_{31}} \times (1.b_{22}b_{21} \dots b_{0})_2 \times 2^{(b_{30}b_{29} \dots b_{23})_2 - 127} &\text{normalized}
+\end{cases}\\
+&=
+\begin{cases}
+\displaystyle(-1)^{b_{31}} \times \sum_{i=1}^{23} b_{23-i} 2^{-i} \times 2^{- 126} &\text{denormalized}\\
+\displaystyle(-1)^{b_{31}} \times ( 1 + \sum_{i=1}^{23} b_{23-i} 2^{-i} ) \times 2^{\sum_{i=0}^{7} b_{i+23} 2^i - 127} &\text{normalized}
+\end{cases}
+\end{align}
+
+\begin{table}[H]
+\centering
+\begin{tabu} to \textwidth {XX}
+\toprule
+Number &Value\\
+\hline
+smallest denormalized number &$\pm 2^{-23} \times 2^{-126} \approx \pm 1.4 \times 10^{-45}$\\
+\hline
+largest denormalized number &$\pm (1-2^{-23}) \times 2^{-126} \approx \pm 1.18 \times 10^{-38}$\\
+\hline
+smallest normalized number &$\pm 1 \times 2^{-126} \approx \pm 1.18 \times 10^{-38}$\\
+\hline
+largest normalized number &$\pm (2-2^{-23}) \times 2^{127} \approx \pm 3.4 \times 10^{38}$\\
+\bottomrule
+\end{tabu}
+\caption{Floating-Point Range}
+\label{floating-point-range}
+\end{table}
