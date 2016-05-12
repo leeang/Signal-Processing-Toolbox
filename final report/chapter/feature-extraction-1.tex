@@ -8,3 +8,9 @@
 \label{eq:mel-function}
 f_{mel} = \mel(f) = 2595 \log_{10} (1 + \frac{f}{700}); \quad f \text{ in Hz}
 \end{equation}
+
+Let $s[n]$ be a time-domain signal, we define the \textit{power cepstrum} by
+\begin{equation}
+\label{eq:time-domain-to-cepstrum}
+X[n] = \mathcal{F}^{-1} \left\{\log_{10} \left( |\mathcal{F}\{s[n]\}|^2 \right) \right\}
+\end{equation}
