@@ -266,7 +266,14 @@ Fig. \ref{threshold2} shows the decision-making strategy based on the thresholds
 \subsection{Mel-frequency Cepstral Coefficients Extraction}
 \label{subsection:mfcc}
 
-Once informative frames are picked out by discarding the silent frames, the next stage is to calculate the Mel-frequency cepstral coefficients for each frame. This task consists of 4 sub-procedures: power spectrum, bank filtering, log scaling and discrete cosine transform. 
+Once informative frames are picked out by discarding the silent frames, the next stage is to calculate the Mel-frequency cepstral coefficients for each frame. MFCC algorithm is based on the concept of power cepstrum. The whole process to obtain power cepstrum defined in (\ref{eq:time-domain-to-cepstrum}) on page \pageref{eq:time-domain-to-cepstrum} can be divided into three procedures.
+\begin{enumerate}
+	\item Compute the Discrete Fourier Transform $S_j[k]$ and corresponding power spectrum $\hat{S}_j[k]$ of a time-domain signal $s_j[n]$.
+	\item Take the logarithm of the power spectrum $\hat{S}_j[k]$.
+	\item Conduct inverse Fourier transform.
+\end{enumerate}
+
+From previous section, we have known human hearing responds to the entire critical band instead of individual frequencies in this band. Thus, MFCC calculates the total power within each certain mel-scale band prior to log scaling (step 2). Moreover, MFCC substitute Discrete Cosine Transform for inverse Fourier transform to reduce the computational complexity.
 
 \subsubsection{Power Spectrum}
 
@@ -375,7 +382,7 @@ It is easy to prove that $H_{mel}[m, 0]$ = $H_{mel}[m, \frac{N}{2}+1] = 0$, $\fo
 
 \begin{equation}
 \label{eq:log-scaling}
-\hat{X}_j[m] = \ln(X_j[m]) \quad m = 1, 2, \dots, M
+\hat{X}_j[m] = \log_{10}(X_j[m]) \quad m = 1, 2, \dots, M
 \end{equation}
 
 %--------------------------------------------
