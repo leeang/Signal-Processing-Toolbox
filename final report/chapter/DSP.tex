@@ -296,23 +296,15 @@ Once the spectrum is obtained, we invoke \texttt{cabs\_fr32()} function to compu
 
 \subsubsection{Bank Filtering \& Log Scaling}
 
-\begin{figure}[H]
-\centering
-\wideplot{ang/mel_filter_bank_gain}
-\caption{Gain of Spectrum Data Points in Each Bank}
-\label{mel_filter_bank_gain}
-\end{figure}
-
 %--------------------------------------------
 
 \subsubsection{Discrete Cosine Transform}
 
 We define
-\begin{align}
+\begin{equation}
 \label{eq:dct-coef}
-H_{dct}[n, m] &= w_{dct}[n] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right)\\
-&= \sqrt{\frac{2}{M}} \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right)
-\end{align}
+H_{dct}[n, m] = \sqrt{\frac{2}{M}} \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right)
+\end{equation}
 where $n = 1, 2, \dots, F$ and $m = 1, 2, \dots, M$.\\
 
 Thereby, (\ref{eq:dct}) becomes
