@@ -70,7 +70,7 @@ b_2 = 1.366544
 
 \subsection{Framing \& Windowing}
 
-Speech signals are time-varying signals, but due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period (approximately 30 ms) \cite{brandstein1995practical}. The time period of 30 ms indicates 30 ms $\times$ 16000 Hz = 480 samples per frame. We take $N = 512$ to achieve a power of 2 in order that Fast Fourier Transform can be effectively conducted during the following \textit{power spectrum} procedure in \autoref{subsection:mfcc}.\\
+Speech signals are time-varying signals, but due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period (approximately 30 ms) \cite{brandstein1995practical}. The time period of 30 ms indicates 30 ms $\times$ 16000 Hz = 480 samples per frame. We take $N = 512$ to achieve a power of 2 in order that Fast Fourier Transform can be effectively conducted during the following \textit{power spectrum} procedure in \fullref{subsection:mfcc}.\\
 
 The framing operation can be finished by multiplying the signal by a moving window. For the $j$-th frame and frame length $N$, mathematical equation is given in (\ref{eq:windowing}).
 
