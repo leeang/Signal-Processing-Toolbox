@@ -3,6 +3,7 @@ addpath([ABSPATH '/../function']);
 
 clear;
 
+global BANK_NUM;
 BANK_NUM = 20;
 
 border = get_bank_border();
