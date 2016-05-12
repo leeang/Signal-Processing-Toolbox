@@ -30,13 +30,13 @@ y[n] = x[n] - \alpha x[n-1]
 \begin{figure}[H]
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/pre_emphasis_filter}
+\minipageplot{ang/pre_emphasis_filter}
 \caption{Pre-emphasis Filters}
 \label{pre_emphasis_filter}
 \end{minipage}
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/zero_fft}
+\minipageplot{ang/zero_fft}
 \caption{Spectra of Word \textit{zero}}
 \label{zero_fft}
 \end{minipage}
@@ -98,13 +98,13 @@ However, the selection of a proper window always involves a trade-off between hi
 \begin{figure}[H]
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/windows_time}
+\minipageplot{ang/windows_time}
 \caption{Windows in Time Domain}
 \label{windows_time}
 \end{minipage}
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/windows_frequency}
+\minipageplot{ang/windows_frequency}
 \caption{Windows in Frequency Domain}
 \label{windows_frequency}
 \end{minipage}
@@ -135,13 +135,13 @@ where $\alpha = 25/46 \approx 0.54$ and $\beta = 1 - \alpha \approx 0.46$.
 \begin{figure}[H]
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/hamming_bell_shape}
+\minipageplot{ang/hamming_bell_shape}
 \caption{Information Loss}
 \label{hamming_bell_shape}
 \end{minipage}
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/hamming_overlap}
+\minipageplot{ang/hamming_overlap}
 \caption{Hamming with/without overlap}
 \label{hamming_overlap}
 \end{minipage}
@@ -201,13 +201,13 @@ We manually identify the unvoiced region and voiced region (the remains are sile
 \begin{figure}[H]
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/threshold_example1}
+\minipageplot{ang/threshold_example1}
 \caption{Waveform, enery \& zcc}
 \label{threshold_example1}
 \end{minipage}
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{ang/threshold_example2}
+\minipageplot{ang/threshold_example2}
 \caption{Zoomed-in Version}
 \label{threshold_example2}
 \end{minipage}
@@ -355,7 +355,7 @@ f = \mel^{-1}(f_{mel}) = 700 \left( 10^{\left(\frac{f_{mel}}{2595}\right)} - 1 \
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{ang/mel_triangle}
+\wideplot{ang/mel_triangle}
 \caption{Mel Filter Banks}
 \label{mel_triangle}
 \end{figure}
@@ -366,7 +366,7 @@ Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of b
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{ang/bank_filter_demostration}
+\includegraphics[width=0.5\textwidth, trim={1.1cm 0.6cm 1.1cm 0.6cm}, clip]{ang/bank_filter_demostration}
 \caption{Bank Filtering Demonstration}
 \label{bank_filter_demostration}
 \end{figure}
