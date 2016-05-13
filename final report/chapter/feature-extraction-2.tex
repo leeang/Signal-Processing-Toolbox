@@ -399,10 +399,5 @@ Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of b
 
 \begin{equation}
 \label{eq:dct}
-\hat{C}_j[n] = w_{dct}[n] \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right) \quad n = 1, 2, \dots, F
-\end{equation}
-where
-\begin{equation}
-\label{eq:dct-weight}
-w_{dct}[n] = \sqrt{\frac{2}{M}}
+\hat{C}_j[n] = \sqrt{\frac{2}{M}} \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right) \quad n = 1, 2, \dots, F
 \end{equation}
