@@ -1,8 +1,8 @@
 \newpage
-\section{Speech Signal Processing}
-\label{section:feature2}
+\chapter{Speech Signal Processing}
+\label{chapter:speech-processing}
 
-\subsection{Analog-to-Digital Conversion}
+\section{Analog-to-Digital Conversion}
 Voices in real life are analog signals, hence before conducting digital signal processing techniques, analog-to-digital conversions are required.\\
 
 Given a continuous-time signal $s(t)$, we define the \textit{sampled signal} by
@@ -16,7 +16,7 @@ $T_s$ should be carefully chosen in order to avoid distortion caused by aliasing
 %--------------------------------------------
 %--------------------------------------------
 
-\subsection{Pre-emphasis}
+\section{Pre-emphasis}
 
 The speech production system inherently attenuates speech signal by a negative spectral slope per decade. In addition, human hearing is more sensitive to frequency band above 1 kHz \cite{picone1993signal}. However, as is depicted in Fig. \ref{zero_fft}, frequency components below 1 kHz predominantly comprise the spectrum. Hence, it is advantageous to employ a high-pass filter to amplify the high frequency range.\\
 
@@ -68,7 +68,7 @@ b_2 = 1.366544
 %--------------------------------------------
 %--------------------------------------------
 
-\subsection{Framing \& Windowing}
+\section{Framing \& Windowing}
 
 Speech signals are time-varying signals, but due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period (approximately 30 ms) \cite{brandstein1995practical}. The time period of 30 ms indicates 30 ms $\times$ 16000 Hz = 480 samples per frame. We take $N = 512$ to achieve a power of 2 in order that Fast Fourier Transform can be effectively conducted during the following \textit{power spectrum} procedure in \fullref{subsection:mfcc}.\\
 
@@ -154,13 +154,13 @@ In order to avoid information loss, we overlap each frame by half of the frame s
 %--------------------------------------------
 %--------------------------------------------
 
-\subsection{Thresholds}
+\section{Thresholds}
 
 An important task involved in speech recognition is to distinguish the informative speech (voiced \& unvoiced) frames for further processing (MFCC) from the useless silent frames that will be discarded. The basic decision-making strategy is based on the three types of speech signals (voiced, unvoiced \& silent) explained in previous section. \textbf{Energy} and \textbf{zero-crossing count} are two major metrics to determine whether a frame is voiced, unvoiced or silent.
 
 %--------------------------------------------
 
-\subsubsection{Energy}
+\subsection{Energy}
 
 The energy of a finite-length discrete signal $s_j[n]$ ($N = 1, 2, \dots, N$) is the sum of the square of the amplitudes. We define the energy of the $j$-th frame
 
@@ -171,7 +171,7 @@ E_s[j] = \sum_{n=1}^{N} |s_j[n]|^2 = \sum_{n=1}^{N} (s_j[n])^2
 
 %--------------------------------------------
 
-\subsubsection{Zero-crossing count}
+\subsection{Zero-crossing count}
 
 \begin{figure}[H]
 \centering
@@ -194,7 +194,7 @@ zcc_s[j] &= \sum_{n=1}^{N-1} \Lambda ( s_j[n], s_j[n+1] )\\
 
 %--------------------------------------------
 
-\subsubsection{Features of Different Frame Types}
+\subsection{Features of Different Frame Types}
 
 We manually identify the unvoiced region and voiced region (the remains are silent region) of several different words by hearing the sound and observing the waveform.
 
@@ -234,7 +234,7 @@ Silent &low &low\\
 
 %--------------------------------------------
 
-\subsubsection{Find Thresholds}
+\subsection{Find Thresholds}
 
 Fig. \ref{threshold1} shows the methods taken to find the energy threshold and the zero-crossing threshold. At the beginning, we manually identify the voiced and unvoiced frames of different words. Then, we calculate the average energy of these voiced frames and take noise level into consideration, finally determine a frame energy threshold. Analogously, we calculate the mean zero-crossing count of unvoiced frames and take the noise frequency into account, eventually obtain the zero-crossing threshold.\\
 
@@ -249,7 +249,7 @@ Note that thresholds are subject to the change of recording devices and environm
 
 %--------------------------------------------
 
-\subsubsection{Decision Rule}
+\subsection{Decision Rule}
 
 Fig. \ref{threshold2} shows the decision-making strategy based on the thresholds obtained from above. Firstly, we calculate the energy of a frame and compare the energy with the threshold. A frame with higher energy is regarded as a voiced frame. Then, compute the zero-crossing count of low energy frame. If zero-crossing count is higher than the threshold, this frame is considered as unvoiced frame; otherwise, this frame will be discarded.
 
@@ -263,7 +263,7 @@ Fig. \ref{threshold2} shows the decision-making strategy based on the thresholds
 %--------------------------------------------
 %--------------------------------------------
 
-\subsection{Mel-frequency Cepstral Coefficients Extraction}
+\section{Mel-frequency Cepstral Coefficients Extraction}
 \label{subsection:mfcc}
 
 Once informative frames are picked out by discarding the silent frames, the next stage is to calculate the Mel-frequency cepstral coefficients for each frame. MFCC algorithm is based on the concept of power cepstrum. The whole process to obtain power cepstrum defined in (\ref{eq:time-domain-to-cepstrum}) on page \pageref{eq:time-domain-to-cepstrum} can be divided into three procedures.
@@ -275,7 +275,7 @@ Once informative frames are picked out by discarding the silent frames, the next
 
 From previous section, we have known human hearing responds to the entire critical band instead of individual frequencies in this band. Thus, MFCC calculates the total power within each certain mel-scale band prior to log scaling (step 2). Moreover, MFCC substitute Discrete Cosine Transform for inverse Fourier transform to reduce the computational complexity.
 
-\subsubsection{Power Spectrum}
+\subsection{Power Spectrum}
 
 Discrete Fourier Transform (\ref{eq:dft}) constitutes the cornerstone of spectrum analysis.
 \begin{equation}
@@ -321,7 +321,7 @@ When computing the power spectrum, we are motivated to use this symmetry propert
 
 %--------------------------------------------
 
-\subsubsection{Bank Filtering}
+\subsection{Bank Filtering}
 
 The energy within each mel-scale bank can be computed by (\ref{eq:mel-filter}).
 \begin{equation}
@@ -386,7 +386,7 @@ Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of b
 
 %--------------------------------------------
 
-\subsubsection{Log Scaling}
+\subsection{Log Scaling}
 
 \begin{equation}
 \label{eq:log-scaling}
@@ -395,7 +395,7 @@ Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of b
 
 %--------------------------------------------
 
-\subsubsection{Discrete Cosine Transform}
+\subsection{Discrete Cosine Transform}
 
 \begin{equation}
 \label{eq:dct}
