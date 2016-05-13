@@ -375,7 +375,7 @@ fetch from external memory &9367 &0.015612 ms\\
 
 It takes 107.851525 ms (64710920 clocks) to process 48000 data points from pre-emphasis to recognition result.\\
 
-Fig. \ref{probability_comparison} compares the probabilities of 27 words computed by MATLAB and DSP: no apparent difference can be seen. In fact, the relative error defined in (\ref{eq:relative_error}) is of the order of magnitude of $10^{-5}$ as shown in Fig. \ref{probability_error}.
+Fig. \ref{probability_comparison_1} compares the probabilities of 27 words computed by MATLAB and DSP: no apparent difference can be seen. In fact, the relative error defined in (\ref{eq:relative_error}) is of the order of magnitude of $10^{-5}$ as shown in Fig. \ref{probability_error_1}.
 
 \begin{equation}
 \label{eq:relative_error}
@@ -385,15 +385,15 @@ Fig. \ref{probability_comparison} compares the probabilities of 27 words compute
 \begin{figure}[H]
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\minipageplot{ang/probability_comparison}
+\minipageplot{ang/probability_comparison_1}
 \caption{Result Comparison}
-\label{probability_comparison}
+\label{probability_comparison_1}
 \end{minipage}
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\minipageplot{ang/probability_error}
+\minipageplot{ang/probability_error_1}
 \caption{Relative Error of Probabilities}
-\label{probability_error}
+\label{probability_error_1}
 \end{minipage}
 \end{figure}
 
