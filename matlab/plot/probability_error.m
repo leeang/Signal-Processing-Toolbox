@@ -17,6 +17,9 @@ title('probabilities of 27 words computed by MATLAB', 'interpreter', 'latex');
 xlabel('word 1 to word 27', 'interpreter', 'latex');
 ylabel('probabilities', 'interpreter', 'latex');
 grid on;
+ax = gca;
+ax.XTick = linspace(0, 27, 10);
+xlim([0 28]);
 
 subplot(2, 1, 2);
 plot(DSP);
@@ -24,6 +27,9 @@ title('probabilities of 27 words computed by DSP', 'interpreter', 'latex');
 xlabel('word 1 to word 27', 'interpreter', 'latex');
 ylabel('probabilities', 'interpreter', 'latex');
 grid on;
+ax = gca;
+ax.XTick = linspace(0, 27, 10);
+xlim([0 28]);
 
 print('probability_comparison', '-dpdf');
 
@@ -38,6 +44,9 @@ title('relative error between probabilities computed by MATLAB and DSP', 'interp
 xlabel('word 1 to word 27', 'interpreter', 'latex');
 ylabel('$\frac{DSP - MATLAB}{MATLAB}$', 'interpreter', 'latex');
 grid on;
+ax = gca;
+ax.XTick = linspace(0, 27, 10);
+xlim([0 28]);
 
 print('probability_error', '-dpdf');
 
