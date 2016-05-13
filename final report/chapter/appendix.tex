@@ -22,6 +22,32 @@ a_2 &= \frac{1 - \sqrt{2}K + K^2}{1 + \sqrt{2}K + K^2}
 \end{align}
 where $a_0 = 1$, $K = \tan(\pi F_c / F_s)$ and $V_0 = 10^{G/20}$.
 
+%--------------------------------------------
+%--------------------------------------------
+
+\subsection{Mel-frequency Cepstral Coefficients Extraction}
+\begin{table}[H]
+\centering
+\caption{Frequency and Mel-scale Relationship}
+\label{table:frequency-mel-relationship}
+\begin{tabular}{rrr|rrr}
+\toprule
+m &$f[m]$ in Hz &Mel-scale in mel &m &$f[m]$ in Hz &Mel-scale in mel\\
+0  & 0.0    & 0.0    & 11 & 1920.4 & 1485.0 \\
+1  & 89.2   & 135.0  & 12 & 2254.5 & 1620.0 \\
+2  & 189.9  & 270.0  & 13 & 2631.2 & 1755.0 \\
+3  & 303.3  & 405.0  & 14 & 3055.9 & 1890.0 \\
+4  & 431.3  & 540.0  & 15 & 3534.7 & 2025.0 \\
+5  & 575.5  & 675.0  & 16 & 4074.7 & 2160.0 \\
+6  & 738.1  & 810.0  & 17 & 4683.4 & 2295.0 \\
+7  & 921.5  & 945.0  & 18 & 5369.8 & 2430.0 \\
+8  & 1128.2 & 1080.0 & 19 & 6143.7 & 2565.0 \\
+9  & 1361.3 & 1215.0 & 20 & 7016.2 & 2700.0 \\
+10 & 1624.1 & 1350.0 & 21 & 8000.0 & 2835.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 %----------------------------------------------------------------------------------------
 %	Section
 %----------------------------------------------------------------------------------------
@@ -32,6 +58,8 @@ where $a_0 = 1$, $K = \tan(\pi F_c / F_s)$ and $V_0 = 10^{G/20}$.
 
 \begin{table}[H]
 \centering
+\caption{Fixed-Point Data Types}
+\label{fixed-point-data-types}
 \begin{tabu} to \textwidth {XXXX}
 \toprule
 Type &Size &Min &Max\\
@@ -53,8 +81,6 @@ Type &Size &Min &Max\\
 \texttt{unsigned long} &32-bit &0 &4,294,967,295\\
 \bottomrule
 \end{tabu}
-\caption{Fixed-Point Data Types}
-\label{fixed-point-data-types}
 \end{table}
 
 \subsection{Floating-Point Data Types}
@@ -107,6 +133,8 @@ value &=
 
 \begin{table}[H]
 \centering
+\caption{Floating-Point Range}
+\label{floating-point-range}
 \begin{tabu} to \textwidth {XX}
 \toprule
 Number &Value\\
@@ -120,6 +148,4 @@ smallest normalized number &$\pm 1 \times 2^{-126} \approx \pm 1.18 \times 10^{-
 largest normalized number &$\pm (2-2^{-23}) \times 2^{127} \approx \pm 3.4 \times 10^{38}$\\
 \bottomrule
 \end{tabu}
-\caption{Floating-Point Range}
-\label{floating-point-range}
 \end{table}
