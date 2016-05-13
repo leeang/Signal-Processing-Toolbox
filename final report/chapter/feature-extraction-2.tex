@@ -111,6 +111,8 @@ However, the selection of a proper window always involves a trade-off between hi
 \end{figure}
 
 \begin{table}[H]
+\caption{Windows Properties for $N = 16$}
+\label{table:windows}
 \begin{tabu} to \textwidth {XXXXX}
 \toprule
 Windows &Rectangular &Hanning &Hamming &Blackman\\
@@ -120,8 +122,6 @@ Mainlobe width &$0.125 \pi$ &$0.2353 \pi$ &$0.2985 \pi$ &$0.4 \pi$\\
 Peak sidelobe &-13.2 dB &-31.5 dB &-39.8 dB &-58.6 dB\\
 \bottomrule
 \end{tabu}
-\caption{Windows Properties for $N = 16$}
-\label{table:windows}
 \end{table}
 
 In terms of the windows involved in Fig. \ref{windows_time}, Fig. \ref{windows_frequency} and Table \ref{table:windows}, \textit{rectangular} window has the best frequency resolution (narrowest mainlobe) at the expense of highest spectral leakage (biggest sidelode peak) while \textit{Blackman} window has the lowest spectral leakage (smallest sidelode peak) accompanied by worst frequency resolution (widest mainlobe). Eventually, we choose an intermediate \textit{Hamming} window given in (\ref{eq:hamming}).
@@ -217,6 +217,8 @@ In the case of word \textit{zero}, Fig. \ref{threshold_example1} shows the wavef
 
 \begin{table}[H]
 \centering
+\caption{Properties of Different Frame Types}
+\label{table:thresholds}
 \begin{tabu} to 0.8\textwidth {XXX}
 \toprule
 Type &Energy &Zero-crossing count\\
@@ -228,8 +230,6 @@ Unvoiced &low &high\\
 Silent &low &low\\
 \bottomrule
 \end{tabu}
-\caption{Properties of Different Frame Types}
-\label{table:thresholds}
 \end{table}
 
 %--------------------------------------------
@@ -291,6 +291,8 @@ It can be clearly seen that the computations required by DFT increase dramatical
 The principles of FFT algorithms involve a divide-and-conquer approach in which an $N$-point DFT is divided into successively smaller DFTs. One of the most popular FFT algorithms is Radix-2 which restricts the sample length to a power of two. Therefore, we chose the frame length $N = 512 = 2^9$ to make full use of the FFT function. Table \ref{table:radix-2} summarizes and compares the computational requirements of DFT and Radix-2 based FFT.
 
 \begin{table}[H]
+\caption{Computational Requirements of DFT and Radix-2 FFT}
+\label{table:radix-2}
 \begin{tabu} to \textwidth {X[c]X[c]X[c]}
 \toprule
 &$N$ &$N = 512$\\
@@ -304,8 +306,6 @@ FFT multiplications &$\frac{N}{2} \log_2(N)$ &2304\\
 FFT additions &$N \log_2(N)$ &4608\\
 \bottomrule
 \end{tabu}
-\caption{Computational Requirements of DFT and Radix-2 FFT}
-\label{table:radix-2}
 \end{table}
 
 We have known that the DFT $X[k]$ of a real sequence $x[n]$ is a conjugate symmetric sequence (from ELEN90058 \textit{Signal Processing} Workshop 3), i.e.

@@ -61,6 +61,8 @@ Table \ref{main-fixed-point-data-types} as a subset of Table \ref{fixed-point-da
 
 \begin{table}[H]
 \centering
+\caption{Main Fixed-Point Data Types}
+\label{main-fixed-point-data-types}
 \begin{tabu} to \textwidth {XXXX}
 \toprule
 Type &Size &Min &Max\\
@@ -74,14 +76,14 @@ Type &Size &Min &Max\\
 \texttt{long} &32-bit &-2,147,483,648 &2,147,483,647\\
 \bottomrule
 \end{tabu}
-\caption{Main Fixed-Point Data Types}
-\label{main-fixed-point-data-types}
 \end{table}
 
 Table \ref{floating-point-data-types} summarizes properties of floating-point data types. Note that \texttt{double} is equivalent to \texttt{float}. Value ranges are computed based on the internal representation of single-precision floating-point numbers. Details are provided in appendix on page \pageref{subsection:float-data-type}. We have also shown \texttt{float} has a precision of $\log_{10}(2^{24}) \approx 7.225$ decimal digits in the appendix. This deduction is significant to exporting model and coefficients from MATLAB.
 
 \begin{table}[H]
 \centering
+\caption{Floating-Point Data Types}
+\label{floating-point-data-types}
 \begin{tabu} to \textwidth {XXX}
 \toprule
 Type &Size &Range\\
@@ -91,8 +93,6 @@ Type &Size &Range\\
 \texttt{double} &32-bit &$\pm 1.18 \times 10^{-38}$ to $\pm 3.4 \times 10^{38}$\\
 \bottomrule
 \end{tabu}
-\caption{Floating-Point Data Types}
-\label{floating-point-data-types}
 \end{table}
 
 The smallest denormalized number has a marked impact on small probability calculation. For instance, the emission probability can easily become smaller than $e^{-200} = 1.3839 \times 10^{-87}$. Fortunately, all computation involved between probabilities are multiplications, hence we take natural logarithm before conducting multiplications and convert all multiplications into additions based on the property of logarithm (\ref{log-property}).
@@ -117,6 +117,8 @@ Fractional data types \texttt{fract16} and \texttt{fract32} can be represented a
 
 \begin{table}[H]
 \centering
+\caption{Fractional Data Types}
+\label{fractional-data-types}
 \begin{tabu} to \textwidth {XXXX}
 \toprule
 Type &Size &Range &Resolution\\
@@ -126,8 +128,6 @@ Type &Size &Range &Resolution\\
 \texttt{fract32} &32-bit &$-1$ to $1 - 2^{-31}$ &$2^{-31}$\\
 \bottomrule
 \end{tabu}
-\caption{Fractional Data Types}
-\label{fractional-data-types}
 \end{table}
 
 %--------------------------------------------
@@ -218,6 +218,8 @@ For the window length $N = 512$, Hamming window weight $w[n]$ has 512 elements. 
 
 \begin{table}[H]
 \centering
+\caption{Efficiency of Approaches to Obtain $w[n]$}
+\label{clocks-hamming}
 \begin{tabu} to \textwidth {XXX}
 \toprule
 Action &clocks &time elapsed\\
@@ -231,8 +233,6 @@ fetch from L2 &12827 &0.021378 ms\\
 fetch from external memory &30878 &0.051463 ms\\
 \bottomrule
 \end{tabu}
-\caption{Efficiency of Approaches to Obtain $w[n]$}
-\label{clocks-hamming}
 \end{table}
 
 From (\ref{eq:windowing}), we have
@@ -338,6 +338,8 @@ We pre-compute $H_{dct}[n, m]$ by \texttt{calc\_dct\_coef()} while initializing 
 
 \begin{table}[H]
 \centering
+\caption{Efficiency of Approaches to Obtain $H_{dct}[n, m]$}
+\label{clocks-dct}
 \begin{tabu} to \textwidth {XXX}
 \toprule
 Action &clocks &time elapsed\\
@@ -351,8 +353,6 @@ fetch from L2 &4929 &0.008215 ms\\
 fetch from external memory &9367 &0.015612 ms\\
 \bottomrule
 \end{tabu}
-\caption{Efficiency of Approaches to Obtain $H_{dct}[n, m]$}
-\label{clocks-dct}
 \end{table}
 
 %--------------------------------------------
