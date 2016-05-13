@@ -342,15 +342,15 @@ H_{mel}[m, k] =
 \end{equation}
 where $f_{d2c}(k) = (k-1) \cdot \frac{F_s}{N}$ transforms the DFT data point into continuous-time frequency.
 
-$f[m] \in [0, 8000]$ Hz are equally spaced in the mel-scale and can be computed by (\ref{eq:bank-boundary}). We take $f_{\min}$ = 1 Hz and $f_{\max} = \frac{F_s}{2}$ = 8000 Hz as per the system specification and $M = 20$ according to \cite{davis1980comparison}.
+$f[m]$ ($m = 0, 1, \dots, M+1$) are equally spaced in the mel-scale. We take $f_{\min}$ = 0 Hz and $f_{\max} = \frac{F_s}{2}$ = 8000 Hz as per the system specification and $M = 20$ according to \cite{davis1980comparison}. $f[m]$ ($m = 0, 1, \dots, M+1$) are computed by (\ref{eq:bank-boundary}) and listed in the appendix on page \pageref{table:frequency-mel-relationship}.
 \begin{equation}
 \label{eq:bank-boundary}
 f[m] = \mel^{-1} \left( \mel(f_{\min}) + m \cdot \frac{\mel(f_{\max}) - \mel(f_{\min})}{M + 1} \right)
 \end{equation}
-where $m = 0, 1, \dots, M+1$ and the mel-scale to frequency transform $\mel^{-1}(f_{mel})$ is the inverse function of (\ref{eq:mel-function}).
+where the mel-scale to frequency transform $\mel^{-1}(m_{mel})$ is the inverse function of (\ref{eq:mel-function}).
 \begin{equation}
 \label{eq:mel-function-inverse}
-f = \mel^{-1}(f_{mel}) = 700 \left( 10^{\left(\frac{f_{mel}}{2595}\right)} - 1 \right); \quad f \text{ in Hz}
+f = \mel^{-1}(m_{mel}) = 700 \left( 10^{\left(\frac{m_{mel}}{2595}\right)} - 1 \right); \quad f \text{ in Hz}
 \end{equation}
 
 \begin{figure}[H]
