@@ -133,11 +133,6 @@ Type &Size &Range &Resolution\\
 %--------------------------------------------
 %--------------------------------------------
 
-\subsection{Performance Tuning Guidelines}
-
-%--------------------------------------------
-%--------------------------------------------
-
 \subsection{CrossCore Embedded Studio}
 
 During ELEN90058 \textit{Signal Processing} and ELEN90052 \textit{Advanced Signal Processing} workshop sessions, we used CrossCore\textsuperscript{\textregistered} Embedded Studio to compile and debug code for Blackfin DSP board. Basing on Eclipse, CCES exploits the ecosystem of third-party tools already available to Eclipse developers. Thus, plenty of convenient functions such as plotting arrays of data are available to users \cite{erik-cces}\cite{cces-faq}. CCES could be an ideal substitution for VisualDSP++.\\
@@ -182,6 +177,8 @@ Project Repository: \url{https://github.com/leeang/Word-Recognition}
 
 \section{C Program}
 \label{section:c_program}
+
+In addition to the experience gained in workshops, \cite{TuningCSourceCode} provides official guidance for optimizing C program execution efficiency. During implementation, we reduce floating-point arithmetic as much as possible and try to avoid integer division in loops.
 
 \subsection{Audioloopback}
 
