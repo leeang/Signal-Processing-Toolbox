@@ -288,7 +288,7 @@ W_N = e^{\frac{- 2\pi i}{N}}
 
 It can be clearly seen that the computations required by DFT increase dramatically as length $N$ increases. Due to the high computational requirement, direct implementation of DFT for large sequences has not been feasible. However, Fast Fourier Transform has made implementation of DFT practical in real-time processing.\\
 
-The principles of FFT algorithms involve a divide-and-conquer approach in which an $N$-point DFT is divided into successively smaller DFTs. One of the most popular FFT algorithms is Radix-2 which restricts the sample length to a power of two. Therefore, we chose the frame length $N = 512 = 2^9$ to make full use of the FFT function. Table \ref{table:radix-2} summarizes and compares the computational requirements of DFT and Radix-2 based FFT.
+FFT algorithms commonly implement a divide-and-conquer approach, i.e. an $N$-point DFT is successively divided into smaller DFTs. One of the most popular FFT algorithms is Radix-2 which restricts the sample length to a power of two. Therefore, we chose the frame length $N = 512$ (the 9th power of 2) to make full use of the FFT function. Table \ref{table:radix-2} compares the computational requirements of DFT and Radix-2 based FFT.
 
 \begin{table}[H]
 \caption{Computational Requirements of DFT and Radix-2 FFT}
