@@ -344,16 +344,18 @@ H_{mel}[m, k] =
 \end{equation}
 where $f_{d2c}(k) = (k-1) \cdot \frac{F_s}{N}$ transforms the DFT data point into continuous-time frequency.
 
-$f[m]$ ($m = 0, 1, \dots, M+1$) are equally spaced in the mel-scale. We take $f_{\min}$ = 0 Hz and $f_{\max} = \frac{F_s}{2}$ = 8000 Hz as per the system specification and $M = 20$ according to \cite{davis1980comparison}. $f[m]$ ($m = 0, 1, \dots, M+1$) are computed by (\ref{eq:bank-boundary}) and listed in the appendix on page \pageref{table:frequency-mel-relationship}.
+$f[m]$ ($m = 0, 1, \dots, M+1$) are equally spaced in mel-scale and can be computed by (\ref{eq:bank-boundary}).
 \begin{equation}
 \label{eq:bank-boundary}
 f[m] = \mel^{-1} \left( \mel(f_{\min}) + m \cdot \frac{\mel(f_{\max}) - \mel(f_{\min})}{M + 1} \right)
 \end{equation}
-where the mel-scale to frequency transform $\mel^{-1}(m_{mel})$ is the inverse function of (\ref{eq:mel-function}) on page \pageref{eq:mel-function}.
+where the mel-scale to frequency transform $\mel^{-1}(m_{mel})$ is the inverse function of (\ref{eq:mel-function}).
 \begin{equation}
 \label{eq:mel-function-inverse}
 f = \mel^{-1}(m_{mel}) = 700 \left( 10^{\left(\frac{m_{mel}}{2595}\right)} - 1 \right); \quad f \text{ in Hz}
 \end{equation}
+
+We take $f_{\min}$ = 0 Hz and $f_{\max} = \frac{F_s}{2}$ = 8000 Hz as per the system specification and $M = 20$ according to \cite{davis1980comparison}. $f[m]$ in Hz and corresponding mel-scale are listed in the appendix on page \pageref{table:frequency-mel-relationship}.
 
 \begin{figure}[H]
 \centering
@@ -362,7 +364,7 @@ f = \mel^{-1}(m_{mel}) = 700 \left( 10^{\left(\frac{m_{mel}}{2595}\right)} - 1 \
 \label{mel_triangle}
 \end{figure}
 
-Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) and (\ref{eq:bank-boundary}) is essentially a band-pass filter for each bank. $H_{mel}$ offers maximal gain 1 at $f[m]$ (the `central frequency' of this bank in mel-scale) and then linearly decreases to 0 until reaching adjacent frequency boundaries ($f[m-1]$ and $f[m+1]$) on both sides.\\
+Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) and (\ref{eq:bank-boundary}) is essentially a band-pass filter for each bank. $H_{mel}$ offers maximal gain 1 at $f[m]$ (the `central frequency' of bank $m$ in mel-scale) and then linearly decreases to 0 until reaching adjacent frequency boundaries ($f[m-1]$ and $f[m+1]$) on both sides.\\
 
 Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of bank $m = 9$ based on (\ref{eq:mel-filter}). In subplot 1, each power data point $\hat{S}_j[k]$ (\textcolor{gold_matlab}{gold circle $\circ$}) is multiplied by the corresponding gain $H_{mel}[m, k]|_{m=9}$ (\textcolor{orange_matlab}{orange asterisk $*$}). Filtered power data points are shown in subplot 2 by \textcolor{orange_matlab}{orange cross $\times$}. Thereby, the sum of all filtered power data points is the energy $X_j[m]$ within filter bank $m = 9$.
 
