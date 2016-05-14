@@ -328,9 +328,9 @@ When computing the power spectrum, we are motivated to use this symmetry propert
 The energy within each mel-scale bank can be computed by (\ref{eq:mel-filter}).
 \begin{equation}
 \label{eq:mel-filter}
-X_j[m] = \sum^{\frac{N}{2} + 1}_{k=1} \hat{S}_j[k] H_{mel}[m, k]
+X_j[m] = \sum^{\frac{N}{2} + 1}_{k=1} \hat{S}_j[k] H_{mel}[m, k] \quad m = 1, 2, \dots, M
 \end{equation}
-where $H_{mel}[m, k]$ is the gain of $k$-th power data point within bank $m$ and $m = 1, 2, \dots, M$.\\
+where $H_{mel}[m, k]$ is the gain of the $k$-th power spectrum data point within bank $m$.\\
 
 \begin{equation}
 \label{eq:mel-bank-gain}
@@ -342,7 +342,7 @@ H_{mel}[m, k] =
 0 &f_{d2c}(k) > f[m+1]
 \end{cases}
 \end{equation}
-where $f_{d2c}(k) = (k-1) \cdot \frac{F_s}{N}$ transforms the DFT data point into continuous-time frequency.
+where $f_{d2c}(k) = (k-1) \cdot \frac{F_s}{N}$ transforming the index $k$ of DFT into continuous-time frequency.
 
 $f[m]$ ($m = 0, 1, \dots, M+1$) are equally spaced in mel-scale and can be computed by (\ref{eq:bank-boundary}).
 \begin{equation}
