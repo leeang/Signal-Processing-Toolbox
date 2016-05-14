@@ -273,6 +273,7 @@ Hence,
 %--------------------------------------------
 
 \subsection{Thresholds}
+\label{subsection:dsp-thresholds}
 \subsubsection{Frame Energy}
 
 From (\ref{eq:frame-energy}) and (\ref{hamming-inequation}), we have
@@ -325,7 +326,7 @@ Fig. \ref{bank_filter_demostration} also shows that bank $m=9$ only intersects w
 
 In order to diminish the processing time by pre-computing and eliminating the useless operations with zeros, we design a special storage structure for this sparse matrix. One array for storing non-zero values in linear shape and one array for storing corresponding offset for each bank. One array for storing at which $k$ gain becomes non-zero (\textcolor{red}{red dashed-line arrows}) and one-array for storing the length of each grayscale block (\textcolor{orange_html}{orange solid-line arrows}).\\
 
-Gains are converted into \texttt{fract32} by \texttt{calc\_bank\_gain()} function during system initialization. Power cepstrum data points are converted back to \texttt{float} in case of overflow before accumulation that evaluates the total power within each bank.  We did not scale data as we had done when calculating frame energy, because
+Gains are converted into \texttt{fract32} by \texttt{calc\_bank\_gain()} function during system initialization. Power cepstrum data points are converted back to \texttt{float} in case of overflow before accumulation that evaluates the total power within each bank.  We did not scale data as what we had done when calculating frame energy in \autoref{subsection:dsp-thresholds}, because
 \begin{enumerate}
 \item only 30 - 50 frames (out of 180 frames) are passed to MFCC;
 \item precision error will be accumulated;
