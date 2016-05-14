@@ -368,7 +368,7 @@ By utilizing this symmetry, (\ref{eq:dct-coef-form}) can be simplified as
 \end{cases}
 \end{equation}
 
-To calculate $\hat{C}_j[n]$ for each $n$, (\ref{eq:dct-coef-form}) requires $M$ multiplications and $(M - 1)$ additions while (\ref{eq:dct-symmetric-form}) requires $M/2$ multiplications (reduced by 50\%) and $(M - 1)$ additions. Furthermore, only a half pre-computed coefficients need to be stored in memory.\\
+To calculate $\hat{C}_j[n]$ for each $n$, (\ref{eq:dct-coef-form}) requires $M$ multiplications and $(M - 1)$ additions while (\ref{eq:dct-symmetric-form}) requires $M/2$ multiplications (reduced by 50\%) and $(M - 1)$ additions. Furthermore, only a half precomputed coefficients need to be stored in memory.\\
 
 We pre-compute $H_{dct}[n, m]$ by \texttt{calc\_dct\_coef()} while initializing the system. Table \ref{clocks-dct} summarizes the efficiency of different methods to obtain $H_{dct}[n, m]$. It can be clearly seen that fetching from external memory is even 40 times faster than directly computing.
 
@@ -399,9 +399,9 @@ fetch from external memory &9367 &0.015612 ms\\
 
 \begin{enumerate}
 \item first-order FIR pre-emphasis filter is replaced by shelving filter.
-\item coefficients that intensively require floating-point computations are pre-computed.\\(pre-emphasis, Hamming window and discrete cosine transform)
+\item coefficients that intensively require floating-point computations are precomputed.\\(pre-emphasis, Hamming window and discrete cosine transform)
 \item frame energy is calculated in fixed-point arithmetic.
-\item Mel bank filter gains are pre-computed and stored in an ingeniously designed structure. Meaningless multiplications with zeros are illuminated.
+\item Mel bank filter gains are precomputed and stored in an ingeniously designed structure. Meaningless multiplications with zeros are illuminated.
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------
