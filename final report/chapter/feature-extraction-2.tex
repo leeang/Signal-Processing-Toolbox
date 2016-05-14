@@ -364,12 +364,7 @@ We take $f_{\min}$ = 0 Hz and $f_{\max} = \frac{F_s}{2}$ = 8000 Hz as per the sy
 \label{mel_triangle}
 \end{figure}
 
-Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) and (\ref{eq:bank-boundary}) is essentially a band-pass filter for each bank. $H_{mel}$ offers maximal gain 1 at $f[m]$ (the `central frequency' of bank $m$ in mel-scale) and then linearly decreases to 0 until reaching adjacent frequency boundaries ($f[m-1]$ and $f[m+1]$) on both sides.\\
-
-(\ref{eq:power-spectrum}) can be further simplified because $H_{mel}[m, 0]$ = $H_{mel}[m, \frac{N}{2}+1] = 0$, $\forall m = 1, 2, \dots, M$. Fig. \ref{mel_triangle} also visualizes this property. Hence, only the first half of the \textbf{complex} spectrum need to be taken into consideration when computing power spectrum.
-\begin{equation}
-\hat{S}_j[k] = |S_j(k)|^2 \quad k = 2, \dots, \frac{N}{2}
-\end{equation}
+Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) and (\ref{eq:bank-boundary}) is essentially a band-pass filter for each bank. $H_{mel}$ offers maximal gain 1 at $f[m]$ (the `central frequency' of bank $m$ in mel-scale) and then linearly decreases to 0 until reaching adjacent frequency boundaries ($f[m-1]$ and $f[m+1]$) on both sides.
 
 %--------------------------------------------
 
