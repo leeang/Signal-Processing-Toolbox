@@ -366,23 +366,6 @@ We take $f_{\min}$ = 0 Hz and $f_{\max} = \frac{F_s}{2}$ = 8000 Hz as per the sy
 
 Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) and (\ref{eq:bank-boundary}) is essentially a band-pass filter for each bank. $H_{mel}$ offers maximal gain 1 at $f[m]$ (the `central frequency' of bank $m$ in mel-scale) and then linearly decreases to 0 until reaching adjacent frequency boundaries ($f[m-1]$ and $f[m+1]$) on both sides.\\
 
-Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of bank $m = 9$ based on (\ref{eq:mel-filter}). In subplot 1, each power data point $\hat{S}_j[k]$ (\textcolor{gold_matlab}{gold circle $\circ$}) is multiplied by the corresponding gain $H_{mel}[m, k]|_{m=9}$ (\textcolor{orange_matlab}{orange asterisk $*$}). Filtered power data points are shown in subplot 2 by \textcolor{orange_matlab}{orange cross $\times$}. Thereby, the sum of all filtered power data points is the energy $X_j[m]$ within filter bank $m = 9$.
-
-\begin{figure}[H]
-\begin{minipage}[t]{0.5\linewidth}
-\centering
-\minipageplot{ang/bank_filter_demostration}
-\caption{Bank Filtering Demonstration}
-\label{bank_filter_demostration}
-\end{minipage}
-\begin{minipage}[t]{0.5\linewidth}
-\centering
-\minipageplot{ang/mel_filter_bank_gain}
-\caption{Gain of Each Point in Each Bank}
-\label{mel_filter_bank_gain}
-\end{minipage}
-\end{figure}
-
 (\ref{eq:power-spectrum}) can be further simplified because $H_{mel}[m, 0]$ = $H_{mel}[m, \frac{N}{2}+1] = 0$, $\forall m = 1, 2, \dots, M$. Fig. \ref{mel_triangle} also visualizes this property. Hence, only the first half of the \textbf{complex} spectrum need to be taken into consideration when computing power spectrum.
 \begin{equation}
 \hat{S}_j[k] = |S_j(k)|^2 \quad k = 2, \dots, \frac{N}{2}
