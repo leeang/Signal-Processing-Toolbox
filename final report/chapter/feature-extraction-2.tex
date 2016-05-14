@@ -182,15 +182,17 @@ E_s[j] = \sum_{n=1}^{N} |s_j[n]|^2 = \sum_{n=1}^{N} (s_j[n])^2
 
 As is illustrated in Fig. \ref{zero_crossing_illustration}, a zero-crossing is a point where the \textbf{sign} of a signal changes, represented by a crossing of the time axis where amplitude is zero in the graph. Zero-crossing count is the times of zero-crossing occurrence in a stipulated period. Zero-crossing count of the $j$-th frame can be mathematically represented in (\ref{eq:frame-zcc}).
 
-\begin{align}
+\begin{equation}
 \label{eq:frame-zcc}
-zcc_s[j] &= \sum_{n=1}^{N-1} \Lambda ( s_j[n], s_j[n+1] )\\
-\Lambda ( a, b ) &=
+Z_s[j] = \sum_{n=1}^{N-1} \Big| \sgn(s_j[n]) - \sgn(s_j[n+1]) \Big|
+\end{equation}
+\begin{equation}
+\sgn(s_j[n]) =
 \begin{cases}
-1, &\text{if } ab < 0\\
-0, &\text{otherwise}
+1, &s_j[n] \ge 0\\
+0, &s_j[n] < 0
 \end{cases}
-\end{align}
+\end{equation}
 
 %--------------------------------------------
 
@@ -202,7 +204,7 @@ We manually identify the unvoiced region and voiced region (the remains are sile
 \begin{minipage}[t]{0.5\linewidth}
 \centering
 \minipageplot{ang/threshold_example1}
-\caption{Waveform, enery \& zcc}
+\caption{Waveform, $E_S$ \& $Z_s$}
 \label{threshold_example1}
 \end{minipage}
 \begin{minipage}[t]{0.5\linewidth}
