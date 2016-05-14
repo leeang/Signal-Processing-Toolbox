@@ -181,7 +181,17 @@ Project Repository: \url{https://github.com/leeang/Word-Recognition}
 
 In addition to the experience gained in workshops, \cite{TuningCSourceCode} provides official guidance for optimizing C program execution efficiency. During implementation, we reduce floating-point arithmetic as much as possible and try to avoid integer division in loops.
 
-\subsection{Audioloopback}
+\subsection{Audio\_Loopback Framework}
+
+Analog Devices provides an example named \texttt{Audio\_Loopback} which simply copies the sampled and quantized audio input to the audio output in real-time. This example is available in the /\texttt{Drivers}/\texttt{AudioCodec} folder under VisualDSP++ installation directory. This framework initializes the codec AD1980 via the device manager and will invoke an interrupt callback function when the inbound buffer is full.\\
+
+This example project helps us spend more time on our main quest instead of configuring hardware environment from scratch. Original \texttt{.h} and \texttt{.c} files are added to the project. Some codes are added to \texttt{main} and \texttt{AD1980Callback} function to initialize the recognition system and associate the functions properly.
+\begin{enumerate}
+\item \texttt{header.h} defines all constants and global variables.
+\item \texttt{function.c} includes all original functions.
+\item \texttt{model.h} contains speech models exported from MATLAB.
+\item \texttt{mel\_filter.h} incorporates precomputed Mel-filter bank gain.
+\end{enumerate}
 
 %--------------------------------------------
 %--------------------------------------------
