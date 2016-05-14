@@ -385,6 +385,19 @@ fetch from external memory &9367 &0.015612 ms\\
 %	Section
 %----------------------------------------------------------------------------------------
 
+\section{Improvements on previous work}
+
+\begin{enumerate}
+\item first-order FIR pre-emphasis filter is replaced by shelving filter.
+\item coefficients that intensively require floating-point computations are pre-computed.\\(pre-emphasis, Hamming window and discrete cosine transform)
+\item frame energy is calculated in fixed-point arithmetic.
+\item Mel bank filter gains are pre-computed and stored in an ingeniously designed structure. Meaningless multiplications with zeros are illuminated.
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	Section
+%----------------------------------------------------------------------------------------
+
 \section{Performance}
 
 \subsection{Feature Extraction \& Recognition}
