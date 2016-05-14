@@ -80,6 +80,12 @@ ax = gca;
 ax.XTick = linspace(0, 256, 9);
 grid on;
 
+annotation('doublearrow', [.12 .26], [.5 .5], 'LineStyle', '--', 'Color', 'r');
+annotation('doublearrow', [.26 .312], [.5 .5], 'Color', green_html);
+
+annotation('doublearrow', [.12 .425], [.292 .292], 'LineStyle', '--', 'Color', 'r');
+annotation('doublearrow', [.425 .525], [.292 .292], 'Color', green_html);
+
 annotation('doublearrow', [.12 .525], [.21 .21], 'LineStyle', '--', 'Color', 'r');
 annotation('doublearrow', [.525 .65], [.21 .21], 'Color', green_html);
 print('mel_filter_bank_gain', '-dpdf');
