@@ -313,7 +313,14 @@ Fig. \ref{bank_filter_demostration} depicts the process to compute $X_j[m]$ of b
 
 Fig. \ref{bank_filter_demostration} also shows that bank $m=9$ only intersects with 16 data points in power spectrum because gain for other points are all zero. We plot the gain of each data point for each bank in Fig. \ref{mel_filter_bank_gain}, grayscale represents the value of gain. We find the same situation for all banks. Directly computing $H_{mel}[m, k]$ results in a $k \times m$ sparse matrix (white blocks stand for zeros).\\
 
-In order to diminish the processing time by pre-computing and eliminating the useless operations with zeros, we design a special storage structure for this sparse matrix. One array for storing non-zero values in linear shape and one array for storing corresponding offset for each bank. One array for storing at which $k$ gain becomes non-zero (\textcolor{red}{red dashed-line arrows}) and one-array for storing the length of each grayscale block (\textcolor{orange_html}{orange solid-line arrows}).
+In order to diminish the processing time by pre-computing and eliminating the useless operations with zeros, we design a special storage structure for this sparse matrix. One array for storing non-zero values in linear shape and one array for storing corresponding offset for each bank. One array for storing at which $k$ gain becomes non-zero (\textcolor{red}{red dashed-line arrows}) and one-array for storing the length of each grayscale block (\textcolor{orange_html}{orange solid-line arrows}).\\
+
+Gains are converted into \texttt{fract32} by \texttt{calc\_bank\_gain()} function during system initialization. Power cepstrum data points are converted back to \texttt{float} in case of overflow before accumulation that evaluates the total power within each bank.  We did not scale data as we had done when calculating frame energy, because
+\begin{enumerate}
+\item only 30 - 50 frames (out of 180 frames) are passed to MFCC;
+\item precision error will be accumulated;
+\item log scaling in the next step will be done with the aid of \texttt{float} type \texttt{log()} function.
+\end{enumerate}
 
 %--------------------------------------------
 
