@@ -3,6 +3,8 @@ addpath([ABSPATH '/../function']);
 
 clear;
 
+green_html = [0 128 0]/255;
+
 WINDOW_LENGTH = 512;
 
 global BANK_NUM;
@@ -77,4 +79,7 @@ ylabel('bank $m = 1, 2, \dots, 20$', 'interpreter', 'latex');
 ax = gca;
 ax.XTick = linspace(0, 256, 9);
 grid on;
+
+annotation('doublearrow', [.12 .525], [.21 .21], 'LineStyle', '--', 'Color', 'r');
+annotation('doublearrow', [.525 .65], [.21 .21], 'Color', green_html);
 print('mel_filter_bank_gain', '-dpdf');
