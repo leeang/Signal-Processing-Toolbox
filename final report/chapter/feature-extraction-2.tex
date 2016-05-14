@@ -370,6 +370,7 @@ Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) a
 
 \subsection{Log Scaling}
 
+Log scaling is the second step of cepstrum transformation and also makes MFCC algorithm more resilient to both very quiet and very loud sound. Besides, the log scale in dB imitates human nonlinear perception to loudness \cite{farin2008mathematical}.  Without taking logarithm, recognition accuracy is severely reduced \cite{tan2008automatic}. 
 \begin{equation}
 \label{eq:log-scaling}
 \hat{X}_j[m] = \log_{10}(X_j[m]) \quad m = 1, 2, \dots, M
@@ -379,7 +380,10 @@ Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) a
 
 \subsection{Discrete Cosine Transform}
 
+At the last step, IDFT is replaced by a discrete cosine transform (DCT) due to the symmetric and real characteristic log power spectrum $\hat{X}_j[m]$ \cite{picone1993signal, iser2008bandwidth}.
 \begin{equation}
 \label{eq:dct}
 \hat{C}_j[n] = \sqrt{\frac{2}{M}} \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right) \quad n = 1, 2, \dots, F
 \end{equation}
+
+The order of DCT ($F$) determines the amount of MFCCs. Higher-order coefficients include excitation information while lower-order coefficients indicate the slowly varying vocal tract. The latter one is more useful for speech recognition.\cite{tan2008automatic} European Telecommunications Standards Institute adopts $F = 13$ in their speech recognition standard \cite{etsi2001202}. Hence, we also condense the $M$-point sequence $\hat{X}_j[m]$ into a shorter $F$-point sequence $\hat{C}_j[n]$. The choice of $F$ will be further discussed in \fullref{chapter:design}.
