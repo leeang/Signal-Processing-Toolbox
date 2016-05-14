@@ -106,7 +106,7 @@ The smallest denormalized number has a marked impact on small probability calcul
 
 \subsubsection{Fractional Data Types}
 
-Fractional data types \texttt{fract16} and \texttt{fract32} can be represented as \texttt{short} and \texttt{int} respectively. Fig. \ref{bf_fract_represent} shows the internal representation of \texttt{fract16} and \texttt{fract32} (from National Instruments). The properties of fractional data types are listed in Table \ref{fractional-data-types}.
+Fractional data types \texttt{fract16} and \texttt{fract32} can be represented as \texttt{short} and \texttt{int} respectively. Fig. \ref{bf_fract_represent} shows the internal representation of \texttt{fract16} and \texttt{fract32} (from National Instruments). Table \ref{fractional-data-types} lists the main properties of fractional data types. \texttt{fract32} has higher precision (assuming no overflow or underflow) and higher processing speed (due to fixed-point arithmetic) than \texttt{float}. Hence, \texttt{fract32} variables are widely utilized when implementing the algorithms introduced in \fullref{chapter:speech-processing}.
 
 \begin{figure}[H]
 \centering
