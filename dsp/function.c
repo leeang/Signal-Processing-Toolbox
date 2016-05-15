@@ -348,7 +348,7 @@ int get_result(int obs_length, float obs[][FEAT_NUM])
 
 void init_gpio(void)
 {
-	*pPORTG_FER			= 0x0000;		// Setup PG4 - PG9 for LEDs
+	*pPORTG_FER			= 0x0000;		// Setup PG6 - PG11 for LEDs
 	*pPORTG_MUX			= 0x0000;		// Turn all LEDs on
 	*pPORTG_DIR_SET		= 0x0FC0;		// Setup port for output
 	*pPORTG_CLEAR		= 0x0FC0;		// Turn all LEDs off
