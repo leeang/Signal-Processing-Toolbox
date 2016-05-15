@@ -20,7 +20,7 @@ $T_s$ should be carefully chosen in order to avoid distortion caused by aliasing
 
 The speech production system inherently attenuates speech signal by a negative spectral slope per decade. In addition, human hearing is more sensitive to frequency band above 1 kHz \cite{picone1993signal}. However, as is depicted in Fig. \ref{zero_fft}, frequency components below 1 kHz predominantly comprise the spectrum. Hence, it is advantageous to employ a high-pass filter to amplify the high frequency range.\\
 
-A first-order FIR filter represented by (\ref{high-pass-filter}) is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}. The merits of this FIR filter include simplicity and efficiency. However, Fig. \ref{pre_emphasis_filter} (\textcolor{orange_matlab}{orange} dash-dot line) shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified. Considering the potential interference caused by high-frequency noise, attenuating low frequencies too much will result in the decline of signal-to-noise ratio (SNR).
+A first-order FIR filter represented by (\ref{high-pass-filter}) is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}. The merits of this FIR filter include simplicity and efficiency. However, Fig. \ref{pre_emphasis_filter} (\textcolor{orange_matlab}{orange dash-dot line}) shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified. Considering the potential interference caused by high-frequency noise, attenuating low frequencies too much will result in the decline of signal-to-noise ratio (SNR).
 
 \begin{equation}
 \label{high-pass-filter}
@@ -42,7 +42,7 @@ y[n] = x[n] - \alpha x[n-1]
 \end{minipage}
 \end{figure}
 
-Suggested by Professor Erik \textsc{Weyer}, we try to devise a second-order \textit{shelving filter} widely utilized in audio equalization to pre-emphasize the speech signal. With the aid of \cite{DAFX_book}, setting center frequency of transition band $F_c$ = 1000 Hz and gain $G$ = 6 dB, eventually we obtain an appropriate filter that effectively amplifies high-frequency components without attenuating low frequencies. Fig. \ref{pre_emphasis_filter} (\textcolor{navy_matlab}{navy} solid line) shows the frequency response of this shelving filter and Fig. \ref{zero_fft} shows the spectrum and pre-emphasized spectrum of word \textit{zero}.\\
+Suggested by Professor Erik \textsc{Weyer}, we try to devise a second-order \textit{shelving filter} widely utilized in audio equalization to pre-emphasize the speech signal. With the aid of \cite{DAFX_book}, setting center frequency of transition band $F_c$ = 1000 Hz and gain $G$ = 6 dB, eventually we obtain an appropriate filter that effectively amplifies high-frequency components without attenuating low frequencies. Fig. \ref{pre_emphasis_filter} (\textcolor{navy_matlab}{navy solid line}) shows the frequency response of this shelving filter and Fig. \ref{zero_fft} shows the spectrum and pre-emphasized spectrum of word \textit{zero}.\\
 
 The pre-emphasis filter is mathematically represented by (\ref{shelving-filter}) and (\ref{shleving-coef}). Equations for calculating filter coefficients are available in the Appendix on page \pageref{shelving-appendix}.
 
@@ -147,9 +147,9 @@ where $\alpha = 25/46 \approx 0.54$ and $\beta = 1 - \alpha \approx 0.46$.
 \end{minipage}
 \end{figure}
 
-Fig. \ref{hamming_bell_shape} shows the effect of the framing operation instructed by (\ref{eq:rectagular-window}) and (\ref{eq:hamming}) for $N = 512$. The \textcolor{red}{red} dash-dot ellipse in subplot 2 demonstrates the loss of information (data points near two borders are severely attenuated) due to the bell shape of the Hamming window shown in Fig. \ref{hamming_overlap} subplot 1.\\
+Fig. \ref{hamming_bell_shape} shows the effect of the framing operation instructed by (\ref{eq:rectagular-window}) and (\ref{eq:hamming}) for $N = 512$. The \textcolor{red}{red dash-dot ellipse} in subplot 2 demonstrates the loss of information (data points near two borders are severely attenuated) due to the bell shape of the Hamming window shown in Fig. \ref{hamming_overlap} subplot 1.\\
 
-In order to avoid information loss, we overlap each frame by half of the frame size. We choose to overlap a half primarily because the data points most attenuated in current frame will have largest gain in the next frame (shown by the \textcolor{green_html}{green} dash-dot rectangle in Fig. \ref{hamming_overlap}). Thus, information is effectively preserved.
+In order to avoid information loss, we overlap each frame by half of the frame size. We choose to overlap a half primarily because the data points most attenuated in current frame will have largest gain in the next frame (shown by the \textcolor{green_html}{green dash-dot rectangle} in Fig. \ref{hamming_overlap}). Thus, information is effectively preserved.
 
 %--------------------------------------------
 %--------------------------------------------
@@ -215,7 +215,7 @@ We manually identify the unvoiced region and voiced region (the remains are sile
 \end{minipage}
 \end{figure}
 
-In the case of word \textit{zero}, Fig. \ref{threshold_example1} shows the waveform and corresponding frame energy as well as the zero-crossing count of each frame. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}. The \textcolor{green_html}{green} dash-dot rectangle stands for the unvoiced region while the \textcolor{red}{red} dashed rectangle indicates voiced region. We can clearly see that unvoiced frames have low energy but high zero-crossing count, voiced frames have high energy but low zero-crossing count while silent frames have not only low energy but also low zero-crossing count. The relationships are summarized in Table \ref{table:thresholds}.
+In the case of word \textit{zero}, Fig. \ref{threshold_example1} shows the waveform and corresponding frame energy as well as the zero-crossing count of each frame. Fig. \ref{threshold_example2} is a zoomed-in version of Fig. \ref{threshold_example1}. The \textcolor{green_html}{green dash-dot rectangle} stands for the unvoiced region while the \textcolor{red}{red dashed rectangle} indicates voiced region. We can clearly see that unvoiced frames have low energy but high zero-crossing count, voiced frames have high energy but low zero-crossing count while silent frames have not only low energy but also low zero-crossing count. The relationships are summarized in Table \ref{table:thresholds}.
 
 \begin{table}[H]
 \centering
