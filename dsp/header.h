@@ -27,8 +27,8 @@
 // for the case LMS_LENGTH = 128, MOD(-1) = 127, MOD(0) = 0, MOD(1) = 1
 
 #define ENERGY_THRESHOLD	0.04
-#define ENERGY_RIGHT_SHIFT	9
-// ENERGY_RIGHT_SHIFT = log2(WINDOW_LENGTH)
+#define ENERGY_RIGHT_SHIFT	8
+// explained in Chapter DSP Section C Program
 
 /* zero crossing count */
 #define IS_ZC(X, Y)			( (X) > 0 && (Y) < 0 || (X) < 0 && (Y) > 0 )
