@@ -30,4 +30,5 @@ function print_array(data, variable_name, variable_type, permission)
 	end
 
 	fprintf(fid, '\n};\n');
+	fclose(fid);
 end
