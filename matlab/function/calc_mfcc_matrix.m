@@ -1,13 +1,7 @@
 function mfcc_matrix = calc_mfcc_matrix(x)
 	global FRAME_NUM;
 	global WINDOW_LENGTH;
-	global BANK_NUM;
-	global FEAT_NUM;
 	global ENERGY_THRESHOLD;
-
-	global border;
-	global bank_gain;
-	global dct_coef;
 
 	global shelf_b;
 	global shelf_a;
