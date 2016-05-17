@@ -16,7 +16,7 @@ int main() {
 	calc_bank_gain();
 	twidfftrad2_fr32(twiddle_table, WINDOW_LENGTH);
 	calc_dct_coef();
-	energy_threshold = float_to_fr32(ENERGY_THRESHOLD / (float) (1 << ENERGY_RIGHT_SHIFT));
+	energy_threshold = float_to_fr32(ENERGY_THRESHOLD);
 	/* /Initialization */
 
 	int chunk_index = 0;
