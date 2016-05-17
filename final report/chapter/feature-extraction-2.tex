@@ -370,7 +370,7 @@ Fig. \ref{mel_triangle} shows that $H_{mel}$ given in (\ref{eq:mel-bank-gain}) a
 
 \subsection{Log Scaling}
 
-Log scaling is the second step of cepstrum transformation and also makes MFCC algorithm more resilient to both very quiet and very loud sound. Besides, the log scale in dB imitates human nonlinear perception to loudness \cite{farin2008mathematical}.  Without taking logarithm, recognition accuracy is severely reduced \cite{tan2008automatic}. 
+Log scaling is the second step of cepstrum transformation and also makes MFCC algorithm more resilient to both very quiet and very loud sound. Besides, the log scale in dB imitates human nonlinear perception to loudness \cite{farin2008mathematical}. Without taking logarithm, recognition accuracy is severely reduced \cite{tan2008automatic}. 
 \begin{equation}
 \label{eq:log-scaling}
 \hat{X}_j[m] = \log_{10}(X_j[m]) \quad m = 1, 2, \dots, M
