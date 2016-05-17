@@ -8,10 +8,10 @@
 \section{Improvements on previous work}
 
 \begin{enumerate}
-\item Adaptive noise cancellation scheme is firstly introduced.
+\item Adaptive noise cancellation scheme is firstly introduced. Least Mean Square algorithm makes recognition system more resilient to accessible noise.
 \item Cross-validation technique is utilized to make full use of the limited speech corpus by partitioning a sample of data into complementary subsets, analyzing one subset and validating by the other subset.
-\item In addition to Baum-Welch algorithm, Maximum Mutual Information algorithm is brought in. Thereby, relationship between confusable models are established.
-\item More computations are conducted in fixed-point arithmetic during implementation on DSP. Reusable coefficients are precomputed. Floating-point arithmetic is avoided as much as possible.
+\item In addition to Baum-Welch algorithm, Maximum Mutual Information algorithm is brought in. Thereby, relationship between confusable models is established.
+\item More computations are conducted in fixed-point arithmetic and reusable coefficients are precomputed during implementation on DSP. Thus, program efficiency and memory management are further optimized.
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------
@@ -36,4 +36,4 @@ Inspired by the voice-controlled speaker `Echo' with an array of seven microphon
 %--------------------------------------------
 
 \subsection{Support of More Home Appliances}
-In order to control more home appliances, we firstly need to extend the number of words supported by our system. Besides, more home appliances will be integrated into the system. For example, air-conditioners can be controlled via infrared emitter and lights can be switched by a relay.
+In order to control more home appliances, we firstly need to extend the number of words supported by our system. Besides, more home appliances will be integrated into the system. For example, air-conditioners can be controlled via infrared emitter and lights can be switched by a relay. With further development and investment, our word recognition system has the potential to become the hub of home automation.
