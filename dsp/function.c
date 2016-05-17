@@ -207,7 +207,7 @@ void calc_mfcc(fract32 frame_data_point[], float mfcc_row[])
 	rfft_fr32(frame_data_point, fft_spectrum, twiddle_table, TWIDDLE_STRIDE, WINDOW_LENGTH, &block_exponent, DYNAMIC_SCALING);
 
 	fract32 power_spectrum[WINDOW_LENGTH_HALF];
-	for (i = 0; i < WINDOW_LENGTH_HALF; ++i) {
+	for (i = 1; i < WINDOW_LENGTH_HALF; ++i) {
 		fract32 absolute = cabs_fr32(fft_spectrum[i]);
 		power_spectrum[i] = multr_fr1x32x32(absolute, absolute);
 /*

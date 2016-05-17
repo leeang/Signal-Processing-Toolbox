@@ -62,8 +62,8 @@ fract32 energy_threshold = 0;
 /* /Global Coefficients */
 
 /* FFT */
-complex_fract32 fft_spectrum[WINDOW_LENGTH] = {0};
-complex_fract32 twiddle_table[WINDOW_LENGTH/2] = {0};
+complex_fract32 fft_spectrum[WINDOW_LENGTH];
+complex_fract32 twiddle_table[WINDOW_LENGTH/2];
 
 /* Mel filter */
 fract32 bank_gain[BANK_GAIN_LENGTH] = {0};
