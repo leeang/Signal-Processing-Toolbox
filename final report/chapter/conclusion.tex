@@ -5,6 +5,19 @@
 %	Section
 %----------------------------------------------------------------------------------------
 
+\section{Improvements on previous work}
+
+\begin{enumerate}
+\item Adaptive noise cancellation scheme is firstly introduced.
+\item Cross-validation model validation technique is utilized to make full use of the limited speech material.
+\item In addition to Baum-Welch algorithm, Maximum Mutual Information algorithm is brought in. Thereby, connections between models are established.
+\item More computations are conducted in fixed-point arithmetic during implementation on DSP. Reusable coefficients are precomputed. Floating-point arithmetic is avoided as much as possible.
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	Section
+%----------------------------------------------------------------------------------------
+
 \section{Future Improvements}
 
 \subsection{Adaptive Noise Cancellation}
@@ -23,4 +36,4 @@ Inspired by the voice-controlled speaker `Echo' with an array of seven microphon
 %--------------------------------------------
 
 \subsection{Support of More Home Appliances}
-
+In order to control more home appliances, we firstly need to extend the number of words supported by our system. Besides, more home appliances will be integrated into the system. For example, air-conditioners can be controlled via infrared emitter and lights can be switched by a relay.
