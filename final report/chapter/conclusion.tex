@@ -1,2 +1,26 @@
 \chapter{Conclusion}
 \label{chapter:conclusion}
+
+%----------------------------------------------------------------------------------------
+%	Section
+%----------------------------------------------------------------------------------------
+
+\section{Future Improvements}
+
+\subsection{Adaptive Noise Cancellation}
+
+The design and implementation of the current system support accessible noise reduction, i.e. the pure noise can be directly imported from the TV \texttt{Line Out}. Wiring will be tedious if more multi-media devices such as personal computer and audio speaker are taken into account. Besides, noise cancellation mechanism has better performance when dealing with speech noise than coping with music because the sampling frequency (16 kHz) is not high enough. However, we cannot increase the sampling frequency disparately due to the computational limitation of ADSP-BF548. In fact, in order to satisfy the real-time processing specification, we update the weights in LMS algorithm every four data points. Implementing fixed-point arithmetic or migrating to floating-point processor such as SHARC\textsuperscript{\textregistered} are potential solutions.
+
+%--------------------------------------------
+
+\subsubsection{Unaccessible Noise Cancellation}
+
+Unaccessible noise refers to the signal that cannot be conveniently obtained, such as the noise from the electric fan or outside the window.\\
+
+Inspired by the voice-controlled speaker `Echo' with an array of seven microphones, we start to look into noise reduction and speech enhancement techniques based on microphones array. By exploiting beam forming technology, `Echo' can receive the speech command from across the room even while music is playing. This scenario resembles the working condition of our system. \cite{mccowan2003microphone} and \cite{spalt2011background} have shown the feasibility of this scheme.
+
+%--------------------------------------------
+%--------------------------------------------
+
+\subsection{Support of More Home Appliances}
+
