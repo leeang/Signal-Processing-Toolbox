@@ -208,10 +208,14 @@ void calc_mfcc(fract32 frame_data_point[], float mfcc_row[])
 
 	fract32 power_spectrum[WINDOW_LENGTH_HALF];
 	for (i = 0; i < WINDOW_LENGTH_HALF; ++i) {
+		fract32 absolute = cabs_fr32(fft_spectrum[i]);
+		power_spectrum[i] = multr_fr1x32x32(absolute, absolute);
+/*
 		power_spectrum[i] = add_fr1x32(
 			multr_fr1x32x32(fft_spectrum[i].re, fft_spectrum[i].re),
 			multr_fr1x32x32(fft_spectrum[i].im, fft_spectrum[i].im)
 		);
+*/
 	}
 
 	float bank_energy[BANK_NUM] = {0.0};
