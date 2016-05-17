@@ -147,6 +147,7 @@ fig.PaperPositionMode = 'Auto';
 plot(MATLAB{index_max}, 'o');
 hold on;
 plot(DSP{index_max}, 'x');
+legend('MATLAB', 'DSP', 'Location', 'southwest');
 title(['probabilities of 27 words (dataset ' num2str(index_max) ')'], 'interpreter', 'latex');
 xlabel(['word 1 to word 27'], 'interpreter', 'latex');
 ylabel('probabilities (natural-log scale)', 'interpreter', 'latex');
