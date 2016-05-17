@@ -51,4 +51,50 @@ Thanks to the ample Arduino accessories, more home appliances can be easily inte
 
 \subsection{Feature Extraction \& Recognition}
 
+We randomly test the final system on DSP for 23 times and compare the outcomes computed by DSP and MATLAB. In term of dataset $n$ ($n = 1, 2, \dots, 23$) and word $k$ ($k = 1, 2, \dots, 27$), let $p_{MATLAB}[n, k]$ denote the probability (natural-log scale) computed by MATLAB and $p_{DSP}[n, k]$ denote the probability (natural-log scale) computed by DSP.\\
 
+We define the \textit{relative error} of word $k$ in dataset $n$
+\begin{equation}
+\varepsilon[n, k] = \frac{p_{DSP}[n, k] - p_{MATLAB}[n, k]}{p_{MATLAB}[n, k]}
+\end{equation}
+and the \textit{Root Mean Square Error} of dataset $n$
+\begin{equation}
+\epsilon_{RMSE}[n] = \sqrt{\frac{1}{27} \sum_{k = 1}^{27} (\varepsilon[n, k])^2}
+\end{equation}
+For a certain dataset $n$, $\epsilon_{RMSE}[n]$ represents the `average' of $\varepsilon[n, k]$.\\
+
+Fig. \ref{relative_error} shows that absolute relative error $|\varepsilon[n, k]|$ ranges from $1 \times 10^{-6}$ to $9 \times 10^{-3}$ and dataset 1 has the largest deviation (\textcolor{navy_matlab}{navy solid line}). Fig. \ref{root_mean_square_error} illustrates the root mean square error $\epsilon_{RMSE}[n]$ of each dataset $n$ and dataset 1 has the largest $\epsilon_{RMSE}[n]$ consistently (\textcolor{navy_matlab}{navy solid line}).
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\minipageplot{ang/relative_error}
+\caption{$\varepsilon[n, k]$ of 27 words in 23 datasets}
+\label{relative_error}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\minipageplot{ang/root_mean_square_error}
+\caption{$\epsilon_{RMSE}[n]$ of 27 words}
+\label{root_mean_square_error}
+\end{minipage}
+\end{figure}
+
+In fact, the computation error has no influence on recognition result. Take dataset 1 with the largest root mean square error as an example, Fig. \ref{word_probabilities} depicts the probabilities of 27 words computed by MATLAB (\textcolor{navy_matlab}{navy circle $\circ$}) and DSP (\textcolor{orange_matlab}{orange cross $\times$}). It can be clearly seen that error are much less than the differences between probabilities. Word \textit{one} can be recognized without any interference.
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\minipageplot{ang/word_probabilities}
+\caption{27 probabilities in dataset 1}
+\label{word_probabilities}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\minipageplot{ang/processing_time}
+\caption{Processing time}
+\label{processing_time}
+\end{minipage}
+\end{figure}
+
+The clocks required to extract speech features and obtain recognition outcome are plotted in Fig. \ref{processing_time}. Given $6 \times 10^8$ clocks per second, corresponding processing time can be converted. The average processing time of these 23 datasets is \textbf{97 milliseconds}. Processing time varies because different number of frames are passed into MFCC after threshold.
