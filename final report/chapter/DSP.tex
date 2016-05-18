@@ -196,6 +196,13 @@ This example project helps us spend more time on our main quest instead of confi
 %--------------------------------------------
 %--------------------------------------------
 
+\subsection{Buffering}
+
+We set the length of segment buffer as 6000 data points, i.e. interrupt callback function is called every $6000 / 16000 = 0.375$ seconds. Time-consuming LMS based filter works every interrupt and noise-reduced command is cached in a buffer of 48000 data points. Speech signal processing and recondition routine run once when the eighth interrupt comes.
+
+%--------------------------------------------
+%--------------------------------------------
+
 \subsection{Pre-emphasis}
 
 It is easy to prove that filter characteristic represented by (\ref{shelving-filter}) will not change if coefficients $a_i$ and $b_i$ are uniformly scaled. Some pre-emphasis filter coefficients (\ref{shleving-coef}) are beyond the fractional data types domain $[-1, 1]$. Hence, the coefficients are scaled by $\lambda$ before converting them from \texttt{float} to \texttt{fract32}.\\
