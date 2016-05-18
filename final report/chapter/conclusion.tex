@@ -28,6 +28,9 @@ Working on a follow-up project, we are able to draw valuable experience from pre
 
 \subsection{Speech Signal Processing}
 
+If computational resources are sufficient, it is recommended to sample the analog signal at a higher frequency (e.g. 48 kHz). Then, implement a low-pass filter with passband edge $\omega_c$ at $\pi/3$ followed by a down-sampler. As a result, feature extraction will be able to get rid of high frequency noise because these components will not be folded into baseband. FIR filter is recommended because efficient overlap-add method can be applied.
+
+%--------------------------------------------
 
 \subsection{Adaptive Noise Cancellation}
 
