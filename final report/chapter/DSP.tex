@@ -250,6 +250,8 @@ fetch from external memory &30878 &0.051463 ms\\
 \label{subsection:dsp-thresholds}
 \subsubsection{Frame Energy}
 
+The energy of frame $j$ is defined in (\ref{eq:frame-energy}) on page \pageref{eq:frame-energy}. We have known the amplitude of a data point $-1 \le s_j[n] \le 1$, thus the power of this point $(s_j[n])^2 \le 1$. The energy of a frame is the sum of $N$ power points. We invoke intrinsic function \texttt{add\_fr1x32()} when performing addition of 32-bit fractional data. Although the energy is possibly larger than 1, because intrinsic functions support saturation arithmetic that prevents overflow \cite{gan2007embedded}. That is, the addition function will return 1 if the original outcome exceeds 1. Given the threshold set by us is smaller than 1, as long as the variable becomes saturated, the frame energy will be definitely higher than the threshold. Hence, saturation will not influence the threshold decision.
+
 %--------------------------------------------
 %--------------------------------------------
 
