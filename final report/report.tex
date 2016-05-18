@@ -39,7 +39,7 @@
 \usepackage{longtable}
 
 % hypertext
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{nameref}
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \textsl{\nameref*{#1}}}}
 
@@ -80,8 +80,8 @@
 \tableofcontents
 \input{chapter/introduction.tex}
 \input{chapter/feature-extraction-1.tex}
-\input{chapter/LMS.tex}
 \input{chapter/feature-extraction-2.tex}
+\input{chapter/LMS.tex}
 \input{chapter/HMM.tex}
 \input{chapter/DSP.tex}
 \input{chapter/design-and-performance.tex}
