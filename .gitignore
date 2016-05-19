@@ -11,6 +11,10 @@
 *.bbl
 *.fdb_latexmk
 *.fls
+
+*.nav
+*.snm
+
 matlab/data
 final report/chapter/report.tex
 final report/report.pdf
