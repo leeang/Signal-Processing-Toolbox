@@ -176,12 +176,12 @@ We overlapped each frame by half of the frame size primarily considering that da
 \frametitle{Threshold}
 \begin{itemize}
 \item distinguish informative frames from silent frames
-\item two metrics: frame \textit{enery} and frame \textit{zero-crossing count}
+\item two metrics: frame \textit{energy} and frame \textit{zero-crossing count}
 \end{itemize}
 
 \begin{table}[H]
 \centering
-\caption{Properties of Different Frame Types}
+\caption{properties of different frame types}
 \begin{tabu} to 0.9\textwidth {X[c]X[c]X[c]}
 \toprule
 Type &Energy &Zero-crossing count\\
@@ -203,7 +203,7 @@ Silent &low &low\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{ang/threshold2}
-\caption{Decision-making Strategy}
+\caption{decision-making strategy}
 \end{figure}
 \end{frame}
 
@@ -269,16 +269,85 @@ W_N = e^{\frac{- 2\pi i}{N}}
 	\end{itemize}
 	\item Fast Fourier Transform makes implementation of DFT practical in real-time processing.
 	\begin{itemize}
-		\item Radix-2 algorithm requires $2^n$-point sequences.
+		\item Radix-2 algorithm restricts the length of input sequence to $2^n$.
 	\end{itemize}
 \end{itemize}
+\end{frame}
+
+%--------------------------------------------
+
+\begin{frame}
+The DFT $X[k]$ of a real sequence $x[n] \in \mathbb{R}$ is a conjugate symmetric sequence (from ELEN90058 \textit{Signal Processing} Workshop 3).
+\begin{equation}
+X[k] = X^*[\langle-k\rangle_{N}] = X^*[N-k]
+\end{equation}
+
+Last $(\frac{N}{2} - 1)$ points can be discarded when computing the power spectrum.
+\begin{equation}
+\hat{S}_j[k] = |S_j(k)|^2 \quad k = 1, 2, \dots, \frac{N}{2} + 1
+\end{equation}
 \end{frame}
 
 %--------------------------------------------
 %--------------------------------------------
 
 \begin{frame}
-\frametitle{2. Log Scaling}
+\frametitle{3. Bank Filtering}
+Total power within each mel-scale bank
+\begin{equation}
+X_j[m] = \sum^{\frac{N}{2} + 1}_{k=1} \hat{S}_j[k] H_{mel}[m, k] \quad m = 1, 2, \dots, M
+\end{equation}
+where $H_{mel}[m, k]$ is the gain of the $k$-th power spectrum data point within bank $m$.
+\end{frame}
+
+%--------------------------------------------
+
+\begin{frame}
+\begin{equation}
+H_{mel}[m, k] =
+\begin{cases}
+0 &f_{d2c}(k) \le f[m-1]\\
+\displaystyle\frac{k - f[m-1]}{f[m] - f[m-1]} &f[m-1] < f_{d2c}(k) \le f[m]\\
+\displaystyle\frac{f[m+1] - k}{f[m+1] - f[m]} &f[m] < f_{d2c}(k) \le f[m+1]\\
+0 &f_{d2c}(k) > f[m+1]
+\end{cases}
+\end{equation}
+where $f_{d2c}(k) = (k-1) \cdot \frac{F_s}{N}$ transforming the index $k$ of DFT into continuous-time frequency.\\
+\vspace{10pt}
+Frequency boundaries $f[m]$ ($m = 0, 1, \dots, M+1$) are equally spaced in mel-scale. We take $f[0]$ = 0 Hz and $f[M+1] = \frac{F_s}{2}$ = 8000 Hz as per the system specification and popular number of banks $M = 20$ \cite{davis1980comparison}.
+\end{frame}
+
+%--------------------------------------------
+
+\begin{frame}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth, trim={0 0.6cm 0 0.6cm}, clip]{ang/mel_triangle}
+\end{figure}
+
+$H_{mel}$ is essentially a band-pass filter for each bank $m$. $H_{mel}$ offers maximal gain 1 at the `central frequency' of bank $m$ and then linearly decreases to 0 until reaching adjacent critical frequencies (the `central frequency' of bank $m-1$ and bank $m+1$).
+\end{frame}
+
+%--------------------------------------------
+
+\begin{frame}
+\begin{enumerate}
+\item Each power spectrum data point $\hat{S}_j[k]$ (\textcolor{gold_matlab}{gold circle $\circ$}) is multiplied by the corresponding gain $H_{mel}[m, k]|_{m=9}$ (\textcolor{orange_matlab}{orange asterisk $*$}).
+\item \textcolor{orange_matlab}{Orange crosses $\times$} represent the filtered power spectrum.
+\item Total power within bank $m=9$ is the sum of all filtered power data points.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/bank_filter_demostration}
+\end{figure}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+\frametitle{3. Log Scaling}
 \begin{equation}
 \hat{X}_j[m] = \log_{10}(X_j[m]) \quad m = 1, 2, \dots, M
 \end{equation}
