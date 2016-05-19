@@ -1,5 +1,30 @@
 \section{Final Implementation}
 
 \begin{frame}
-\frametitle{Frame Title}
+\frametitle{Improvements on previous work}
+\begin{enumerate}
+\item Coefficients that intensively require floating-point computations are precomputed. (Hamming window and discrete cosine transform)
+\item Frame energy is calculated in fixed-point arithmetic.
+\item Mel-bank filter gains are precomputed and stored in an ingeniously designed structure. Meaningless multiplications with zeros are illuminated.
+\item Symmetry is sufficiently taken in to consideration. (FFT of real sequence and discrete cosine transform)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Performance on DSP Board}
+We randomly test the final system on DSP for 23 times and compare the outcomes computed by DSP and MATLAB.
+\begin{itemize}
+	\item dataset $n$ ($n = 1, 2, \dots, 23$) and word $k$ ($k = 1, 2, \dots, 27$)
+	\item $p_{MATLAB}[n, k]$ denotes the probability (natural-log scale) computed by MATLAB
+	\item $p_{DSP}[n, k]$ denotes the probability (natural-log scale) computed by DSP
+\end{itemize}
+
+The \textit{relative error} of word $k$ in dataset $n$
+\begin{equation}
+\varepsilon[n, k] = \frac{p_{DSP}[n, k] - p_{MATLAB}[n, k]}{p_{MATLAB}[n, k]}
+\end{equation}
+The \textit{Root Mean Square Error} of dataset $n$
+\begin{equation}
+\epsilon_{RMSE}[n] = \sqrt{\frac{1}{27} \sum_{k = 1}^{27} (\varepsilon[n, k])^2}
+\end{equation}
 \end{frame}
