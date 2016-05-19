@@ -1,5 +1,9 @@
 \section{Final Implementation}
 
+%----------------------------------------------------------------------------------------
+%	Subsection
+%----------------------------------------------------------------------------------------
+
 \begin{frame}
 \frametitle{Improvements on previous work}
 \begin{enumerate}
@@ -10,11 +14,15 @@
 \end{enumerate}
 \end{frame}
 
+%----------------------------------------------------------------------------------------
+%	Subsection
+%----------------------------------------------------------------------------------------
+
 \begin{frame}
 \frametitle{Performance on DSP Board}
 We randomly test the final system on DSP for 23 times and compare the outcomes computed by DSP and MATLAB.
 \begin{itemize}
-	\item dataset $n$ ($n = 1, 2, \dots, 23$) and word $k$ ($k = 1, 2, \dots, 27$)
+	\item for dataset $n$ ($n = 1, 2, \dots, 23$) and word $k$ ($k = 1, 2, \dots, 27$)
 	\item $p_{MATLAB}[n, k]$ denotes the probability (natural-log scale) computed by MATLAB
 	\item $p_{DSP}[n, k]$ denotes the probability (natural-log scale) computed by DSP
 \end{itemize}
@@ -27,4 +35,61 @@ The \textit{Root Mean Square Error} of dataset $n$
 \begin{equation}
 \epsilon_{RMSE}[n] = \sqrt{\frac{1}{27} \sum_{k = 1}^{27} (\varepsilon[n, k])^2}
 \end{equation}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+Absolute relative error $|\varepsilon[n, k]|$ ranges from $1 \times 10^{-6}$ to $9 \times 10^{-3}$ and dataset 1 has the largest deviation (\textcolor{navy_matlab}{navy solid line}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/relative_error}
+\end{figure}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+Dataset 1 has the largest root mean square error $\epsilon_{RMSE}[n]$ consistently.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/root_mean_square_error}
+\caption{the root mean square error $\epsilon_{RMSE}[n]$ of each dataset $n$}
+\end{figure}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+\begin{itemize}
+\item The computation error has no influence on recognition result.
+\item Take the worst case (dataset 1) as an example.
+\item Probabilities of 27 words computed by MATLAB (\textcolor{navy_matlab}{navy circle $\circ$}) and DSP (\textcolor{orange_matlab}{orange cross $\times$}) are so close to each other. (much less than the differences between probabilities.)
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/word_probabilities}
+\end{figure}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+Feature Extraction \& Recognition
+\begin{itemize}
+\item The average processing time of these 23 datasets is 95.8 ms.
+\item The maximal processing time is 150 ms.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/processing_time}
+\end{figure}
 \end{frame}
