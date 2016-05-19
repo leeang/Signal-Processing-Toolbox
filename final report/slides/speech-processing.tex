@@ -33,11 +33,13 @@
 %--------------------------------------------
 
 \begin{frame}
-\frametitle{Pre-emphasis}
 A first-order FIR filter is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}.
 \begin{equation}
 y[n] = x[n] - \alpha x[n-1]
 \end{equation}
+\begin{itemize}
+\item simple and efficient
+\end{itemize}
 \end{frame}
 
 %--------------------------------------------
@@ -87,5 +89,63 @@ Setting center frequency of transition band $F_c$ = 1000 Hz and gain $G$ = 6 dB,
 \begin{figure}[H]
 \centering
 \includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/pre_emphasis_filter}
+\end{figure}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	Subsection
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Framing \& Windowing}
+Speech signals are time-varying signals, but due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period ($\sim$ 30 ms) \cite{brandstein1995practical}.
+
+\begin{align*}
+30 \text{ ms} &\longrightarrow 480 \text{ samples per second}\\
+&\longrightarrow N = 512 \text{ (Radix-2 FFT)}\\
+\end{align*}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+The framing operation can be finished by multiplying the signal by a moving window.
+
+\begin{equation}
+\label{eq:windowing}
+s_j[n] =
+\begin{cases}
+w[n] s[n+jN] & n = 1, 2, \dots, N\\
+0 & \text{otherwise}
+\end{cases}
+\end{equation}
+
+The simplest and easiest-to-implement window is a rectangular window.
+\begin{equation}
+\label{eq:rectagular-window}
+w[n] =
+\begin{cases}
+1, & n = 1, 2, \dots, N\\
+0, & \text{otherwise}
+\end{cases}
+\end{equation}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+The selection of a proper window always involves a trade-off between \textbf{frequency resolution} and \textbf{spectral leakage}.
+
+\begin{itemize}
+\item the width of the mainlobe determines frequency resolution.
+\item the gain of the sidelobes decides spectral leakage.
+\end{itemize}
+We chose an intermediate \textit{Hamming} window.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/windows_frequency}
 \end{figure}
 \end{frame}
