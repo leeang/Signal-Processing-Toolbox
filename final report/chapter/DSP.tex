@@ -371,7 +371,7 @@ fetch from external memory &9367 &0.015612 ms\\
 
 \begin{enumerate}
 \item first-order FIR pre-emphasis filter is replaced by shelving filter.
-\item coefficients that intensively require floating-point computations are precomputed.\\(pre-emphasis, Hamming window and discrete cosine transform)
+\item coefficients that intensively require floating-point computations are precomputed.\\(Hamming window, Mel-bank filter gain and discrete cosine transform)
 \item frame energy is calculated in fixed-point arithmetic.
-\item Mel bank filter gains are precomputed and stored in an ingeniously designed structure. Meaningless multiplications with zeros are illuminated.
+\item Sparse matrices are stored in ingeniously designed structures. Meaningless multiplications with zeros are illuminated.\\(Mel-bank filter gain, inversed variance matrices and transition matrices)
 \end{enumerate}
