@@ -1,0 +1,49 @@
+\documentclass{beamer}
+
+% \usepackage{roboto}
+
+\usepackage{graphicx}	% Required to insert images
+\graphicspath{{img/}}
+\usepackage{epstopdf}	% Required to insert .eps images
+\usepackage{float}		% float figure
+
+\usepackage{xcolor}
+\definecolor{green_html}{HTML}{008000}
+\definecolor{orange_html}{HTML}{FFA500}
+
+\definecolor{navy_matlab}{rgb}{0, 0.4470, 0.7410}
+\definecolor{orange_matlab}{rgb}{0.8500, 0.3250, 0.0980}
+\definecolor{gold_matlab}{rgb}{0.9290, 0.6940, 0.1250}
+\definecolor{purple_matlab}{rgb}{0.4940, 0.1840, 0.5560}
+\definecolor{green_matlab}{rgb}{0.4660, 0.6740, 0.1880}
+\definecolor{sky_matlab}{rgb}{0.3010, 0.7450, 0.9330}
+\definecolor{brown_matlab}{rgb}{0.6350, 0.0780, 0.1840}
+
+\usepackage[numbers]{natbib}
+\citestyle{IEEEtran}
+\bibliographystyle{IEEEtranN}
+\renewcommand\bibname{References}
+
+\mode<presentation> {
+	\usetheme[secheader]{Boadilla}
+}
+
+\title{Voice-controlled Television}
+\author{Minjia Zheng, Ang Li \& Yuanyuan Sun}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\input{slides/speech-processing.tex}
+
+%----------------------------------------------------------------------------------------
+%	Reference
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+\bibliography{chapter/bib_li}
+\end{frame}
+
+\end{document}
