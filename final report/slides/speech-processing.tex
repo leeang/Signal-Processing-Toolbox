@@ -61,12 +61,10 @@ The \textcolor{orange_matlab}{orange dash-dot line} shows that frequencies below
 Suggested by Professor Erik Weyer, we devised a second-order \textit{shelving filter} widely utilized in audio equalization to pre-emphasize the speech signal.
 
 \begin{equation}
-\label{shelving-filter}
 y[n] = \frac{1}{a_0} \Big( b_0 x[n] + b_1 x[n-1] + b_2 x[n-3] - a_1 y[n-1] - a_2 y[n-2] \Big)
 \end{equation}
 where
 \begin{align}
-\label{shleving-coef}
 &\begin{cases}
 a_0 = 1\\
 a_1 = -1.523796\\
@@ -113,7 +111,6 @@ Speech signals are time-varying signals, but due to the inertial motion of artic
 The framing operation can be finished by multiplying the signal by a moving window.
 
 \begin{equation}
-\label{eq:windowing}
 s_j[n] =
 \begin{cases}
 w[n] s[n+jN] & n = 1, 2, \dots, N\\
@@ -123,7 +120,6 @@ w[n] s[n+jN] & n = 1, 2, \dots, N\\
 
 The simplest and easiest-to-implement window is a rectangular window.
 \begin{equation}
-\label{eq:rectagular-window}
 w[n] =
 \begin{cases}
 1, & n = 1, 2, \dots, N\\
@@ -148,4 +144,104 @@ We chose an intermediate \textit{Hamming} window.
 \centering
 \includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/windows_frequency}
 \end{figure}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+Directly framing results in loss of information due to the bell shape of the Hamming window. Data points near two borders are severely attenuated (shown in \textcolor{red}{red dash-dot ellipse}).
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/hamming_bell_shape}
+\end{figure}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+We overlapped each frame by half of the frame size primarily considering that data points most severely attenuated in current frame will have largest gain in the next frame. (shown in \textcolor{green_html}{green dash-dot rectangle})
+\begin{figure}[H]
+\centering
+\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/hamming_overlap}
+\end{figure}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	Subsection
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Threshold}
+\begin{itemize}
+\item distinguish informative frames from silent frames
+\item two metrics: frame \textit{enery} and frame \textit{zero-crossing count}
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Properties of Different Frame Types}
+\begin{tabu} to 0.9\textwidth {X[c]X[c]X[c]}
+\toprule
+Type &Energy &Zero-crossing count\\
+\hline
+Voiced &high &low\\
+\hline
+Unvoiced &low &high\\
+\hline
+Silent &low &low\\
+\bottomrule
+\end{tabu}
+\end{table}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ang/threshold2}
+\caption{Decision-making Strategy}
+\end{figure}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	Subsection
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Mel-frequency Cepstral Coefficients Extraction}
+\begin{equation}
+X[n] = \mathcal{F}^{-1} \left\{\log_{10} \left( |\mathcal{F}\{s[n]\}|^2 \right) \right\}
+\end{equation}
+\vspace{10pt}
+
+The whole process to evaluate \textit{power cepstrum} can be divided into three procedures.
+\begin{enumerate}
+\item Compute the Discrete Fourier Transform $S_j[k]$ and corresponding power spectrum $\hat{S}_j[k]$ of a time-domain signal $s_j[n]$.
+\item Take the logarithm of the power spectrum $\hat{S}_j[k]$.
+\item Conduct inverse Fourier transform.
+\end{enumerate}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+\begin{enumerate}
+\item Compute the Discrete Fourier Transform $S_j[k]$ and corresponding power spectrum $\hat{S}_j[k]$ of a time-domain signal $s_j[n]$.
+\item Take the logarithm of the power spectrum $\hat{S}_j[k]$.
+\item Conduct inverse Fourier transform.
+\end{enumerate}
+\vspace{10pt}
+
+\begin{itemize}
+	\item Human hearing responds to the entire critical band instead of individual frequencies in this band.
+	\begin{itemize}
+		\item MFCC calculates the total power within each certain mel-scale band prior to log scaling.
+	\end{itemize}
+	\item MFCC substitutes Discrete Cosine Transform for inverse Fourier transform to reduce the computational complexity.
+\end{itemize}
 \end{frame}
