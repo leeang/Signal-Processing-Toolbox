@@ -230,13 +230,6 @@ The whole process to evaluate \textit{power cepstrum} can be divided into three 
 %--------------------------------------------
 
 \begin{frame}
-\begin{enumerate}
-\item Compute the Discrete Fourier Transform $S_j[k]$ and corresponding power spectrum $\hat{S}_j[k]$ of a time-domain signal $s_j[n]$.
-\item Take the logarithm of the power spectrum $\hat{S}_j[k]$.
-\item Conduct inverse Fourier transform.
-\end{enumerate}
-\vspace{10pt}
-
 \begin{itemize}
 	\item Human hearing responds to the entire critical band instead of individual frequencies in this band.
 	\begin{itemize}
@@ -244,4 +237,13 @@ The whole process to evaluate \textit{power cepstrum} can be divided into three 
 	\end{itemize}
 	\item MFCC substitutes Discrete Cosine Transform for inverse Fourier transform to reduce the computational complexity.
 \end{itemize}
+\vspace{10pt}
+
+MFCC extraction process
+\begin{enumerate}
+\item Power spectrum
+\item Bank filtering
+\item Log scaling
+\item Discrete cosine transform
+\end{enumerate}
 \end{frame}
