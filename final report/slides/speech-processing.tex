@@ -247,3 +247,45 @@ MFCC extraction process
 \item Discrete cosine transform
 \end{enumerate}
 \end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+\frametitle{1. Power spectrum}
+
+Discrete Fourier Transform constitutes the cornerstone of spectrum analysis.
+\begin{equation}
+S_j[k] = \sum_{n=1}^{N} s_j[n] W_N^{(n-1) k} \quad k = 1, 2, \dots, N
+\end{equation}
+\begin{equation}
+W_N = e^{\frac{- 2\pi i}{N}}
+\end{equation}
+
+\begin{itemize}
+	\item The computations required by DFT increase dramatically as length $N$ increases.
+	\begin{itemize}
+		\item Infeasible to directly implement on large sequences.
+	\end{itemize}
+	\item Fast Fourier Transform makes implementation of DFT practical in real-time processing.
+	\begin{itemize}
+		\item Radix-2 algorithm requires $2^n$-point sequences.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+\frametitle{2. Log Scaling}
+\begin{equation}
+\hat{X}_j[m] = \log_{10}(X_j[m]) \quad m = 1, 2, \dots, M
+\end{equation}
+
+\begin{enumerate}
+\item Log scaling makes the system more resilient to both very quiet and very loud sound.
+\item Log scale in dB imitates human nonlinear perception to loudness \cite{farin2008mathematical}.
+\item Without taking logarithm, recognition accuracy is severely reduced \cite{tan2008automatic}.
+\end{enumerate}
+\end{frame}
