@@ -5,7 +5,7 @@
 %----------------------------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Improvements on previous work}
+\frametitle{Improvements on previous work (word recognition)}
 \begin{enumerate}
 \item Coefficients that intensively require floating-point computations are precomputed. (Hamming window, Mel-bank filter gain and discrete cosine transform)
 \item Frame energy is calculated in fixed-point arithmetic.
@@ -20,7 +20,7 @@
 
 \begin{frame}
 \frametitle{Performance on DSP Board}
-We randomly test the final system on DSP for 23 times and compare the outcomes computed by DSP and MATLAB.
+We randomly test the word recognition system on DSP and compare the outcomes computed by DSP and MATLAB for 23 times.
 \begin{itemize}
 	\item for dataset $n$ ($n = 1, 2, \dots, 23$) and word $k$ ($k = 1, 2, \dots, 27$)
 	\item $p_{MATLAB}[n, k]$ denotes the probability (natural-log scale) computed by MATLAB
@@ -92,4 +92,24 @@ Feature Extraction \& Recognition
 \centering
 \includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/processing_time}
 \end{figure}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	Subsection
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Final system implemented on DSP board}
+\begin{itemize}
+	\item Adaptive noise cancellation based on Least Mean Square Algorithm
+	\item Real-time recognition of spoken words
+	\item Result indication via a five-LED array
+		\begin{itemize}
+		\item \LED\offLED\offLED\offLED\offLED\onLED $\longrightarrow$ $(00001)_2 = 1$ $\longrightarrow$ word \textit{one}
+		\item \LED\offLED\onLED\onLED\onLED\onLED $\longrightarrow$ $(01111)_2 = 15$ $\longrightarrow$ word \textit{fifteen}
+		\item \LED\onLED\offLED\onLED\offLED\onLED $\longrightarrow$ $(10101)_2 = 21$ $\longrightarrow$ word \textit{zero}
+		\item \LED\offLED\offLED\offLED\offLED\offLED $\longrightarrow$ $(00000)_2 = 0$ $\longrightarrow$ error
+		\end{itemize}
+	\item YouTube controller
+\end{itemize}
 \end{frame}
