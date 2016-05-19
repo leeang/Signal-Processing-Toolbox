@@ -252,7 +252,7 @@ MFCC extraction process
 %--------------------------------------------
 
 \begin{frame}
-\frametitle{1. Power spectrum}
+\frametitle{I. Power spectrum}
 
 Discrete Fourier Transform constitutes the cornerstone of spectrum analysis.
 \begin{equation}
@@ -292,7 +292,7 @@ Last $(\frac{N}{2} - 1)$ points can be discarded when computing the power spectr
 %--------------------------------------------
 
 \begin{frame}
-\frametitle{3. Bank Filtering}
+\frametitle{II. Bank Filtering}
 Total power within each mel-scale bank
 \begin{equation}
 X_j[m] = \sum^{\frac{N}{2} + 1}_{k=1} \hat{S}_j[k] H_{mel}[m, k] \quad m = 1, 2, \dots, M
@@ -347,7 +347,7 @@ $H_{mel}$ is essentially a band-pass filter for each bank $m$. $H_{mel}$ offers 
 %--------------------------------------------
 
 \begin{frame}
-\frametitle{3. Log Scaling}
+\frametitle{III. Log Scaling}
 \begin{equation}
 \hat{X}_j[m] = \log_{10}(X_j[m]) \quad m = 1, 2, \dots, M
 \end{equation}
@@ -357,4 +357,25 @@ $H_{mel}$ is essentially a band-pass filter for each bank $m$. $H_{mel}$ offers 
 \item Log scale in dB imitates human nonlinear perception to loudness \cite{farin2008mathematical}.
 \item Without taking logarithm, recognition accuracy is severely reduced \cite{tan2008automatic}.
 \end{enumerate}
+\end{frame}
+
+%--------------------------------------------
+%--------------------------------------------
+
+\begin{frame}
+\frametitle{IV. Discrete Cosine Transform}
+IDFT is replaced by discrete cosine transform (DCT) due to the symmetric and real characteristic of log power spectrum $\hat{X}_j[m]$ \cite{picone1993signal, iser2008bandwidth}.
+\begin{equation}
+\hat{C}_j[n] = \sqrt{\frac{2}{M}} \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right) \quad n = 1, 2, \dots, F
+\end{equation}
+
+\begin{itemize}
+	\item The order of DCT ($F$) determines the amount of MFCCs. \cite{tan2008automatic}
+	\begin{itemize}
+		\item Higher-order coefficients incorporates excitation information.
+		\item Lower-order coefficients indicate the slowly varying vocal tract. (more useful for speech recognition)
+	\end{itemize}
+	\item European Telecommunications Standards Institute adopts $F = 13$ in their speech recognition standard \cite{etsi2001202}.
+	\item We also condense the $M$-point sequence $\hat{X}_j[m]$ into a shorter $F$-point sequence $\hat{C}_j[n]$. The choice of $F$ will be further discussed in \textit{Design \& Performance} section.
+\end{itemize}
 \end{frame}
