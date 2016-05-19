@@ -380,7 +380,7 @@ Log scaling is the second step of cepstrum transformation and also makes MFCC al
 
 \subsection{Discrete Cosine Transform}
 
-At the last step, IDFT is replaced by a discrete cosine transform (DCT) due to the symmetric and real characteristic log power spectrum $\hat{X}_j[m]$ \cite{picone1993signal, iser2008bandwidth}.
+At the last step, IDFT is replaced by a discrete cosine transform (DCT) due to the symmetric and real characteristic of log power spectrum $\hat{X}_j[m]$ \cite{picone1993signal, iser2008bandwidth}.
 \begin{equation}
 \label{eq:dct}
 \hat{C}_j[n] = \sqrt{\frac{2}{M}} \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right) \quad n = 1, 2, \dots, F
