@@ -113,3 +113,35 @@ Feature Extraction \& Recognition
 	\item YouTube controller
 \end{itemize}
 \end{frame}
+
+%----------------------------------------------------------------------------------------
+%	Subsection
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Utilization in Home Automation}
+\begin{itemize}
+	\item Arduino\textsuperscript{\textregistered} board as an intermediate
+		\begin{itemize}
+		\item the open-source ecosystem of abundant resources already available to Arduino developers
+		\item infrared emitter $\longrightarrow$ remote control of TV
+		\item WIFI module $\longrightarrow$ wireless communication
+		\item relay $\longrightarrow$ AC light switch
+		\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{ang/relay-arduino}
+\caption{Control AC Light using Arduino with Relay Module \cite{relay-arduino}}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+Control YouTube on PC
+\begin{enumerate}
+	\item A python program keeps listening the serial port (wired connection) or the \texttt{Telnet} port (wireless connection).
+	\item The python program simulates a keyboard press according to the received command.
+	\item YouTube on PC becomes controlled by speech command.
+\end{enumerate}
+\end{frame}

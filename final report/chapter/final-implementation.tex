@@ -31,7 +31,7 @@ We also tried to transmit command via UART serial port. It took a long time to c
 Arduino retrieves logic levels of aforementioned pins and then decodes the binary information. At the next step, Arduino sends the decoded result to the WIFI module via the serial port (8 data bits, no parity, one stop bit, 9600 bps). At this stage, PC can directly receive the result through a USB cable.
 
 \subsubsection{YouTube Controller on PC}
-A python program keeps listening the serial port (wired connection) or the \texttt{Telnet} port (wireless connection). Afterwards, python program simulates a keyboard press according to the received command. Thereby, YouTube on TV becomes controlled by speech command.
+A python program keeps listening the serial port (wired connection) or the \texttt{Telnet} port (wireless connection). Afterwards, python program simulates a keyboard press according to the received command. Thereby, YouTube on PC becomes controlled by speech command.
 
 \subsubsection{Other applications}
 Thanks to the ample Arduino accessories, more home appliances can be easily integrated into our system. For example, air conditioners can be controlled by the infrared signal sent by IR emitter. AC lights can also be controlled by an Arduino with relay module.
