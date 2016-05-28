@@ -112,28 +112,6 @@ The whole process to evaluate \textit{power cepstrum} can be divided into three 
 %--------------------------------------------
 
 \begin{frame}
-\begin{itemize}
-	\item Human hearing responds to the entire critical band instead of individual frequencies in this band.
-	\begin{itemize}
-		\item MFCC calculates the total power within each certain mel-scale band prior to log scaling.
-	\end{itemize}
-	\item MFCC substitutes Discrete Cosine Transform for inverse Fourier transform to reduce the computational complexity.
-\end{itemize}
-\vspace{10pt}
-
-MFCC extraction process
-\begin{enumerate}
-\item Power spectrum
-\item Bank filtering
-\item Log scaling
-\item Discrete cosine transform
-\end{enumerate}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
 \frametitle{I. Power spectrum}
 
 Discrete Fourier Transform
@@ -142,6 +120,11 @@ S_j[k] = \sum_{n=1}^{N} s_j[n] W_N^{(n-1) k} \quad k = 1, 2, \dots, N
 \end{equation}
 \begin{equation}
 W_N = e^{\frac{- 2\pi i}{N}}
+\end{equation}
+
+Power Spectrum
+\begin{equation}
+\hat{S}_j[k] = |S_j[k]|^2 \quad k = 1, 2, \dots, \frac{N}{2} + 1
 \end{equation}
 \end{frame}
 
@@ -152,6 +135,7 @@ W_N = e^{\frac{- 2\pi i}{N}}
 \frametitle{II. Bank Filtering}
 \begin{itemize}
 	\item Human hearing responds to the entire critical band instead of individual frequencies in this band.
+	\item $M = 20$ banks
 \end{itemize}
 
 \begin{figure}[H]
@@ -196,16 +180,13 @@ W_N = e^{\frac{- 2\pi i}{N}}
 
 \begin{frame}
 \frametitle{IV. Discrete Cosine Transform}
-IDFT is replaced by discrete cosine transform (DCT) due to the symmetric and real characteristic of log power spectrum $\hat{X}_j[m]$ \cite{picone1993signal, iser2008bandwidth}.
-\begin{equation}
-\hat{C}_j[n] = \sqrt{\frac{2}{M}} \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right) \quad n = 1, 2, \dots, F
-\end{equation}
+IDFT is replaced by Discrete Cosine Transform due to the symmetric and real characteristic of log power spectrum $\hat{X}_j[m]$ \cite{picone1993signal, iser2008bandwidth}.
 
 \begin{itemize}
 	\item The order of DCT ($F$) determines the amount of MFCCs. \cite{tan2008automatic}
 	\begin{itemize}
-		\item Higher-order coefficients incorporates excitation information.
-		\item Lower-order coefficients indicate the slowly varying vocal tract. (more useful for speech recognition)
+		\item Higher-order coefficients incorporate excitation information.
+		\item Lower-order coefficients indicate the slowly varying vocal tract.
 	\end{itemize}
 	\item European Telecommunications Standards Institute adopts $F = 13$ in their speech recognition standard \cite{etsi2001202}.
 	\item We also condense the $M$-point sequence $\hat{X}_j[m]$ into a shorter $F$-point sequence $\hat{C}_j[n]$. The choice of $F$ will be further discussed in \textit{Design \& Performance} section.
