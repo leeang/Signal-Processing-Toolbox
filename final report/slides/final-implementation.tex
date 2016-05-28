@@ -38,9 +38,9 @@ Feature Extraction \& Recognition
 
 \begin{frame}
 \begin{itemize}
-\item The computation error has no influence on recognition result.
-\item Take the worst case (dataset 1) as an example.
-\item Probabilities of 27 words computed by MATLAB (\textcolor{navy_matlab}{navy circle $\circ$}) and DSP (\textcolor{orange_matlab}{orange cross $\times$}) are so close to each other. (much less than the differences between probabilities.)
+\item Probabilities of 27 words computed by MATLAB (\textcolor{navy_matlab}{navy circle $\circ$})
+\item Probabilities of 27 words computed by DSP (\textcolor{orange_matlab}{orange cross $\times$})
+\item Dataset 1 has the largest relative error among 23 datasets.
 \end{itemize}
 
 \begin{figure}[H]
@@ -90,13 +90,4 @@ Feature Extraction \& Recognition
 \includegraphics[width=0.5\textwidth]{ang/relay-arduino}
 \caption{Control AC Light using Arduino with Relay Module \cite{relay-arduino}}
 \end{figure}
-\end{frame}
-
-\begin{frame}
-Control YouTube on PC
-\begin{enumerate}
-	\item A python program keeps listening the serial port (wired connection) or the \texttt{Telnet} port (wireless connection).
-	\item The python program simulates a keyboard press according to the received command.
-	\item YouTube on PC becomes controlled by speech command.
-\end{enumerate}
 \end{frame}
