@@ -22,8 +22,8 @@
 \begin{itemize}
 \item compensates this natural attenuation before spectral analysis.
 \end{itemize}
-\item Hearing is more sensitive to the components higher than 1 kHz.
 \vspace{15pt}
+\item Hearing is more sensitive to the components higher than 1 kHz.
 \begin{itemize}
 \item caters to human perception of sound
 \end{itemize}
@@ -36,12 +36,14 @@
 
 \begin{frame}
 \frametitle{Framing \& Windowing}
-Speech signals are time-varying signals, but due to the inertial motion of articulators (speech organs such as the tongue, lips and palate), speech can be considered statistically stationary in a short-time period ($\sim$ 30 ms) \cite{brandstein1995practical}.
-
-\begin{align*}
-30 \text{ ms} &\longrightarrow 480 \text{ samples per second}\\
-&\longrightarrow N = 512 \text{ (Radix-2 FFT)}\\
-\end{align*}
+\begin{itemize}
+	\item speech signals are time-varying signals.
+	\item the inertial motion of articulators
+	\begin{itemize}
+		\item speech can be considered statistically stationary in a short-time period ($\sim$ 30 ms) \cite{brandstein1995practical}.
+		\item 30 ms $\longrightarrow$ 480 samples $\longrightarrow$ 512 (Radix-2 FFT)
+	\end{itemize}
+\end{itemize}
 \end{frame}
 
 %--------------------------------------------
