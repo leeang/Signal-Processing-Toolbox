@@ -8,7 +8,6 @@
 \frametitle{Improvements on previous work (word recognition)}
 \begin{enumerate}
 \item Coefficients that intensively require floating-point computations are precomputed. (Hamming window, Mel-bank filter gain and discrete cosine transform)
-\item Frame energy is calculated in fixed-point arithmetic.
 \item Sparse matrices are stored in ingeniously designed structures. Meaningless multiplications with zeros are illuminated. (Mel bank filter gain, inversed variance matrices and transition matrices)
 \item Symmetry is sufficiently taken in to consideration. (FFT of real sequence and discrete cosine transform)
 \end{enumerate}
