@@ -136,37 +136,12 @@ MFCC extraction process
 \begin{frame}
 \frametitle{I. Power spectrum}
 
-Discrete Fourier Transform constitutes the cornerstone of spectrum analysis.
+Discrete Fourier Transform
 \begin{equation}
 S_j[k] = \sum_{n=1}^{N} s_j[n] W_N^{(n-1) k} \quad k = 1, 2, \dots, N
 \end{equation}
 \begin{equation}
 W_N = e^{\frac{- 2\pi i}{N}}
-\end{equation}
-
-\begin{itemize}
-	\item The computations required by DFT increase dramatically as length $N$ increases.
-	\begin{itemize}
-		\item Infeasible to directly implement on large sequences.
-	\end{itemize}
-	\item Fast Fourier Transform makes implementation of DFT practical in real-time processing.
-	\begin{itemize}
-		\item Radix-2 algorithm restricts the length of input sequence to $2^n$.
-	\end{itemize}
-\end{itemize}
-\end{frame}
-
-%--------------------------------------------
-
-\begin{frame}
-The DFT $X[k]$ of a real sequence $x[n] \in \mathbb{R}$ is a conjugate symmetric sequence (from ELEN90058 \textit{Signal Processing} Workshop 3).
-\begin{equation}
-X[k] = X^*[\langle-k\rangle_{N}] = X^*[N-k]
-\end{equation}
-
-Last $(\frac{N}{2} - 1)$ points can be discarded when computing the power spectrum.
-\begin{equation}
-\hat{S}_j[k] = |S_j(k)|^2 \quad k = 1, 2, \dots, \frac{N}{2} + 1
 \end{equation}
 \end{frame}
 
@@ -175,6 +150,10 @@ Last $(\frac{N}{2} - 1)$ points can be discarded when computing the power spectr
 
 \begin{frame}
 \frametitle{II. Bank Filtering}
+\begin{itemize}
+	\item Human hearing responds to the entire critical band instead of individual frequencies in this band.
+\end{itemize}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth, trim={0 0.6cm 0 0.6cm}, clip]{ang/mel_triangle}
@@ -185,9 +164,9 @@ Last $(\frac{N}{2} - 1)$ points can be discarded when computing the power spectr
 
 \begin{frame}
 \begin{enumerate}
-\item Each power spectrum data point $\hat{S}_j[k]$ (\textcolor{gold_matlab}{gold circle $\circ$}) is multiplied by the corresponding gain $H_{mel}[m, k]|_{m=9}$ (\textcolor{orange_matlab}{orange asterisk $*$}).
-\item \textcolor{orange_matlab}{Orange crosses $\times$} represent the filtered power spectrum.
-\item Total power within bank $m=9$ is the sum of all filtered power data points.
+\item Each power spectrum data point (\textcolor{gold_matlab}{gold circle $\circ$}) is multiplied by the corresponding gain (\textcolor{orange_matlab}{orange asterisk $*$}).
+\item \textcolor{orange_matlab}{Orange crosses $\times$} represent the scaled power spectrum.
+\item Total power within bank $m=9$ is the sum of all scaled power data points.
 \end{enumerate}
 
 \begin{figure}[H]
