@@ -43,71 +43,11 @@
 		\item speech can be considered statistically stationary in a short-time period ($\sim$ 30 ms) \cite{brandstein1995practical}.
 		\item 30 ms $\longrightarrow$ 480 samples $\longrightarrow$ 512 (Radix-2 FFT)
 	\end{itemize}
+	\item Hamming window
+	\begin{itemize}
+		\item a compromise between \textbf{frequency resolution} and \textbf{spectral leakage}
+	\end{itemize}
 \end{itemize}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
-The framing operation can be finished by multiplying the signal by a moving window.
-
-\begin{equation}
-s_j[n] =
-\begin{cases}
-w[n] s[n+jN] & n = 1, 2, \dots, N\\
-0 & \text{otherwise}
-\end{cases}
-\end{equation}
-
-The simplest and easiest-to-implement window is a rectangular window.
-\begin{equation}
-w[n] =
-\begin{cases}
-1, & n = 1, 2, \dots, N\\
-0, & \text{otherwise}
-\end{cases}
-\end{equation}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
-The selection of a proper window always involves a trade-off between \textbf{frequency resolution} and \textbf{spectral leakage}.
-
-\begin{itemize}
-\item the width of the mainlobe determines frequency resolution.
-\item the gain of the sidelobes decides spectral leakage.
-\end{itemize}
-We chose an intermediate \textit{Hamming} window.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/windows_frequency}
-\end{figure}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
-Directly framing results in loss of information due to the bell shape of the Hamming window. Data points near two borders are severely attenuated (shown in \textcolor{red}{red dash-dot ellipse}).
-\begin{figure}[H]
-\centering
-\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/hamming_bell_shape}
-\end{figure}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
-We overlapped each frame by half of the frame size primarily considering that data points most severely attenuated in current frame will have largest gain in the next frame. (shown in \textcolor{green_html}{green dash-dot rectangle})
-\begin{figure}[H]
-\centering
-\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/hamming_overlap}
-\end{figure}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
@@ -235,39 +175,10 @@ Last $(\frac{N}{2} - 1)$ points can be discarded when computing the power spectr
 
 \begin{frame}
 \frametitle{II. Bank Filtering}
-Total power within each mel-scale bank
-\begin{equation}
-X_j[m] = \sum^{\frac{N}{2} + 1}_{k=1} \hat{S}_j[k] H_{mel}[m, k] \quad m = 1, 2, \dots, M
-\end{equation}
-where $H_{mel}[m, k]$ is the gain of the $k$-th power spectrum data point within bank $m$.
-\end{frame}
-
-%--------------------------------------------
-
-\begin{frame}
-\begin{equation}
-H_{mel}[m, k] =
-\begin{cases}
-0 &f_{d2c}(k) \le f[m-1]\\
-\displaystyle\frac{k - f[m-1]}{f[m] - f[m-1]} &f[m-1] < f_{d2c}(k) \le f[m]\\
-\displaystyle\frac{f[m+1] - k}{f[m+1] - f[m]} &f[m] < f_{d2c}(k) \le f[m+1]\\
-0 &f_{d2c}(k) > f[m+1]
-\end{cases}
-\end{equation}
-where $f_{d2c}(k) = (k-1) \cdot \frac{F_s}{N}$ transforming the index $k$ of DFT into continuous-time frequency.\\
-\vspace{10pt}
-Frequency boundaries $f[m]$ ($m = 0, 1, \dots, M+1$) are equally spaced in mel-scale. We take $f[0]$ = 0 Hz and $f[M+1] = \frac{F_s}{2}$ = 8000 Hz as per the system specification and number of banks $M = 20$ (one common choice) \cite{davis1980comparison}.
-\end{frame}
-
-%--------------------------------------------
-
-\begin{frame}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth, trim={0 0.6cm 0 0.6cm}, clip]{ang/mel_triangle}
 \end{figure}
-
-$H_{mel}$ is essentially a band-pass filter for each bank $m$. $H_{mel}$ offers maximal gain 1 at the `central frequency' of bank $m$ and then linearly decreases to 0 until reaching adjacent critical frequencies (the `central frequency' of bank $m-1$ and bank $m+1$).
 \end{frame}
 
 %--------------------------------------------
