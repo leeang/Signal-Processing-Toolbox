@@ -23,72 +23,11 @@
 \item compensates this natural attenuation before spectral analysis.
 \end{itemize}
 \item Hearing is more sensitive to the components higher than 1 kHz.
+\vspace{15pt}
 \begin{itemize}
 \item caters to human perception of sound
 \end{itemize}
 \end{itemize}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
-A first-order FIR filter is widely implemented, including the previous group where $\alpha = 0.95$ \cite{EVW-report}.
-\begin{equation}
-y[n] = x[n] - \alpha x[n-1]
-\end{equation}
-\begin{itemize}
-\item simple and efficient
-\item rough and coarse
-\end{itemize}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
-The \textcolor{orange_matlab}{orange dash-dot line} shows that frequencies below 500 Hz are severely suppressed even though frequencies above 3 kHz are successfully amplified.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/pre_emphasis_filter}
-\end{figure}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
-Suggested by Professor Erik Weyer, we devised a second-order \textit{shelving filter} widely utilized in audio equalization to pre-emphasize the speech signal.
-
-\begin{equation}
-y[n] = \frac{1}{a_0} \Big( b_0 x[n] + b_1 x[n-1] + b_2 x[n-3] - a_1 y[n-1] - a_2 y[n-2] \Big)
-\end{equation}
-where
-\begin{align}
-&\begin{cases}
-a_0 = 1\\
-a_1 = -1.523796\\
-a_2 = 0.649345
-\end{cases}
-&\begin{cases}
-b_0 = 1.861856\\
-b_1 = -3.102851\\
-b_2 = 1.366544
-\end{cases}
-\end{align}
-\end{frame}
-
-%--------------------------------------------
-%--------------------------------------------
-
-\begin{frame}
-Setting center frequency of transition band $F_c$ = 1000 Hz and gain $G$ = 6 dB, eventually we obtain an appropriate filter that effectively amplifies high-frequency components without attenuating low frequencies. The \textcolor{navy_matlab}{navy solid line} shows the frequency response of this shelving filter.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/pre_emphasis_filter}
-\end{figure}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
