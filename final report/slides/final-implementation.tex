@@ -7,14 +7,23 @@
 \begin{frame}
 \frametitle{Improvements on previous work}
 \begin{enumerate}
-\item Coefficients that intensively require floating-point computations are precomputed. (Hamming window, Mel-bank filter gain and discrete cosine transform)
-\item Sparse matrices are stored in ingeniously designed structures. Meaningless multiplications with zeros are illuminated. (Mel bank filter gain, inversed variance matrices and transition matrices)
-\item Symmetry is sufficiently taken in to consideration. (FFT of real sequence and discrete cosine transform)
+	\item Coefficients that intensively require floating-point computations are precomputed.
+	\begin{itemize}
+		\item Hamming window, Mel-bank filter gain, discrete cosine transform
+	\end{itemize}
+	\item Sparse matrices are stored in ingeniously designed structures. Meaningless multiplications with zeros are illuminated.
+	\begin{itemize}
+		\item Mel bank filter gain, inversed variance matrices, transition matrices
+	\end{itemize}
+	\item Symmetry is sufficiently taken in to consideration.
+	\begin{itemize}
+		\item FFT of real sequence, discrete cosine transform
+	\end{itemize}
 \end{enumerate}
 
 \begin{itemize}
-\item Hamming window: $1 - \frac{0.014552 \text{ ms}}{1.012452 \text{ ms}} = 98.6\%$
-\item DCT: $1 - \frac{0.006482 \text{ ms}}{0.287135 \text{ ms}} = 97.7\%$
+\item Hamming window: $1 - \frac{0.014552 \text{ ms}}{1.012452 \text{ ms}} = 99\%$
+\item DCT: $1 - \frac{0.006482 \text{ ms}}{0.287135 \text{ ms}} = 98\%$
 \end{itemize}
 \end{frame}
 
