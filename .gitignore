@@ -14,7 +14,7 @@
 
 *.nav
 *.snm
+*.dvi
 
 matlab/data
-final report/chapter/report.tex
 final report/report.pdf
