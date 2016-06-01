@@ -133,13 +133,15 @@ Power Spectrum
 \frametitle{IV. Discrete Cosine Transform}
 IDFT is replaced by Discrete Cosine Transform due to the symmetric and real characteristic of log power spectrum $\hat{X}_j[m]$ \cite{picone1993signal, iser2008bandwidth}.
 
+\begin{equation}
+\hat{C}_j[n] = \sqrt{\frac{2}{M}} \sum^{M}_{m=1} \hat{X}_j[m] \cos \left( \frac{\pi}{M} (m - 0.5) (n-1) \right) \quad n = 1, 2, \dots, F
+\end{equation}
+
 \begin{itemize}
-	\item The order of DCT ($F$) determines the amount of MFCCs. \cite{tan2008automatic}
+	\item Condense $M = 20$ points into $F = 13$ points. \cite{tan2008automatic}
 	\begin{itemize}
 		\item Higher-order coefficients incorporate excitation information.
 		\item Lower-order coefficients indicate the slowly varying vocal tract.
 	\end{itemize}
-	\item European Telecommunications Standards Institute adopts $F = 13$ in their speech recognition standard \cite{etsi2001202}.
-	\item We also condense the $M$-point sequence $\hat{X}_j[m]$ into a shorter $F$-point sequence $\hat{C}_j[n]$. The choice of $F$ will be further discussed in \textit{Design \& Performance} section.
 \end{itemize}
 \end{frame}
