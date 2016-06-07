@@ -62,16 +62,17 @@
 
 \begin{frame}
 \frametitle{Mel-frequency Cepstral Coefficients Extraction}
+
+Power cepstrum
 \begin{equation}
 X[n] = \mathcal{F}^{-1} \left\{\log_{10} \left( |\mathcal{F}\{s[n]\}|^2 \right) \right\}
 \end{equation}
 \vspace{10pt}
 
-The whole process to evaluate \textit{power cepstrum} can be divided into three procedures.
 \begin{enumerate}
-\item Compute the Discrete Fourier Transform $S_j[k]$ and corresponding power spectrum $\hat{S}_j[k]$ of a time-domain signal $s_j[n]$.
-\item Take the logarithm of the power spectrum $\hat{S}_j[k]$.
-\item Conduct inverse Fourier transform.
+\item Discrete Fourier Transform and corresponding power spectrum.
+\item Log scaling.
+\item Inverse Fourier Transform.
 \end{enumerate}
 \end{frame}
 
