@@ -29,7 +29,7 @@
 \begin{frame}
 \begin{enumerate}
 	\setcounter{enumi}{1}
-	\item Sparse matrices are stored in ingeniously designed structures.
+	\item Special data structures are designed for sparse matrices.
 	\begin{itemize}
 		\item Mel bank filter gain, inversed variance matrices, transition matrices
 		\item Meaningless multiplications with zeros are illuminated.
@@ -39,6 +39,7 @@
 \begin{figure}[H]
 \centering
 \includegraphics[width=3in, trim={0 0.6cm 0 0.6cm}, clip]{ang/mel_filter_bank_gain}
+\caption{Mel filter bank gain}
 \end{figure}
 \end{frame}
 
@@ -106,6 +107,7 @@ Feature Extraction \& Recognition
 		\item \LED\onLED\offLED\onLED\offLED\onLED $\longrightarrow$ $(10101)_2 = 21$ $\longrightarrow$ word \textit{zero}
 		\item \LED\offLED\offLED\offLED\offLED\offLED $\longrightarrow$ $(00000)_2 = 0$ $\longrightarrow$ error
 		\end{itemize}
+	\item Wireless communication (WIFI)
 	\item YouTube controller
 		\begin{itemize}
 		\item A Python program receives command and controls YouTube on PC.
@@ -122,7 +124,7 @@ Feature Extraction \& Recognition
 \begin{itemize}
 	\item Arduino\textsuperscript{\textregistered} board as an intermediate
 		\begin{itemize}
-		\item the open-source ecosystem of abundant resources already available to Arduino developers
+		\item the open-source ecosystem of abundant resources
 		\item WIFI module $\longrightarrow$ wireless communication
 		\item infrared emitter $\longrightarrow$ remote control of TV
 		\item relay $\longrightarrow$ AC light switch
