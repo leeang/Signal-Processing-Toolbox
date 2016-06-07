@@ -7,26 +7,51 @@
 \begin{frame}
 \frametitle{Final Implementation}
 
-Improvements on previous work
 \begin{enumerate}
 	\item Coefficients that intensively require floating-point computations are precomputed.
 	\begin{itemize}
 		\item Hamming window, Mel-bank filter gain, discrete cosine transform
 	\end{itemize}
-	\item Sparse matrices are stored in ingeniously designed structures. Meaningless multiplications with zeros are illuminated.
+\end{enumerate}
+
+\begin{itemize}
+\item Hamming window:
+\begin{equation}
+1 - \frac{0.014552 \text{ ms}}{1.012452 \text{ ms}} = 99\%
+\end{equation}
+\item DCT:
+\begin{equation}
+1 - \frac{0.006482 \text{ ms}}{0.287135 \text{ ms}} = 98\%
+\end{equation}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item Sparse matrices are stored in ingeniously designed structures.
 	\begin{itemize}
 		\item Mel bank filter gain, inversed variance matrices, transition matrices
+		\item Meaningless multiplications with zeros are illuminated.
 	\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\begin{enumerate}
+	\setcounter{enumi}{2}
 	\item Symmetry is sufficiently taken in to consideration.
 	\begin{itemize}
 		\item FFT of real sequence, discrete cosine transform
 	\end{itemize}
 \end{enumerate}
 
-\begin{itemize}
-\item Hamming window: $1 - \frac{0.014552 \text{ ms}}{1.012452 \text{ ms}} = 99\%$
-\item DCT: $1 - \frac{0.006482 \text{ ms}}{0.287135 \text{ ms}} = 98\%$
-\end{itemize}
+\begin{equation}
+S_j[k] = \sum_{n=1}^{N} s_j[n] W_N^{(n-1) k} \quad k = 1, 2, \dots, N
+\end{equation}
+\begin{equation}
+\hat{S}_j[k] = |S_j[k]|^2 \quad k = 1, 2, \dots, \frac{N}{2} + 1
+\end{equation}
 \end{frame}
 
 %--------------------------------------------
@@ -90,8 +115,8 @@ Feature Extraction \& Recognition
 	\item Arduino\textsuperscript{\textregistered} board as an intermediate
 		\begin{itemize}
 		\item the open-source ecosystem of abundant resources already available to Arduino developers
-		\item infrared emitter $\longrightarrow$ remote control of TV
 		\item WIFI module $\longrightarrow$ wireless communication
+		\item infrared emitter $\longrightarrow$ remote control of TV
 		\item relay $\longrightarrow$ AC light switch
 		\end{itemize}
 \end{itemize}
