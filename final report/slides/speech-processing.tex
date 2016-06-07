@@ -5,14 +5,15 @@
 \begin{itemize}
 \item Pre-emphasis filter is essentially an \textbf{high-pass} filter.
 \vspace{15pt}
-\item Voiced speech naturally have an attenuation of $\sim$ 20 dB per decade due to physiological characteristics of the speech production system \cite{picone1993signal}.
+\item Voiced speech has a natural attenuation of $\sim$ 20 dB per decade.
 \begin{itemize}
-\item compensates this natural attenuation before spectral analysis.
+\item physiological characteristics of the speech production system \cite{picone1993signal}.
+\item Pre-emphasis compensates this natural attenuation.
 \end{itemize}
 \vspace{15pt}
 \item Hearing is more sensitive to the components higher than 1 kHz.
 \begin{itemize}
-\item caters to human perception of sound
+\item Pre-emphasis caters to human perception of sound.
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -25,9 +26,9 @@
 \frametitle{Framing \& Windowing}
 \begin{itemize}
 	\item speech signals are time-varying signals.
-	\item the inertial motion of articulators
+	\item speech can be considered stationary in a short-time period ($\sim$ 30 ms)
 	\begin{itemize}
-		\item speech can be considered statistically stationary in a short-time period ($\sim$ 30 ms) \cite{brandstein1995practical}.
+		\item the inertial motion of articulators \cite{brandstein1995practical}.
 		\item 30 ms $\longrightarrow$ 480 samples $\longrightarrow$ 512 (Radix-2 FFT)
 	\end{itemize}
 	\item Hamming window
