@@ -147,11 +147,18 @@ Considering the project budget and potential risk, we eventually decided to stic
 
 \section{Execution Efficiency Optimization}
 
-In addition to the experience gained in ELEN90058 \textit{Signal Processing} workshop sessions, \cite{TuningCSourceCode} provides official guidance for optimizing C program execution efficiency. Some important guidelines are summarized as follows.\\
+In addition to the experience gained in ELEN90058 \textit{Signal Processing} workshop sessions, \cite{TuningCSourceCode} provides official guidance for optimizing C program execution efficiency.
 
-Fixed-point arithmetic operations are natively supported by hardware, hence computation on \texttt{int} (including \texttt{fract32}) variables are executed at high speed. Nevertheless, the hardware does not directly support \textbf{integer division}. Division and modulus operations on \texttt{int} variables are multicycle operations, this will prevent the optimizer from using a hardware loop for any loops around the division \cite{TuningCSourceCode}. Hence, it is recommended to avoid divide or modulus operators inside a loop whenever possible.\\
+\subsection{Avoid Integer Division in Loops}
+Fixed-point arithmetic operations are natively supported by hardware, hence computation on \texttt{int} (including \texttt{fract32}) variables are executed at high speed. Nevertheless, the hardware does not directly support \textbf{integer division}. Division and modulus operations on \texttt{int} variables are multicycle operations, this will prevent the optimizer from using a hardware loop for any loops around the division \cite{TuningCSourceCode}. Hence, it is recommended to avoid divide or modulus operators inside a loop whenever possible.
 
+\subsection{Avoid Float Arithmetic}
 Floating-point arithmetic operations are implemented using software emulation and consequently far slower than integer operations. An arithmetic floating-point operation inside a loop will prevent the optimizer from using a hardware loop \cite{TuningCSourceCode}. As a result, floating-point operations inside a loop should be avoided whenever possible.
+
+\subsection{Statistical Profiler}
+
+\subsection{\texttt{time.h} Library}
+
 
 %----------------------------------------------------------------------------------------
 %	Section
