@@ -391,3 +391,17 @@ At the last step, IDFT is replaced by a discrete cosine transform (DCT) due to t
 \end{equation}
 
 The order of DCT ($F$) determines the amount of MFCCs. Higher-order coefficients include excitation information while lower-order coefficients indicate the slowly varying vocal tract. The latter one is more useful for speech recognition.\cite{tan2008automatic} Hence, it is beneficial to condense the $M$-point sequence $\hat{X}_j[m]$ into a shorter $F$-point sequence $\hat{C}_j[n]$ ($F < M$). For example, European Telecommunications Standards Institute adopts $F = 13$ in their speech recognition standard \cite{etsi2001202}. We test the system performance for $F = 12, 13, \dots, 16$ and $F = 13$ gives the best recognition accuracy. The choice of $F$ will be further discussed in \fullref{section:design-optimization} on page \pageref{section:design-optimization}.
+
+%--------------------------------------------
+%--------------------------------------------
+
+\section{Summary}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5in]{ang/speech-processing}
+\caption{Feature Extraction}
+\label{speech-processing}
+\end{figure}
+
+In order to extract speech features, we firstly pre-emphasize the speech signal. Then, we devide 48000 data points (for 3 seconds) into 180 frames. After the threshold block, we obtain $J$ informative frames out of 180 frames. Sequently, we extract the feature vector $\hat{C}_j \in \mathbb{R}^F$ from each frame. Eventually, a $J \times F$ MFCC matrix is obtained and will be processing by following classfication (Viterbi) block as shown in Fig. \ref{fig intro} on page \pageref{fig intro}.
