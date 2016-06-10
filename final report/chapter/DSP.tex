@@ -356,9 +356,26 @@ fetch from external memory &9367 &0.015612 ms\\
 
 \section{Improvements on previous work}
 
-\begin{enumerate}
-\item first-order FIR pre-emphasis filter is replaced by shelving filter.
-\item coefficients that intensively require floating-point computations are precomputed.\\(Hamming window, Mel-bank filter gain and discrete cosine transform)
-\item frame energy is calculated in fixed-point arithmetic.
-\item Sparse matrices are stored in ingeniously designed structures. Meaningless multiplications with zeros are illuminated.\\(Mel-bank filter gain, inversed variance matrices and transition matrices)
-\end{enumerate}
+Coefficients that intensively require floating-point computations are precomputed.
+
+\begin{table}[H]
+\centering
+\caption{Reusable Coefficients}
+\begin{tabu} to \textwidth {XXX}
+\toprule
+&variable &equation\\
+\hline
+Hamming window &$w[n]$ &(\ref{eq:hamming}) on page \pageref{eq:hamming}\\
+\hline
+Mel-bank filter gain &$H_{mel}[m, k]$ &(\ref{eq:mel-bank-gain}) on page \pageref{eq:mel-bank-gain}\\
+\hline
+discrete Fourier transform &$H_{dct}[n, m]$ &(\ref{eq:dct-coef-form}) on page \pageref{eq:dct-coef-form}\\
+\bottomrule
+\end{tabu}
+\end{table}
+
+Take Hamming window as an example, the processing time for each frame is reduced by 0.9979 ms, consequently 179.6 ms are saved for 180 frames. Note that the average total processing time to recognize a command is 95.8 ms (will be further discussed in \fullref{chapter:implementation}). Without pre-computation of Hamming window weights, the total processing time will increase by $187\%$.\\
+
+Frame energy is calculated in fixed-point arithmetic (\fullref{subsection:dsp-thresholds}).\\
+
+Special data structures are designed for sparse matrices, such as Mel-bank filter gain shown in Fig. \ref{mel_filter_bank_gain} on page \pageref{mel_filter_bank_gain} and transition matrices shown in Fig. \ref{fig 5} on page \pageref{fig 5}.
