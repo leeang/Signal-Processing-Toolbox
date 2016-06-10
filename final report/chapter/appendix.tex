@@ -157,6 +157,26 @@ largest normalized number &$\pm (2-2^{-23}) \times 2^{127} \approx \pm 3.4 \time
 \end{tabu}
 \end{table}
 
+%--------------------------------------------
+%--------------------------------------------
+
+\subsection{Software Process}
+
+We develop the software system of our project according to the following set of activities.
+\begin{enumerate}
+\item Determine system specification.
+\item Design algorithm in MATLAB.
+\item Optimize program efficiency in MATLAB, e.g. pre-computing reusable coefficients, taking advantage of symmetry, scaling data in order to use fixed-point arithmetic.
+\item Develop evolutionarily. Implementation and validation are interleaved.
+\begin{enumerate}
+	\item Implement each function in C language on DSP board.
+	\item Validate each function by comparing the outcomes calculated by DSP with the expected results from MATLAB. Round off errors are allowed but differences are supposed to be within precision tolerance.
+\end{enumerate}
+\item Adjust algorithm in MATLAB if the original design is infeasible to implement due to precision and speed restriction of DSP board.
+\item Implement algorithms for real-time processing.
+\item Tune performance by optimizing efficiency and improving accuracy.
+\end{enumerate}
+
 %----------------------------------------------------------------------------------------
 %	Section
 %----------------------------------------------------------------------------------------
