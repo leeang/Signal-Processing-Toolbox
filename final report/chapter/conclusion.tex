@@ -26,12 +26,6 @@ Working on a follow-up project, we are able to draw valuable experience from pre
 
 \section{Future Improvements}
 
-\subsection{Speech Signal Processing}
-
-If computational resources are sufficient, it is recommended to sample the analog signal at a higher frequency (e.g. 48 kHz). Then, implement a low-pass filter with passband edge $\omega_c$ at $\pi/3$ followed by a down-sampler. As a result, feature extraction will be able to get rid of high frequency noise because these components will not be folded into baseband. FIR filter is recommended because efficient overlap-add method can be applied.
-
-%--------------------------------------------
-
 \subsection{Adaptive Noise Cancellation}
 
 The design and implementation of the current system support accessible noise reduction, i.e. the pure noise can be directly imported from the TV \texttt{Line Out}. Wiring will be tedious if more multi-media devices such as personal computer and audio speaker are taken into account. Besides, noise cancellation mechanism has better performance when dealing with speech noise than coping with music because the sampling frequency (16 kHz) is not high enough. However, we cannot increase the sampling frequency disparately due to the computational limitation of ADSP-BF548. In fact, in order to satisfy the real-time processing specification, we update the weights in LMS algorithm every four data points. Implementing fixed-point arithmetic or migrating to floating-point processor such as SHARC\textsuperscript{\textregistered} are potential solutions.
