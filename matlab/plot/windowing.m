@@ -43,7 +43,7 @@ grid on;
 legend('rectangular', 'hannning', 'hamming', 'blackman')
 title('windows in time domain ($N = 16$)', 'interpreter', 'latex');
 xlabel('normalized frequency ($\times \pi$ rad/sample)', 'interpreter', 'latex');
-ylabel('magnitude (dB)', 'interpreter', 'latex');
+ylabel('magnitude (linear scale)', 'interpreter', 'latex');
 ylim([0 1.2]);
 
 print('windows_time', '-dpdf');
