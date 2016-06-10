@@ -2,10 +2,13 @@
 \chapter{Feature Extraction}
 \label{chapter:speech-processing}
 
+Based on the speech features introduced in \fullref{chapter:speech-feature}, this chapter will present the approach to extract speech features. Feature exaction includes two primary steps - pre-processing and Mel-frequency cepstral coefficients, corresponding to \textit{pre-process} block and \textit{MFCC} block in Fig. \ref{fig intro} on page \pageref{fig intro}. Pre-processing involves \fullref{section:pre-processing-first} to \fullref{section:pre-processing-last} while MFCC extraction incorporates \fullref{subsection:mfcc}.
+
 \section{Analog-to-Digital Conversion}
+\label{section:pre-processing-first}
 Voices in real life are analog signals, hence before conducting digital signal processing techniques, analog-to-digital conversions are required.\\
 
-Given a continuous-time signal $s(t)$, we define the \textit{sampled signal} by
+Given a continuous-time signal $s(t)$, we define the sampled signal by
 \begin{equation}
 s[n] = s(nT_s) = s(\frac{n}{F_s})
 \end{equation}
@@ -155,6 +158,7 @@ In order to avoid information loss, we overlap each frame by half of the frame s
 %--------------------------------------------
 
 \section{Thresholds}
+\label{section:pre-processing-last}
 
 An important task involved in speech recognition is to distinguish the informative speech (voiced \& unvoiced) frames for further processing (MFCC) from the useless silent frames that will be discarded. The basic decision-making strategy is based on the three types of speech signals (voiced, unvoiced \& silent) explained in previous section. \textbf{Energy} and \textbf{zero-crossing count} are two major metrics to determine whether a frame is voiced, unvoiced or silent.
 
