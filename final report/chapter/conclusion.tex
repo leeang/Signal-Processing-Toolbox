@@ -26,6 +26,15 @@ Working on a follow-up project, we are able to draw valuable experience from pre
 
 \section{Future Improvements}
 
+\subsection{Threshold before Pre-emphasis and Hamming Windowing}
+
+We discussed the bottleneck of execution efficiency in \fullref{subsection:statistical-profiling} on page \pageref{subsection:statistical-profiling}. \texttt{pre\_emphasis()} function and \texttt{hamming()} function consume respectively $18.18\%$ and $5.65\%$ of the total processing time to recognize a speech command.\\
+
+If we could decide whether a frame will be preserved or discarded before conducting pre-emphasis and Hamming windowing, $72\%$ - $89\%$ time spent on pre-emphasis and Hamming windowing could be saved because only 20-50 frames out of 180 frames will be used to extract speech features.
+
+%--------------------------------------------
+%--------------------------------------------
+
 \subsection{Adaptive Noise Cancellation}
 
 The design and implementation of the current system support accessible noise reduction, i.e. the pure noise can be directly imported from the TV \texttt{Line Out}. Wiring will be tedious if more multi-media devices such as personal computer and audio speaker are taken into account. Besides, noise cancellation mechanism has better performance when dealing with speech noise than coping with music because the sampling frequency (16 kHz) is not high enough. However, we cannot increase the sampling frequency disparately due to the computational limitation of ADSP-BF548. In fact, in order to satisfy the real-time processing specification, we update the weights in LMS algorithm every four data points. Implementing fixed-point arithmetic or migrating to floating-point processor such as SHARC\textsuperscript{\textregistered} are potential solutions.
