@@ -158,6 +158,7 @@ Fixed-point arithmetic operations are natively supported by hardware, hence comp
 Floating-point arithmetic operations are implemented using software emulation and consequently far slower than integer operations. An arithmetic floating-point operation inside a loop will prevent the optimizer from using a hardware loop \cite{TuningCSourceCode}. As a result, floating-point operations inside a loop should be avoided whenever possible.
 
 \subsection{Statistical Profiling}
+\label{subsection:statistical-profiling}
 
 VisualDSP++ provides an excellent tool called \textit{Statistical Profiling} helping developers find the bottleneck of the execution efficiency. This tool can be found in the \texttt{Tools} $\to$ \texttt{Statistical Profiling} $\to$ \texttt{New Profiling} menu.\\
 
