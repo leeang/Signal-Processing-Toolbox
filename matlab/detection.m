@@ -55,13 +55,13 @@ mfcc_matrix = calc_mfcc_matrix(data);
 probability = zeros(1, WORD_NUM);
 for word_index = 1:WORD_NUM
 	probability(word_index) = viterbi(mfcc_matrix, word_index);
-	% Viterbi(Model{word_index}, mfcc_matrix);
 end
 
 [probability_max, result] = max(probability);
 
 % save('probability', 'probability');
 
+return;
 fig = figure;
 fig.Units = 'inches';
 pos = fig.Position;
