@@ -266,6 +266,8 @@ Fig. \ref{threshold2} shows the decision-making strategy based on the thresholds
 \label{threshold2}
 \end{figure}
 
+By testing the speech data that we obtained, we discover that 20-50 frames out of 180 will be passed to the next procedure.
+
 %--------------------------------------------
 %--------------------------------------------
 
@@ -405,3 +407,20 @@ The order of DCT ($F$) determines the amount of MFCCs. Higher-order coefficients
 \end{figure}
 
 In order to extract speech features, we firstly pre-emphasize the speech signal. Then, we devide 48000 data points (for 3 seconds) into 180 frames. After the threshold block, we obtain $J$ informative frames out of 180 frames. Sequently, we extract the feature vector $\hat{C}_j \in \mathbb{R}^F$ from each frame. Eventually, a $J \times F$ MFCC matrix is obtained and will be processing by following classfication (Viterbi) block as shown in Fig. \ref{fig intro} on page \pageref{fig intro}.
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\minipageplot{ang/mfcc_matrix-uk-zero}
+\caption{MFCC Matrix I of word \textit{zero}}
+\label{mfcc_matrix-uk-zero}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\minipageplot{ang/mfcc_matrix-us-zero}
+\caption{MFCC Matrix II of word \textit{zero}}
+\label{mfcc_matrix-us-zero}
+\end{minipage}
+\end{figure}
+
+Fig. \ref{mfcc_matrix-uk-zero} and Fig. \ref{mfcc_matrix-us-zero} illustrate the MFCC matrices of word \textit{zero} spoken by two individuals. They have same numbers of columns ($F = 13$), but the numbers of rows are different which depend on how many frames are discarded during the threshold procedure.
