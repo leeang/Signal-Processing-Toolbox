@@ -313,6 +313,43 @@ Fig. \ref{bank_filter_demostration} also shows that bank $m=9$ only intersects w
 
 In order to diminish the processing time by pre-computing and eliminating the useless operations with zeros, we design a special storage structure for this sparse matrix. One array for storing non-zero values in linear shape and one array for storing corresponding offset for each bank. One array for storing at which $k$ gain becomes non-zero (\textcolor{red}{red dashed-line arrows}) and one-array for storing the length of each grayscale block (\textcolor{orange_html}{orange solid-line arrows}).\\
 
+Take the following matrix as an example
+\begin{equation*}
+\begin{bmatrix}
+0 &0.1 &0.2 &0 &0 &0 &0\\
+0 &0 &0.5 &0.8 &0.3 &0 &0\\
+0 &0 &0 &0.5 &0.7 &0.9 &0.6
+\end{bmatrix}
+\end{equation*}
+
+The first array stores the non-zero values.
+\begin{equation*}
+\begin{bmatrix}
+0.1 &0.2 &0.5 &0.8 &0.3 &0.5 &0.7 &0.9 &0.6
+\end{bmatrix}
+\end{equation*}
+
+The second array stores the offset of the first element of each row.
+\begin{equation*}
+\begin{bmatrix}
+0 &2 &5
+\end{bmatrix}
+\end{equation*}
+
+The third array stores the number of zeros before the first non-zero element of each row (\textcolor{red}{red dashed-line arrows} in Fig. \ref{mel_filter_bank_gain}).
+\begin{equation*}
+\begin{bmatrix}
+1 &2 &3
+\end{bmatrix}
+\end{equation*}
+
+The forth array stores the length of non-zero sequence of each row (\textcolor{orange_html}{orange solid-line arrows} in Fig. \ref{mel_filter_bank_gain}).
+\begin{equation*}
+\begin{bmatrix}
+2 &3 &4
+\end{bmatrix}
+\end{equation*}
+
 Gains are converted into \texttt{fract32} by \texttt{calc\_bank\_gain()} function during system initialization. Power cepstrum data points are converted back to \texttt{float} in case of saturation before summation that evaluates the total power within each bank. We no longer insist on fixed-point arithmetic because
 \begin{enumerate}
 \item only 20 - 50 frames (out of 180 frames) are passed to MFCC;
