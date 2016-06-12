@@ -48,7 +48,7 @@ global shelf_a;
 shelf_b = shelf_b/4;
 shelf_a = shelf_a/4;
 
-load(['data/' num2str(word_input) '.mat']);
+load(['data/google-uk-' num2str(word_input) '.mat']);
 
 mfcc_matrix = calc_mfcc_matrix(data);
 
@@ -61,3 +61,15 @@ end
 [probability_max, result] = max(probability);
 
 % save('probability', 'probability');
+
+fig = figure;
+fig.Units = 'inches';
+pos = fig.Position;
+fig.PaperSize = [pos(3) pos(4)];
+fig.PaperPositionMode = 'Auto';
+imagesc(mfcc_matrix);
+colorbar;
+title('MFCC matrix of word \textit{zero}', 'interpreter', 'latex');
+xlabel('MFCCs ($n = 1, 2, \dots, F$)', 'interpreter', 'latex');
+ylabel('frames', 'interpreter', 'latex');
+print('mfcc_matrix-zero', '-dpdf');
