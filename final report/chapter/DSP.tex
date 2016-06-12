@@ -1,7 +1,7 @@
 \chapter{Digital Signal Processor}
 \label{chapter:dsp}
 
-In this chapter, we firstly introduce the hardware architecture and the data type characteristics of the DSP board. Secondly, program execution efficiency optimization guidelines are presented. Finally, choices and considerations about the C program implemented on the DSP board are recorded in the third section.
+In this chapter, we firstly introduce the hardware architecture and the data type characteristics of the DSP board. Secondly, program execution efficiency optimization guidelines are presented. Subsequently, choices and considerations about the C program implemented on the DSP board are recorded in the third section. Finally, the improvements on previous work are summarized.
 
 %----------------------------------------------------------------------------------------
 %	Section
@@ -157,9 +157,22 @@ Fixed-point arithmetic operations are natively supported by hardware, hence comp
 \subsection{Avoid Float Arithmetic}
 Floating-point arithmetic operations are implemented using software emulation and consequently far slower than integer operations. An arithmetic floating-point operation inside a loop will prevent the optimizer from using a hardware loop \cite{TuningCSourceCode}. As a result, floating-point operations inside a loop should be avoided whenever possible.
 
-\subsection{Statistical Profiler}
+\subsection{Statistical Profiling}
 
-\subsection{\texttt{time.h} Library}
+VisualDSP++ provides an excellent tool called \textit{Statistical Profiling} helping developers find the bottleneck of the execution efficiency. This tool can be found in the \texttt{Tools} $\to$ \texttt{Statistical Profiling} $\to$ \texttt{New Profiling} menu.\\
+
+As is shown in Fig. \ref{profiler}, \texttt{pre\_emphasis()} function and \texttt{hamming()} function consume respectively $18.18\%$ and $5.65\%$ of the total processing time to recognize a speech command.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5in]{ang/profiling}
+\caption{Statistical Profiling}
+\label{profiler}
+\end{figure}
+
+\subsection{The \texttt{time.h} Library}
+
+The \texttt{time.h} header defines several variable types, macros and various functions for manipulating date and time. The variable type \texttt{clock\_t} is suitable for storing the processor time. The function \texttt{clock\_t clock(void)} returns the processor clock time used since the beginning of the program.
 
 
 %----------------------------------------------------------------------------------------
@@ -172,7 +185,7 @@ Floating-point arithmetic operations are implemented using software emulation an
 
 \subsection{Audio\_Loopback}
 
-Analog Devices provides an example named \texttt{Audio\_Loopback} which simply copies the sampled and quantized audio input to the audio output in real-time. This example is available in the /\texttt{Drivers}/\texttt{AudioCodec} folder under VisualDSP++ installation directory. This framework initializes the codec AD1980 via the device manager and will invoke an interrupt callback function when the inbound buffer is full.\\
+Analog Devices provides an example named \texttt{Audio\_Loopback} which simply copies the sampled and quantized audio input to the audio output in real-time. This example is available in the /\texttt{VisualDSP 5.1.2}/\texttt{Blackfin}/\texttt{ADSP-BF548 EZ-KIT Lite}/\texttt{Drivers}/\texttt{AudioCodec} folder under VisualDSP++ installation directory. This framework initializes the codec AD1980 via the device manager and will invoke an interrupt callback function when the inbound buffer is full.\\
 
 This example project helps us spend more time on our main quest instead of configuring hardware environment from scratch. Original \texttt{.h} and \texttt{.c} files are added to the project. Some codes are added to \texttt{main} and \texttt{AD1980Callback} function to initialize the recognition system and associate the functions properly.
 \begin{enumerate}
