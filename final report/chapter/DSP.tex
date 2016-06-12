@@ -172,8 +172,21 @@ As is shown in Fig. \ref{profiler}, \texttt{pre\_emphasis()} function and \textt
 
 \subsection{The \texttt{time.h} Library}
 
-The \texttt{time.h} header defines several variable types, macros and various functions for manipulating date and time. The variable type \texttt{clock\_t} is suitable for storing the processor time. The function \texttt{clock\_t clock(void)} returns the processor clock time used since the beginning of the program.
+The \texttt{time.h} header defines several variable types, macros and various functions for manipulating date and time. The variable type \texttt{clock\_t} is suitable for storing the processor time. The function \texttt{clock\_t clock(void)} returns the processor clock time used since the beginning of the program. With the aid of the macro \texttt{CLOCKS\_PER\_SEC}, processor clock time can be converted into time in millisecond. In terms of ADSP-BF548, \texttt{CLOCKS\_PER\_SEC} = $600 \times 10^6$ clocks per second.
 
+\begin{lstlisting}[language={C}, stepnumber=1]
+clock_t clocks = clock();
+
+/* Some operations here */
+
+clocks = clock() - clocks;
+float time_elapsed = (float) clocks * 1000 / CLOCKS_PER_SEC;
+
+printf("Clocks: %d\n", clocks);
+printf("Time elapsed: %f ms\n", time_elapsed);
+\end{lstlisting}
+
+Preceding code snippet provides the paradigm about measuring code execution time. The \texttt{clock()} function in 1st line gets the current timestamp before certain operations. Then, some actions are executed. The \texttt{clock()} function in 5th line obtains the timestamp again and calculate the difference between two timestamps. The 6th line converts the time in clocks into time in millisecond.
 
 %----------------------------------------------------------------------------------------
 %	Section
@@ -300,7 +313,7 @@ In order to diminish the processing time by pre-computing and eliminating the us
 
 Gains are converted into \texttt{fract32} by \texttt{calc\_bank\_gain()} function during system initialization. Power cepstrum data points are converted back to \texttt{float} in case of saturation before summation that evaluates the total power within each bank. We no longer insist on fixed-point arithmetic because
 \begin{enumerate}
-\item only 30 - 50 frames (out of 180 frames) are passed to MFCC;
+\item only 20 - 50 frames (out of 180 frames) are passed to MFCC;
 \item precision error will be accumulated;
 \item log scaling in the next step will be done with the aid of \texttt{float} type \texttt{log()} function;
 \item outcome of logarithm ranges widely.

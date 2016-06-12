@@ -44,6 +44,27 @@
 \usepackage{nameref}
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \textsl{\nameref*{#1}}}}
 
+% code listings
+\usepackage{listings}
+\definecolor{commentColor}{RGB}{34,139,34}
+\definecolor{stringColor}{RGB}{160,32,240}
+\lstset{
+	language=Matlab,
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\color{blue},
+	stringstyle=\color{stringColor},
+	commentstyle=\usefont{T1}{pcr}{m}{n}\color{commentColor},
+	tabsize = 4,
+	breaklines=true,
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\scriptsize,
+	firstnumber=1,
+	numberfirstline=true,
+	stepnumber=5,
+	frame=leftline
+}
+
 % Margins
 \usepackage{geometry}
 \geometry{
