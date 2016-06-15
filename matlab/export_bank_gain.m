@@ -1,3 +1,5 @@
+% export mel filter bank gain into .c file
+
 ABSPATH = pwd;
 % identify current folder (absolute path)
 addpath([ABSPATH '/function']);
