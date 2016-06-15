@@ -1,3 +1,5 @@
+% export speech model into .c file
+
 clear;
 
 ABSPATH = pwd;
