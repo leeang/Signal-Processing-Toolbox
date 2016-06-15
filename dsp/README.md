@@ -13,4 +13,4 @@
 
 ### Test
 - Files under `test` folder are used to test the efficiency and accuracy of the DSP program for given inputs.
-- `cmd_01.h` to `cmd_27.h` are some test inputs.
+- `cmd_data/cmd01.h` to `cmd_data/cmd27.h` are some test inputs.
